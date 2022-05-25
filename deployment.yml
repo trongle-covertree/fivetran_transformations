@@ -26,9 +26,9 @@ jobs:
 #      - name: run models
 #        command: dbt run
 
- - name: every5minutes
+ - name: every10minutes
    targetName: dev
-   schedule: '*/5 * * * *' # The example will run every 30 minutes. Note that the cron string is quoted as otherwise it will be treated as invalid alias node (see https://yaml.org/spec/1.2/spec.html#*%20alias// for details)
+   schedule: '*/10 * * * *' # The example will run every 10 minutes. Note that the cron string is quoted as otherwise it will be treated as invalid alias node (see https://yaml.org/spec/1.2/spec.html#*%20alias// for details)
    steps:
      - name: run models
        command: dbt run
