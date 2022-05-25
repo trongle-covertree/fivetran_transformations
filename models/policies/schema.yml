@@ -1,0 +1,61 @@
+
+version: 2
+
+models:
+  - name: policies_cancellation
+    description: "Policy table with cancellation sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: CANCELLATION_CATEGORY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: EFFECTIVE_TIMESTAMP
+        description: ""
+        data_type: NUMBER(38,0)
+      - name: DOCUMENTS
+        description: ""
+        data_type: VARIANT
+      - name: CREATED_TIMESTAMP
+        description: ""
+        data_type: NUMBER(38,0)
+      - name: TITLE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: POLICY_MODIFICATION_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRICE
+        description: ""
+        data_type: VARIANT
+      - name: CONFLICT_HANDLING
+        description: ""
+        data_type: VARCHAR(256)
+      - name: NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ISSUED_TIMESTAMP
+        description: ""
+        data_type: NUMBER(38,0)
+      - name: POLICY_LOCATOR
+        description: ""
+        data_type: NUMBER(38,0)
+      - name: STATE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CANCELLATION_COMMENTS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: INVOICE_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: REINSTATEMENT
+        description: ""
+        data_type: VARIANT
