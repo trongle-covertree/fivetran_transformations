@@ -107,7 +107,7 @@ models:
       - name: SK
         description: "Sort key (action)"
         data_type: VARCHAR(256)
-     - name: documents
+      - name: documents
         description: ""
         data_type: VARIANT
       - name: created_timestamp
@@ -204,7 +204,7 @@ models:
       - name: SK
         description: "Sort key (action)"
         data_type: VARCHAR(256)
-     - name: documents
+      - name: documents
         data_type: VARIANT
         description: ""
       - name: created_timestamp
