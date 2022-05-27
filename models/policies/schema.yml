@@ -98,3 +98,328 @@ models:
       - name: due_timestamp
         data_type: FIXED
         description: ""
+  - name: policies_invoice
+    description: "Policy table with invoice sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+     - name: documents
+        description: ""
+        data_type: VARIANT
+      - name: created_timestamp
+        description: ""
+        data_type: FIXED
+      - name: policy_modification_locator
+        description: ""
+        data_type: TEXT
+      - name: policy_locator
+        description: ""
+        data_type: FIXED
+      - name: updated_timestamp
+        description: ""
+        data_type: FIXED
+      - name: display_id
+        description: ""
+        data_type: FIXED
+      - name: settlement_status
+        description: ""
+        data_type: TEXT
+      - name: total_due_currency
+        description: ""
+        data_type: TEXT
+      - name: end_timestamp
+        description: ""
+        data_type: FIXED
+      - name: start_timestamp
+        description: ""
+        data_type: FIXED
+      - name: total_due
+        description: ""
+        data_type: REAL
+      - name: transaction_issued
+        description: ""
+        data_type: BOOLEAN
+      - name: payments
+        description: ""
+        data_type: VARIANT
+      - name: due_timestamp
+        description: ""
+        data_type: FIXED
+      - name: statuses
+        description: ""
+        data_type: VARIANT
+      - name: invoice_type
+        description: ""
+        data_type: TEXT
+      - name: locator
+        description: ""
+        data_type: TEXT
+      - name: settlement_type
+        description: ""
+        data_type: TEXT
+      - name: financial_transactions
+        description: ""
+        data_type: VARIANT
+      - name: future_invoices
+        description: ""
+        data_type: VARIANT
+      - name: generated_invoices VARIANT
+      - name: invoice VARIANT
+        description: ""
+        data_type: // object
+      - name: status
+        description: ""
+        data_type: TEXT
+  - name: policies_leads
+    description: "Policy table with lead sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: partner_name
+        data_type: TEXT
+        description: ""
+      - name: partner_key
+        data_type: TEXT
+        description: ""
+      - name: lead_id
+        data_type: FIXED
+        description: ""
+      - name: updated_at
+        data_type: REAL
+        description: ""
+  - name: policies_policy
+    description: "Policy table with policy sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+     - name: documents
+        data_type: VARIANT
+        description: ""
+      - name: created_timestamp
+        data_type: FIXED
+        description: ""
+      - name: issued_timestamp
+        data_type: FIXED
+        description: ""
+      - name: fees
+        data_type: VARIANT
+        description: ""
+      - name: characteristics
+        data_type: VARIANT
+        description: ""
+      - name: config_version
+        data_type: FIXED
+        description: ""
+      - name: gross_fees
+        data_type: REAL
+        description: ""
+      - name: payment_schedule_name
+        data_type: TEXT
+        description: ""
+      - name: original_contract_start_timestamp
+        data_type: FIXED
+        description: ""
+      - name: updated_timestamp
+        data_type: FIXED
+        description: ""
+      - name: product_name
+        data_type: TEXT
+        description: ""
+      - name: exposures VARIANT
+        data_type:
+        description: ""
+      - name: invoices VARIANT
+        data_type:
+        description: ""
+      - name: effective_contract_end_timestamp
+        data_type: FIXED
+        description: ""
+      - name: product_locator
+        data_type: TEXT
+        description: ""
+      - name: policyholder_locator
+        data_type: TEXT
+        description: ""
+      - name: gross_fees_currency
+        data_type: TEXT
+        description: ""
+      - name: original_contract_end_timestamp
+        data_type: FIXED
+        description: ""
+      - name: display_id
+        data_type: FIXED
+        description: ""
+      - name: modifications
+        data_type: VARIANT
+        description: ""
+      - name: locator
+        data_type: TEXT
+        description: ""
+      - name: cancellation
+        data_type: VARIANT
+        description: ""
+      - name: currency
+        data_type: TEXT
+        description: ""
+      - name: status
+        data_type: TEXT
+        description: ""
+  - name: policies_quote_plans
+    description: "Policy table with quote_plans sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: silver_quote_pricing
+        data_type: TEXT
+        description: ""
+      - name: customization
+        data_type: TEXT
+        description: "" // array of objects
+      - name: platinum_quote_locator
+        data_type: FIXED
+        description: ""
+      - name: silver_quote_locator
+        data_type: FIXED
+        description: ""
+      - name: descriptions
+        data_type: TEXT
+        description: ""
+      - name: gold_quote_data
+        data_type: TEXT
+        description: ""
+      - name: platinum_quote_pricing
+        data_type: TEXT
+        description: ""
+      - name: gold_quote_locator
+        data_type: FIXED
+        description: ""
+      - name: gold_quote_pricing
+        data_type: TEXT
+        description: ""
+      - name: platinum_quote_data
+        data_type: TEXT
+        description: ""
+      - name: silver_quote_data
+        data_type: TEXT
+        description: ""
+  - name: policies_stripe_payment_intent
+    description: "Policy table with stripe_payment_intent sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: policy_locator
+        data_type: FIXED
+        description: ""
+      - name: payment_intent_id
+        data_type: TEXT
+        description: ""
+  - name: policies_policyholder_pk_policy_number_sk
+    description: "Policy table with policyholder pk and policy# sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: documents
+        data_type: VARIANT
+        description: ""
+      - name: created_timestamp
+        data_type: FIXED
+        description: ""
+      - name: issued_timestamp
+        data_type: FIXED
+        description: ""
+      - name: fees
+        data_type: VARIANT
+        description: ""
+      - name: characteristics
+        data_type: VARIANT
+        description: ""
+      - name: config_version
+        data_type: FIXED
+        description: ""
+      - name: gross_fees
+        data_type: REAL
+        description: ""
+      - name: payment_schedule_name
+        data_type: TEX
+        description: ""
+      - name: original_contract_start_timestamp
+        data_type: FIXED
+        description: ""
+      - name: updated_timestamp
+        data_type: FIXED
+        description: ""
+      - name: product_name
+        data_type: TEX
+        description: ""
+      - name: exposures
+        data_type: VARIANT
+        description: ""
+      - name: invoices
+        data_type: VARIANT
+        description: ""
+      - name: effective_contract_end_timestamp
+        data_type: FIXED
+        description: ""
+      - name: product_locator
+        data_type: TEXT
+        description: ""
+      - name: policyholder_locator
+        data_type: TEXT
+        description: ""
+      - name: gross_fees_currency
+        data_type: TEX
+        description: ""
+      - name: original_contract_end_timestamp
+        data_type: FIXED
+        description: ""
+      - name: display_id
+        data_type: FIXED
+        description: ""
+      - name: modifications
+        data_type: VARIANT
+        description: ""
+      - name: locator
+        data_type: TEXT
+        description: ""
+      - name: cancellation
+        data_type: VARIANT
+        description: ""
+      - name: currency
+        data_type: TEX
+        description: ""
+  - name: policies_address_hash_pk_policy_number_sk
+    description: "Policy table with address_hash pk and policy# sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: POLICY_LOCATOR
+        description: ""
+        data_type: FIXED

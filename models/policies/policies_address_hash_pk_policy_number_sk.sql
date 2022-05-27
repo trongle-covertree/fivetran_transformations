@@ -3,6 +3,6 @@
 select
   pk,
   sk,
-  pricing
+  policy_locator
 from dynamodb_develop.deve_socotra_policy_table
-where (pk like 'POLICY#%' and sk like 'DEFAULT_COVERAGES') and _fivetran_deleted='FALSE'
+where (pk like 'ADDRESS_HASH#%' and sk like 'POLICY#%') and _fivetran_deleted='FALSE'
