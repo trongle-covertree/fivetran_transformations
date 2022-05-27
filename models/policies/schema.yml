@@ -239,11 +239,11 @@ models:
       - name: product_name
         data_type: TEXT
         description: ""
-      - name: exposures VARIANT
-        data_type:
+      - name: exposures
+        data_type: VARIANT
         description: ""
-      - name: invoices VARIANT
-        data_type:
+      - name: invoices
+        data_type: VARIANT
         description: ""
       - name: effective_contract_end_timestamp
         data_type: FIXED
