@@ -1,0 +1,37 @@
+
+version: 2
+
+models:
+  - name: signed_user_details
+    description: "signed_user_details table model"
+    columns:
+      - name: PK
+        decription: "PK from quotes table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: DATE
+        decription: ""
+        data_type: TIMESTAMP_TZ
+      - name: RAW_HEADERS
+        decription: ""
+        data_type: VARIANT
+      - name: SIGNED_NAME
+        decription: ""
+        data_type: TEXT
+      - name: OS
+        decription: ""
+        data_type: TEXT
+      - name: BROWSER
+        decription: ""
+        data_type: TEXT
+      - name: IP
+        decription: ""
+        data_type: TEXT
+      - name: DEVICE
+        decription: ""
+        data_type: TEXT
+      - name: POLICY_LOCATOR
+        decription: ""
+        data_type: FIXED

@@ -1,0 +1,43 @@
+
+version: 2
+
+models:
+  - name: policyholders_person_locator
+    description: "Policyholders table with person or locator sk model"
+    columns:
+      - name: PK
+        decription: "PK from policyholders table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: IS_ELIGIBLE_FOR_INSURANCE
+        description: ""
+        data_type: BOOLEAN
+      - name: CREATED_TIMESTAMP
+        description: ""
+        data_type: FIXED
+      - name: VERSION
+        description: ""
+        data_type: FIXED
+      - name: UPDATED_TIMESTAMP
+        description: ""
+        data_type: FIXED
+      - name: LOCATOR
+        description: ""
+        data_type: TEXT
+      - name: ENTITY
+        description: ""
+        data_type: VARIANT
+  - name: policyholders_stripe_customer
+    description: "Policyholders table with stripe_customer sk model"
+    columns:
+      - name: PK
+        decription: "PK from policyholders table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: ID
+        description: ""
+        data_type: TEXT
