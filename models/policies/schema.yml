@@ -59,3 +59,15 @@ models:
       - name: REINSTATEMENT
         description: ""
         data_type: VARIANT
+  - name: policies_default_coverage
+    description: "Policy table with default_coverage sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: pricing
+        data_type: VARCHAR(256)
+        description: ""
