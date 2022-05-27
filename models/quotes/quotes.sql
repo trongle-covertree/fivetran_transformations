@@ -10,5 +10,5 @@ select
   STATUS,
   UPDATED_AT,
   CONVERTED
-from dynamodb_develop.deve_socotra_policy_table
+from dynamodb_develop.deve_socotra_quote_table
 where (pk like 'QUOTE#%' and sk like 'POLICY#%') and _fivetran_deleted='FALSE'
