@@ -71,3 +71,30 @@ models:
       - name: pricing
         data_type: VARCHAR(256)
         description: ""
+  - name: policies_future_invoice
+    description: "Policy table with default_coverage sk model"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: write_off
+        data_type: BOOLEAN
+        description: ""
+      - name: financial_transactions
+        data_type: VARIANT
+        description: ""
+      - name: start_timestamp
+        data_type: FIXED
+        description: ""
+      - name: end_timestamp
+        data_type: FIXED
+        description: ""
+      - name: issue_timestamp
+        data_type: FIXED
+        description: ""
+      - name: due_timestamp
+        data_type: FIXED
+        description: ""
