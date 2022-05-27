@@ -167,10 +167,12 @@ models:
       - name: future_invoices
         description: ""
         data_type: VARIANT
-      - name: generated_invoices VARIANT
-      - name: invoice VARIANT
+      - name: generated_invoices
+        data_type: VARIANT
         description: ""
-        data_type: // object
+      - name: invoice
+        description: ""
+        data_type: VARIANT
       - name: status
         description: ""
         data_type: TEXT
@@ -290,7 +292,7 @@ models:
         description: ""
       - name: customization
         data_type: TEXT
-        description: "" // array of objects
+        description: ""
       - name: platinum_quote_locator
         data_type: FIXED
         description: ""
@@ -364,7 +366,7 @@ models:
         data_type: REAL
         description: ""
       - name: payment_schedule_name
-        data_type: TEX
+        data_type: TEXT
         description: ""
       - name: original_contract_start_timestamp
         data_type: FIXED
@@ -373,7 +375,7 @@ models:
         data_type: FIXED
         description: ""
       - name: product_name
-        data_type: TEX
+        data_type: TEXT
         description: ""
       - name: exposures
         data_type: VARIANT
@@ -391,7 +393,7 @@ models:
         data_type: TEXT
         description: ""
       - name: gross_fees_currency
-        data_type: TEX
+        data_type: TEXT
         description: ""
       - name: original_contract_end_timestamp
         data_type: FIXED
@@ -409,7 +411,7 @@ models:
         data_type: VARIANT
         description: ""
       - name: currency
-        data_type: TEX
+        data_type: TEXT
         description: ""
   - name: policies_address_hash_pk_policy_number_sk
     description: "Policy table with address_hash pk and policy# sk model"
