@@ -12,7 +12,7 @@ select
   gross_fees,
   payment_schedule_name,
   original_contract_start_timestamp,
-  updated_timestamp FIXED,
+  updated_timestamp,
   product_name,
   exposures,
   invoices,
