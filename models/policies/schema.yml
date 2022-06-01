@@ -466,3 +466,12 @@ models:
         data_type: number
       - name: "Scheduled Personal Property"
         data_type: number
+  - name: quotes_view
+    description: "View for count of all quote types"
+    columns:
+      - name: "Silver"
+        data_type: number
+      - name: "Gold"
+        data_type: number
+      - name: "Platinum"
+        data_type: number

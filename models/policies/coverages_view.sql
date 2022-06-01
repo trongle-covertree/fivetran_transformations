@@ -21,4 +21,4 @@ select
   sum(case when EXPOSURES LIKE '%Increased Debris Removal%' then 1 end) as "Increased Debris Removal",
   sum(case when EXPOSURES LIKE '%Scheduled Personal Property%' then 1 end) as "Scheduled Personal Property"
 from {{ ref('policies_policy')}}
-where pk like 'POLICY#%' and sk = 'POLICY'
+where pk like 'POLICY#%' and sk = 'POLICY' and (status = 'Pending-Cancellation' or status = 'Policy-Activated' or status = 'Pending-Esign Required')
