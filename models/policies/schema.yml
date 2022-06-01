@@ -425,3 +425,44 @@ models:
       - name: POLICY_LOCATOR
         description: ""
         data_type: FIXED
+  - name: coverages_view
+    description: "View for count of all coverages"
+    columns:
+      - name: "Coverage A - Dwelling"
+        data_type: number
+      - name: "Coverage B - Other Structures"
+        data_type: number
+      - name: "Coverage C - Personal Property"
+        data_type: number
+      - name: "Coverage D - Loss of Use"
+        data_type: number
+      - name: "Coverage E - Personal Liability"
+        data_type: number
+      - name: "Coverage F - Medical Payment to Others"
+        data_type: number
+      - name: "Deductibles"
+        data_type: number
+      - name: "Trip Collision"
+        data_type: number
+      - name: "Identity Fraud Expense"
+        data_type: number
+      - name: "Golf Cart"
+        data_type: number
+      - name: "Enhanced Coverage"
+        data_type: number
+      - name: "Earthquake Coverage"
+        data_type: number
+      - name: "Vacation Rental Coverage"
+        data_type: number
+      - name: "Water Backup and Sump Overflow"
+        data_type: number
+      - name: "Inflation Guard"
+        data_type: number
+      - name: "Hobby - Incidental Farming"
+        data_type: number
+      - name: "Loss Assessment"
+        data_type: number
+      - name: "Increased Debris Removal"
+        data_type: number
+      - name: "Scheduled Personal Property"
+        data_type: number
