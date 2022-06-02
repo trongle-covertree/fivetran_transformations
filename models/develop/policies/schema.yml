@@ -278,6 +278,9 @@ models:
       - name: status
         data_type: TEXT
         description: ""
+      - name: plan_type
+        data_type: TEXT
+        description: ""
   - name: develop_policies_quote_plans
     description: "Policy table with quote_plans sk model"
     columns:

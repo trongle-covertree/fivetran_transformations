@@ -26,6 +26,8 @@ select
   locator,
   cancellation,
   currency,
-  status
-from dynamodb_develop.deve_socotra_policy_table
-where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE'
+  status,
+  f.value::string as plan_type
+from dynamodb_develop.deve_socotra_policy_table,
+lateral flatten(deve_socotra_policy_table.exposures[0].characteristics[0].fieldGroupsByLocator, recursive=>true) f
+where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' and f.path like '%personalized_plan_type[0]%'
