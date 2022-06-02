@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: policies_cancellation
+  - name: prod_policies_cancellation
     description: "Policy table with cancellation sk model"
     columns:
       - name: PK
@@ -59,7 +59,7 @@ models:
       - name: REINSTATEMENT
         description: ""
         data_type: VARIANT
-  - name: policies_default_coverage
+  - name: prod_policies_default_coverage
     description: "Policy table with default_coverage sk model"
     columns:
       - name: PK
@@ -71,7 +71,7 @@ models:
       - name: pricing
         data_type: VARCHAR(256)
         description: ""
-  - name: policies_future_invoice
+  - name: prod_policies_future_invoice
     description: "Policy table with futureinvoice sk model"
     columns:
       - name: PK
@@ -98,7 +98,7 @@ models:
       - name: due_timestamp
         data_type: FIXED
         description: ""
-  - name: policies_invoice
+  - name: prod_policies_invoice
     description: "Policy table with invoice sk model"
     columns:
       - name: PK
@@ -176,7 +176,7 @@ models:
       - name: status
         description: ""
         data_type: TEXT
-  - name: policies_leads
+  - name: prod_policies_leads
     description: "Policy table with lead sk model"
     columns:
       - name: PK
@@ -197,7 +197,7 @@ models:
       - name: updated_at
         data_type: REAL
         description: ""
-  - name: policies_policy
+  - name: prod_policies_policy
     description: "Policy table with policy sk model"
     columns:
       - name: PK
@@ -278,7 +278,7 @@ models:
       - name: status
         data_type: TEXT
         description: ""
-  - name: policies_quote_plans
+  - name: prod_policies_quote_plans
     description: "Policy table with quote_plans sk model"
     columns:
       - name: PK
@@ -320,7 +320,7 @@ models:
       - name: silver_quote_data
         data_type: TEXT
         description: ""
-  - name: policies_stripe_payment_intent
+  - name: prod_policies_stripe_payment_intent
     description: "Policy table with stripe_payment_intent sk model"
     columns:
       - name: PK
@@ -335,7 +335,7 @@ models:
       - name: payment_intent_id
         data_type: TEXT
         description: ""
-  - name: policies_policyholder_pk_policy_number_sk
+  - name: prod_policies_policyholder_pk_policy_number_sk
     description: "Policy table with policyholder pk and policy# sk model"
     columns:
       - name: PK
@@ -413,7 +413,7 @@ models:
       - name: currency
         data_type: TEXT
         description: ""
-  - name: policies_address_hash_pk_policy_number_sk
+  - name: prod_policies_address_hash_pk_policy_number_sk
     description: "Policy table with address_hash pk and policy# sk model"
     columns:
       - name: PK
@@ -425,7 +425,7 @@ models:
       - name: POLICY_LOCATOR
         description: ""
         data_type: FIXED
-  - name: coverages_view
+  - name: prod_coverages_view
     description: "View for count of all coverages"
     columns:
       - name: "Coverage A - Dwelling"
@@ -466,7 +466,7 @@ models:
         data_type: number
       - name: "Scheduled Personal Property"
         data_type: number
-  - name: quotes_view
+  - name: prod_quotes_view
     description: "View for count of all quote types"
     columns:
       - name: "Silver"

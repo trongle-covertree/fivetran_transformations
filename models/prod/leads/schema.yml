@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: leads
+  - name: prod_leads
     description: "leads table model"
     columns:
       - name: PK

@@ -1,0 +1,25 @@
+
+version: 2
+
+models:
+  - name: develop_leads
+    description: "leads table model"
+    columns:
+      - name: PK
+        decription: "PK from leads table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: CREATED_AT
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: UPDATED_AT
+        description: ""
+        data_type: REAL
+      - name: POLICY_LOCATOR
+        description: ""
+        data_type: FIXED
+      - name: STATUS
+        description: ""
+        data_type: TEXT

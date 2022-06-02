@@ -1,0 +1,34 @@
+
+version: 2
+
+models:
+  - name: prod_quotes
+    description: "quotes table model"
+    columns:
+      - name: PK
+        decription: "PK from quotes table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: CREATED_AT
+        data_type: REAL
+        description: ""
+      - name: DESCRIPTION
+        data_type: TEXT
+        description: ""
+      - name: POLICY_LOCATOR
+        data_type: FIXED
+        description: ""
+      - name: QUOTE_LOCATOR
+        data_type: FIXED
+        description: ""
+      - name: STATUS
+        data_type: TEXT
+        description: ""
+      - name: UPDATED_AT
+        data_type: REAL
+        description: ""
+      - name: CONVERTED
+        data_type: BOOLEAN
+        description: ""

@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: quotes
+  - name: develop_quotes
     description: "quotes table model"
     columns:
       - name: PK

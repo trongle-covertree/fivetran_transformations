@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: policyholders_person_locator
+  - name: develop_policyholders_person_locator
     description: "Policyholders table with person or locator sk model"
     columns:
       - name: PK
@@ -29,7 +29,7 @@ models:
       - name: ENTITY
         description: ""
         data_type: VARIANT
-  - name: policyholders_stripe_customer
+  - name: develop_policyholders_stripe_customer
     description: "Policyholders table with stripe_customer sk model"
     columns:
       - name: PK
