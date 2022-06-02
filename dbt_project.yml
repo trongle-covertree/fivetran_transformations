@@ -34,5 +34,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   fivetran_transformations:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    # example:
+    #   +materialized: view
+    prod:
+      +schema: dynamodb
+    develop:
+      +schema: dynamodb_develop
