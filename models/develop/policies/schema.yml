@@ -475,3 +475,10 @@ models:
         data_type: number
       - name: "Platinum"
         data_type: number
+  - name: develop_cancellation_category_view
+    description: "View for cancellation reasons"
+    columns:
+      - name: "cancellation_category"
+        data_type: TEXT
+      - name: "count"
+        data_type: NUMBER
