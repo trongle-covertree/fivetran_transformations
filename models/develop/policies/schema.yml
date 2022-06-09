@@ -281,6 +281,9 @@ models:
       - name: plan_type
         data_type: TEXT
         description: ""
+      - name: _fivetran_synced
+        data_type: TIMESTAMP_TZ
+        description: ""
   - name: develop_policies_quote_plans
     description: "Policy table with quote_plans sk model"
     columns:
