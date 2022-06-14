@@ -1,6 +1,10 @@
 {{ config(materialized='table') }}
 
 select
+  {{ dbt_utils.surrogate_key(
+    'pk',
+    'created_timestamp'
+  )}} as policy_id,
   pk,
   sk,
   documents,
@@ -27,8 +31,6 @@ select
   cancellation,
   currency,
   status,
-  f.value::string as plan_type,
   _fivetran_synced
 from dynamodb_develop.deve_socotra_policy_table,
-lateral flatten(deve_socotra_policy_table.exposures[0].characteristics[0].fieldGroupsByLocator, recursive=>true) f
-where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' and f.path like '%personalized_plan_type[0]%'
+where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE'
