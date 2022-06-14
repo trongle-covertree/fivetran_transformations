@@ -32,5 +32,5 @@ select
   currency,
   status,
   _fivetran_synced
-from dynamodb_develop.deve_socotra_policy_table,
+from dynamodb_develop.deve_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE'
