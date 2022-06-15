@@ -15,7 +15,7 @@ models:
         data_type: REAL
         description: ""
       - name: DESCRIPTION
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: POLICY_LOCATOR
         data_type: FIXED
@@ -24,7 +24,7 @@ models:
         data_type: FIXED
         description: ""
       - name: STATUS
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: UPDATED_AT
         data_type: REAL

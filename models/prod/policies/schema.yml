@@ -115,7 +115,7 @@ models:
         data_type: FIXED
       - name: policy_modification_locator
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: policy_locator
         description: ""
         data_type: FIXED
@@ -127,10 +127,10 @@ models:
         data_type: FIXED
       - name: settlement_status
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: total_due_currency
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: end_timestamp
         description: ""
         data_type: FIXED
@@ -154,13 +154,13 @@ models:
         data_type: VARIANT
       - name: invoice_type
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: locator
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: settlement_type
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: financial_transactions
         description: ""
         data_type: VARIANT
@@ -175,7 +175,7 @@ models:
         data_type: VARIANT
       - name: status
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
   - name: prod_policies_leads
     description: "Policy table with lead sk model"
     columns:
@@ -186,10 +186,10 @@ models:
         description: "Sort key (action)"
         data_type: VARCHAR(256)
       - name: partner_name
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: partner_key
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: lead_id
         data_type: FIXED
@@ -228,7 +228,7 @@ models:
         data_type: REAL
         description: ""
       - name: payment_schedule_name
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: original_contract_start_timestamp
         data_type: FIXED
@@ -237,7 +237,7 @@ models:
         data_type: FIXED
         description: ""
       - name: product_name
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: exposures
         data_type: VARIANT
@@ -249,13 +249,13 @@ models:
         data_type: FIXED
         description: ""
       - name: product_locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: policyholder_locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: gross_fees_currency
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: original_contract_end_timestamp
         data_type: FIXED
@@ -267,16 +267,16 @@ models:
         data_type: VARIANT
         description: ""
       - name: locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: cancellation
         data_type: VARIANT
         description: ""
       - name: currency
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: status
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
   - name: prod_policies_quote_plans
     description: "Policy table with quote_plans sk model"
@@ -288,10 +288,10 @@ models:
         description: "Sort key (action)"
         data_type: VARCHAR(256)
       - name: silver_quote_pricing
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: customization
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: platinum_quote_locator
         data_type: FIXED
@@ -300,25 +300,25 @@ models:
         data_type: FIXED
         description: ""
       - name: descriptions
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: gold_quote_data
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: platinum_quote_pricing
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: gold_quote_locator
         data_type: FIXED
         description: ""
       - name: gold_quote_pricing
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: platinum_quote_data
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: silver_quote_data
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
   - name: prod_policies_stripe_payment_intent
     description: "Policy table with stripe_payment_intent sk model"
@@ -333,7 +333,7 @@ models:
         data_type: FIXED
         description: ""
       - name: payment_intent_id
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
   - name: prod_policies_policyholder_pk_policy_number_sk
     description: "Policy table with policyholder pk and policy# sk model"
@@ -366,7 +366,7 @@ models:
         data_type: REAL
         description: ""
       - name: payment_schedule_name
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: original_contract_start_timestamp
         data_type: FIXED
@@ -375,7 +375,7 @@ models:
         data_type: FIXED
         description: ""
       - name: product_name
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: exposures
         data_type: VARIANT
@@ -387,13 +387,13 @@ models:
         data_type: FIXED
         description: ""
       - name: product_locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: policyholder_locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: gross_fees_currency
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: original_contract_end_timestamp
         data_type: FIXED
@@ -405,13 +405,13 @@ models:
         data_type: VARIANT
         description: ""
       - name: locator
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
       - name: cancellation
         data_type: VARIANT
         description: ""
       - name: currency
-        data_type: TEXT
+        data_type: VARCHAR(256)
         description: ""
   - name: prod_policies_address_hash_pk_policy_number_sk
     description: "Policy table with address_hash pk and policy# sk model"

@@ -19,19 +19,19 @@ models:
         data_type: VARIANT
       - name: SIGNED_NAME
         decription: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: OS
         decription: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: BROWSER
         decription: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: IP
         decription: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: DEVICE
         decription: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: POLICY_LOCATOR
         decription: ""
         data_type: FIXED

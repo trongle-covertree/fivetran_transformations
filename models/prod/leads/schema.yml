@@ -22,4 +22,4 @@ models:
         data_type: FIXED
       - name: STATUS
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)

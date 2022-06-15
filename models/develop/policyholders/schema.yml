@@ -25,7 +25,7 @@ models:
         data_type: FIXED
       - name: LOCATOR
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
       - name: ENTITY
         description: ""
         data_type: VARIANT
@@ -40,4 +40,4 @@ models:
         data_type: VARCHAR(256)
       - name: ID
         description: ""
-        data_type: TEXT
+        data_type: VARCHAR(256)
