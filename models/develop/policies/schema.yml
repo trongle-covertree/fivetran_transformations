@@ -200,6 +200,11 @@ models:
   - name: develop_policies_policy
     description: "Policy table with policy sk model"
     columns:
+      - name: policy_id
+        description: "Surrogate primary key"
+        data_type: TEXT
+        tests:
+          - dbt_constraints.primary_key
       - name: PK
         decription: "PK from Policy table"
         data_type: VARCHAR(256)
@@ -287,6 +292,13 @@ models:
   - name: develop_policies_quote_plans
     description: "Policy table with quote_plans sk model"
     columns:
+      - name: policy_id
+        description: "policy id foreign key from policies_policy"
+        data_type: text
+        tests:
+          - relationships:
+              to: ref(develop_policies_policy)
+              field: policy_id
       - name: PK
         decription: "PK from Policy table"
         data_type: VARCHAR(256)

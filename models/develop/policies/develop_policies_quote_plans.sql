@@ -1,6 +1,7 @@
 {{ config(materialized='table') }}
 
 select
+  policy_id,
   pk,
   sk,
   silver_quote_locator,
