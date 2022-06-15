@@ -297,7 +297,7 @@ models:
         data_type: text
         tests:
           - relationships:
-              to: ref(develop_policies_policy)
+              to: ref('develop_policies_policy')
               field: policy_id
       - name: PK
         decription: "PK from Policy table"
