@@ -19,10 +19,7 @@ select
   sub_region,
   territory_aop,
   territory_eq,
-  territory_flood,
-  territory_hurr,
   territory_wh,
-  territory_wildfire,
   uw_admitted
 from dynamodb_develop.deve_territory_factor_table
 where _fivetran_deleted='FALSE'

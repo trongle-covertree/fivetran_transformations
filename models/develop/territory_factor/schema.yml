@@ -40,13 +40,7 @@ models:
         data_type: VARCHAR(256)
       - name: territory_eq
         data_type: VARCHAR(256)
-      - name: territory_flood
-        data_type: VARCHAR(256)
-      - name: territory_hurr
-        data_type: VARCHAR(256)
       - name: territory_wh
-        data_type: VARCHAR(256)
-      - name: territory_wildfire
         data_type: VARCHAR(256)
       - name: uw_admitted
         data_type: VARCHAR(256)
