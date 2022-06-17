@@ -27,7 +27,7 @@ jobs:
        command: dbt run --models develop
 
   - name: prod-15-min
-    schedule: */15 * * * *
+    schedule: '*/15 * * * *'
     steps:
       - name: run prod models
         command: dbt run --models prod
