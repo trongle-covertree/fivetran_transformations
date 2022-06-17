@@ -20,11 +20,17 @@ jobs:
 #      - name: run models
 #        command: dbt run --models my_first_model my_second_model # This example will run two specific models.
 
- - name: weekdays
+ - name: develop-weekdays
    schedule: 30 7 * * 1-5 # The example will run every weekday at 7:30am.
    steps:
-     - name: run models
-       command: dbt run
+     - name: run develop models
+       command: dbt run --models develop
+
+  - name: prod-15-min
+    schedule: */15 * * * *
+    steps:
+      - name: run prod models
+        command: dbt run --models prod
 
 #  - name: every10minutes
 #    targetName: dev
