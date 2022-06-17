@@ -26,11 +26,11 @@ jobs:
      - name: run develop models
        command: dbt run --models develop
 
-  - name: prod-15-min
-    schedule: '*/15 * * * *'
-    steps:
-      - name: run prod models
-        command: dbt run --models prod
+ - name: prod15min
+   schedule: '*/15 * * * *'
+   steps:
+     - name: run prod models
+       command: dbt run --models prod
 
 #  - name: every10minutes
 #    targetName: dev
