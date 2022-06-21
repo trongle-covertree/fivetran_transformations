@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: prod_territory_factor
+    description: "territory factor table model"
+    columns:
+      - name: PK
+        data_type: VARCHAR(256)
+      - name: grid_id
+        data_type: VARCHAR(256)
+      - name: primary_census_tract
+        data_type: VARCHAR(256)
+      - name: primary_class
+        data_type: VARCHAR(256)
+      - name: primary_county_fips
+        data_type: VARCHAR(256)
+      - name: primary_county_name
+        data_type: VARCHAR(256)
+      - name: primary_island
+        data_type: VARCHAR(256)
+      - name: primary_place_name
+        data_type: VARCHAR(256)
+      - name: primary_po_name
+        data_type: VARCHAR(256)
+      - name: primary_ua_label
+        data_type: VARCHAR(256)
+      - name: primary_ua_type
+        data_type: VARCHAR(256)
+      - name: primary_zillow_community_name
+        data_type: VARCHAR(256)
+      - name: primary_zip_code
+        data_type: VARCHAR(256)
+      - name: state_fips
+        data_type: VARCHAR(256)
+      - name: state_name
+        data_type: VARCHAR(256)
+      - name: sub_region
+        data_type: VARCHAR(256)
+      - name: territory_aop
+        data_type: VARCHAR(256)
+      - name: territory_eq
+        data_type: VARCHAR(256)
+      - name: territory_wh
+        data_type: VARCHAR(256)
+      - name: uw_admitted
+        data_type: VARCHAR(256)
