@@ -288,10 +288,10 @@ models:
         description: "Sort key (action)"
         data_type: VARCHAR(256)
       - name: silver_quote_pricing
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: customization
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: platinum_quote_locator
         data_type: FIXED
@@ -300,25 +300,25 @@ models:
         data_type: FIXED
         description: ""
       - name: descriptions
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: gold_quote_data
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: platinum_quote_pricing
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: gold_quote_locator
         data_type: FIXED
         description: ""
       - name: gold_quote_pricing
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: platinum_quote_data
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
       - name: silver_quote_data
-        data_type: VARCHAR(256)
+        data_type: VARIANT
         description: ""
   - name: prod_policies_stripe_payment_intent
     description: "Policy table with stripe_payment_intent sk model"
