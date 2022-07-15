@@ -44,7 +44,7 @@ models:
 vars:
   hubspot_marketing_enabled: true
   hubspot_contact_enabled: true
-  hubspot_email_event_enabled: true
+  hubspot_email_event_enabled: false
   hubspot_sales_enabled: true
   hubspot_company_enabled: true
   hubspot_deal_enabled: true
