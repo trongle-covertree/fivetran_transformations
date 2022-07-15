@@ -40,3 +40,12 @@ models:
       +schema: dynamodb
     develop:
       +schema: dynamodb_develop
+
+vars:
+  hubspot_marketing_enabled: true
+  hubspot_contact_enabled: true
+  hubspot_email_event_enabled: true
+  hubspot_sales_enabled: true
+  hubspot_company_enabled: true
+  hubspot_deal_enabled: true
+  hubspot_engagement_enabled: true
