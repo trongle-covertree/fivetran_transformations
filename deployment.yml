@@ -30,7 +30,7 @@ jobs:
    schedule: '*/15 * * * *'
    steps:
      - name: run prod models
-       command: dbt run --models prod
+       command: dbt run --models prod fivetran/hubspot
 
 #  - name: every10minutes
 #    targetName: dev
