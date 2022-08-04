@@ -210,10 +210,10 @@ models:
         data_type: VARIANT
         description: ""
       - name: created_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: issued_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: fees
         data_type: VARIANT
@@ -231,10 +231,10 @@ models:
         data_type: VARCHAR(256)
         description: ""
       - name: original_contract_start_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: updated_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: product_name
         data_type: VARCHAR(256)
@@ -246,7 +246,7 @@ models:
         data_type: VARIANT
         description: ""
       - name: effective_contract_end_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: product_locator
         data_type: VARCHAR(256)
@@ -258,7 +258,7 @@ models:
         data_type: VARCHAR(256)
         description: ""
       - name: original_contract_end_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: display_id
         data_type: FIXED
