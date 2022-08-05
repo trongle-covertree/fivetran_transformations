@@ -16,13 +16,13 @@ models:
         data_type: VARCHAR(256)
       - name: EFFECTIVE_TIMESTAMP
         description: ""
-        data_type: NUMBER(38,0)
+        data_type: TIMESTAMP)
       - name: DOCUMENTS
         description: ""
         data_type: VARIANT
       - name: CREATED_TIMESTAMP
         description: ""
-        data_type: NUMBER(38,0)
+        data_type: TIMESTAMP
       - name: TITLE
         description: ""
         data_type: VARCHAR(256)
@@ -40,7 +40,7 @@ models:
         data_type: VARCHAR(256)
       - name: ISSUED_TIMESTAMP
         description: ""
-        data_type: NUMBER(38,0)
+        data_type: TIMESTAMP
       - name: POLICY_LOCATOR
         description: ""
         data_type: NUMBER(38,0)
@@ -87,16 +87,16 @@ models:
         data_type: VARIANT
         description: ""
       - name: start_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: end_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: issue_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
       - name: due_timestamp
-        data_type: FIXED
+        data_type: TIMESTAMP
         description: ""
   - name: prod_policies_invoice
     description: "Policy table with invoice sk model"
@@ -112,7 +112,7 @@ models:
         data_type: VARIANT
       - name: created_timestamp
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP
       - name: policy_modification_locator
         description: ""
         data_type: VARCHAR(256)
@@ -121,7 +121,7 @@ models:
         data_type: FIXED
       - name: updated_timestamp
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP
       - name: display_id
         description: ""
         data_type: FIXED
@@ -133,10 +133,10 @@ models:
         data_type: VARCHAR(256)
       - name: end_timestamp
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP
       - name: start_timestamp
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP
       - name: total_due
         description: ""
         data_type: REAL
@@ -148,7 +148,7 @@ models:
         data_type: VARIANT
       - name: due_timestamp
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP
       - name: statuses
         description: ""
         data_type: VARIANT
@@ -195,7 +195,7 @@ models:
         data_type: FIXED
         description: ""
       - name: updated_at
-        data_type: REAL
+        data_type: TIMESTAMP
         description: ""
   - name: prod_policies_policy
     description: "Policy table with policy sk model"
