@@ -195,7 +195,7 @@ models:
         data_type: FIXED
         description: ""
       - name: updated_at
-        data_type: TIMESTAMP
+        data_type: FIXED
         description: ""
   - name: prod_policies_policy
     description: "Policy table with policy sk model"
