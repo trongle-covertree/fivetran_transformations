@@ -12,22 +12,22 @@ models:
         description: "Sort key (action)"
         data_type: VARCHAR(256)
       - name: CREATED_AT
-        data_type: REAL
+        data_type: TIMESTAMP
         description: ""
       - name: DESCRIPTION
         data_type: VARCHAR(256)
         description: ""
       - name: POLICY_LOCATOR
-        data_type: FIXED
+        data_type: VARCHAR(256)
         description: ""
       - name: QUOTE_LOCATOR
-        data_type: FIXED
+        data_type: VARCHAR(256)
         description: ""
       - name: STATUS
         data_type: VARCHAR(256)
         description: ""
       - name: UPDATED_AT
-        data_type: REAL
+        data_type: TIMESTAMP
         description: ""
       - name: CONVERTED
         data_type: BOOLEAN
