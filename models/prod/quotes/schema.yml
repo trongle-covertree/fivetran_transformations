@@ -12,7 +12,7 @@ models:
         description: "Sort key (action)"
         data_type: VARCHAR(256)
       - name: CREATED_AT
-        data_type: VARCHAR(256)
+        data_type: TIMESTAMP
         description: ""
       - name: DESCRIPTION
         data_type: VARCHAR(256)
@@ -27,7 +27,7 @@ models:
         data_type: VARCHAR(256)
         description: ""
       - name: UPDATED_AT
-        data_type: VARCHAR(256)
+        data_type: TIMESTAMP
         description: ""
       - name: CONVERTED
         data_type: BOOLEAN
