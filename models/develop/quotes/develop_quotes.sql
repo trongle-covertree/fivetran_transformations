@@ -3,7 +3,7 @@
 select
   PK,
   SK,
-  {{ dbt_date.from_unixtimestamp("created_timestamp", format="milliseconds") }} as CREATED_AT,
+  {{ dbt_date.from_unixtimestamp("created_at", format="milliseconds") }} as CREATED_AT,
   DESCRIPTION,
   POLICY_LOCATOR,
   QUOTE_LOCATOR,
