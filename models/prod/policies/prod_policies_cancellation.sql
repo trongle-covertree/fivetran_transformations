@@ -18,6 +18,7 @@ select
   locator,
   cancellation_comments,
   invoice_locator,
-  reinstatement
+  reinstatement,
+  _fivetran_synced
 from dynamodb.prod_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'CANCELLATION%') and _fivetran_deleted='FALSE'
