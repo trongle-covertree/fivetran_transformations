@@ -4,7 +4,7 @@ packages:
   - package: Snowflake-Labs/dbt_constraints
     version: [">=0.3.0", "<0.4.0"]
   - package: fivetran/hubspot
-    version: [">=0.5.0", "<0.6.0"]
+    version: [">=0.6.0", "<0.7.0"]
   - package: fivetran/google_ads
     version: [">=0.7.0", "<0.8.0"]
   - package: calogica/dbt_date
