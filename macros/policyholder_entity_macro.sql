@@ -1,26 +1,26 @@
-{% macro run_policyholders_locator(env, prefix) %}
+{% macro run_policyholders(env, prefix, locator_type ) %}
 
-{% set policyholder_locator_modern_query %}
+{% set policyholder_modern_query %}
 select entity, pk
 from {{ env }}.{{ prefix }}_policyholders_person_locator
-where SK = 'LOCATOR' and entity like '%email_address%'
+where SK = {{ locator_type }} and entity like '%email_address%'
 
 {% endset %}
 
-{% set results = run_query(policyholder_locator_modern_query) %}
+{% set results = run_query(policyholder_modern_query) %}
 
 {% if execute %}
     {% set modern_entities = results.columns[0].values() %}
     {% set modern_pk = results.columns[1].values() %}
 {% endif %}
 
-{% set policyholder_locator_legacy_query %}
-select entity, locator, pk, sk
+{% set policyholder_legacy_query %}
+select entity, pk
 from {{ env }}.{{ prefix }}_policyholders_person_locator
-where SK = 'LOCATOR' and entity like '%emailAddress%'
+where SK = {{ locator_type }} and entity like '%emailAddress%'
 {% endset %}
 
-{% set results_legacy = run_query(policyholder_locator_legacy_query)%}
+{% set results_legacy = run_query(policyholder_legacy_query)%}
 
 {% if execute %}
     {% set legacy_entities = results_legacy.columns[0].values() %}
