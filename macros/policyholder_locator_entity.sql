@@ -38,7 +38,7 @@ FROM VALUES
     '{{ entity_json.locator }}',
     '{{ entity_json.revision }}',
     '{{ entity_json.updatedTimestamp }}',
-    {% if 'values' in entity_json and 'email_address' in entity_json['values'] %}'{{ entity_json['values']['email_address'][0] }}',{% else %}null,{% endif %}
+    {% if 'values' in entity_json and 'email_address' in entity_json['values'] %}'{{ entity_json['values']['email_address'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'first_name' in entity_json['values'] %}'{{ entity_json['values']['first_name'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'last_name' in entity_json['values'] %}'{{ entity_json['values']['last_name'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_city_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_city_policyholder'][0] }}',{% else %}null,{% endif %}
