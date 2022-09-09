@@ -25,13 +25,13 @@ FROM VALUES
     {% if price %}
         {% set price_json = fromjson(price) %}
 (
-    {{ pk[loop.index0] + '-' + sk[loop.index0] }},
-    {{ pk[loop.index0] }},
-    {{ sk[loop.index0] }},
-    {{ pol_mod_locator[loop.index0] }},
-    {{ price_json.commissions or 'null' }},
-    {{ price_json.exposurePrices or 'null' }},
-    {{ price_json.fees or 'null'}},
+    '{{ pk[loop.index0] + '-' + sk[loop.index0] }}',
+    '{{ pk[loop.index0] }}',
+    '{{ sk[loop.index0] }}',
+    '{{ pol_mod_locator[loop.index0] }}',
+    '{{ price_json.commissions }}',
+    '{{ price_json.exposurePrices }}',
+    '{{ price_json.fees }}',
     {{ price_json.grossCommissionsChange or 'null' }},
     {{ price_json.grossFeesChange or 'null' }},
     {{ price_json.grossPremiumChange or 'null' }},
@@ -42,7 +42,7 @@ FROM VALUES
     {{ price_json.newGrossPremium or 'null' }},
     {{ price_json.newGrossTaxes or 'null' }},
     {{ price_json.newTotal or 'null' }},
-    {{ price_json.taxGroups or 'null' }},
+    '{{ price_json.taxGroups }}',
     {{ price_json.totalChange or 'null' }}
 ){% if not loop.last %},{% endif %}
     {% endif %}
