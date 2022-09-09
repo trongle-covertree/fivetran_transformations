@@ -36,7 +36,7 @@ FROM VALUES
     {{ price_json.grossFeesChange or 'null' }},
     {{ price_json.grossPremiumChange or 'null' }},
     {{ price_json.grossTaxesChange or 'null' }},
-    {{ price_json.holdbacks or 'null' }},
+    '{{ tojson(price_json.holdbacks) }}',
     {{ price_json.newGrossCommissions or 'null' }},
     {{ price_json.newGrossFees or 'null' }},
     {{ price_json.newGrossPremium or 'null' }},
