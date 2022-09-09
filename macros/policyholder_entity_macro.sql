@@ -96,143 +96,143 @@ FROM VALUES
     '{{ entity_json.revision }}',
     '{{ entity_json.updatedTimestamp }}',
     {% if 'values' in entity_json and 'emailAddress' in entity_json['values'] %}
-        {% if entity_json['values']['emailAddress'] is iterable %}
-    '{{ entity_json['values']['emailAddress'][0] | replace("'", "\\'") }}',
-        {% else %}
+        {% if entity_json['values']['emailAddress'] is string %}
     '{{ entity_json['values']['emailAddress'] | replace("'", "\\'") }}',
+        {% else %}
+    '{{ entity_json['values']['emailAddress'][0] | replace("'", "\\'") }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'firstName' in entity_json['values'] %}
-        {% if entity_json['values']['firstName'] is iterable %}
-    '{{ entity_json['values']['firstName'][0] }}',
-        {% else %}
+        {% if entity_json['values']['firstName'] is string  %}
     '{{ entity_json['values']['firstName'] }}',
+        {% else %}
+    '{{ entity_json['values']['firstName'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'lastName' in entity_json['values'] %}
-        {% if entity_json['values']['lastName'] is iterable %}
-    '{{ entity_json['values']['lastName'][0] | replace("'", "\\'") }}',
-        {% else %}
+        {% if entity_json['values']['lastName'] is string %}
     '{{ entity_json['values']['lastName'] | replace("'", "\\'") }}',
+        {% else %}
+    '{{ entity_json['values']['lastName'][0] | replace("'", "\\'") }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingCityPolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingCityPolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingCityPolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingCityPolicyholder'] is string %}
     '{{ entity_json['values']['mailingCityPolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingCityPolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingCountryPolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingCountryPolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingCountryPolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingCountryPolicyholder'] is string %}
     '{{ entity_json['values']['mailingCountryPolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingCountryPolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingCountyPolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingCountyPolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingCountyPolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingCountyPolicyholder'] is string %}
     '{{ entity_json['values']['mailingCountyPolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingCountyPolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingLotUnitPolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingLotUnitPolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingLotUnitPolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingLotUnitPolicyholder'] is string %}
     '{{ entity_json['values']['mailingLotUnitPolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingLotUnitPolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingStatePolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingStatePolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingStatePolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingStatePolicyholder'] is string %}
     '{{ entity_json['values']['mailingStatePolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingStatePolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingStreetAddressPolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingStreetAddressPolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingStreetAddressPolicyholder'][0] | replace("'", "\\'") }}',
-        {% else %}
+        {% if entity_json['values']['mailingStreetAddressPolicyholder'] is string %}
     '{{ entity_json['values']['mailingStreetAddressPolicyholder'] | replace("'", "\\'") }}',
+        {% else %}
+    '{{ entity_json['values']['mailingStreetAddressPolicyholder'][0] | replace("'", "\\'") }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailingZipCodePolicyholder' in entity_json['values'] %}
-        {% if entity_json['values']['mailingZipCodePolicyholder'] is iterable %}
-    '{{ entity_json['values']['mailingZipCodePolicyholder'][0] }}',
-        {% else %}
+        {% if entity_json['values']['mailingZipCodePolicyholder'] is string %}
     '{{ entity_json['values']['mailingZipCodePolicyholder'] }}',
+        {% else %}
+    '{{ entity_json['values']['mailingZipCodePolicyholder'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'middleName' in entity_json['values'] %}
-        {% if entity_json['values']['middleName'] is iterable %}
-    '{{ entity_json['values']['middleName'][0] }}',
-        {% else %}
+        {% if entity_json['values']['middleName'] is string %}
     '{{ entity_json['values']['middleName'] }}',
+        {% else %}
+    '{{ entity_json['values']['middleName'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'primaryContactNumber' in entity_json['values'] %}
-        {% if entity_json['values']['primaryContactNumber'] is iterable %}
-    '{{ entity_json['values']['primaryContactNumber'][0] }}',
-        {% else %}
+        {% if entity_json['values']['primaryContactNumber'] is string %}
     '{{ entity_json['values']['primaryContactNumber'] }}',
+        {% else %}
+    '{{ entity_json['values']['primaryContactNumber'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'thirdPartyNotificationNonConsumer' in entity_json['values'] %}
-        {% if entity_json['values']['thirdPartyNotificationNonConsumer'] is iterable %}
-    '{{ entity_json['values']['thirdPartyNotificationNonConsumer'][0] }}',
-        {% else %}
+        {% if entity_json['values']['thirdPartyNotificationNonConsumer'] is string %}
     '{{ entity_json['values']['thirdPartyNotificationNonConsumer'] }}',
+        {% else %}
+    '{{ entity_json['values']['thirdPartyNotificationNonConsumer'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'typeOfInsured' in entity_json['values'] %}
-        {% if entity_json['values']['typeOfInsured'] is iterable %}
-    '{{ entity_json['values']['typeOfInsured'][0] }}',
-        {% else %}
+        {% if entity_json['values']['typeOfInsured'] is string %}
     '{{ entity_json['values']['typeOfInsured'] }}',
+        {% else %}
+    '{{ entity_json['values']['typeOfInsured'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'organizationType' in entity_json['values'] %}
-        {% if entity_json['values']['organizationType'] is iterable %}
-    '{{ entity_json['values']['organizationType'][0] }}',
-        {% else %}
+        {% if entity_json['values']['organizationType'] is string %}
     '{{ entity_json['values']['organizationType'] }}',
+        {% else %}
+    '{{ entity_json['values']['organizationType'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'organizationName' in entity_json['values'] %}
-        {% if entity_json['values']['organizationName'] is iterable %}
-    '{{ entity_json['values']['organizationName'][0] }}',
-        {% else %}
+        {% if entity_json['values']['organizationName'] is string %}
     '{{ entity_json['values']['organizationName'] }}',
+        {% else %}
+    '{{ entity_json['values']['organizationName'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'policyholderId' in entity_json['values'] %}
-        {% if entity_json['values']['policyholderId'] is iterable %}
-    '{{ entity_json['values']['policyholderId'][0] }}',
-        {% else %}
+        {% if entity_json['values']['policyholderId'] is string %}
     '{{ entity_json['values']['policyholderId'] }}',
+        {% else %}
+    '{{ entity_json['values']['policyholderId'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'relationshipOrganization' in entity_json['values'] %}
-        {% if entity_json['values']['relationshipOrganization'] is iterable %}
-    '{{ entity_json['values']['relationshipOrganization'][0] }}',
-        {% else %}
+        {% if entity_json['values']['relationshipOrganization'] is string %}
     '{{ entity_json['values']['relationshipOrganization'] }}',
+        {% else %}
+    '{{ entity_json['values']['relationshipOrganization'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'repFirstName' in entity_json['values'] %}
-        {% if entity_json['values']['repFirstName'] is iterable %}
-    '{{ entity_json['values']['repFirstName'][0] }}',
-        {% else %}
+        {% if entity_json['values']['repFirstName'] is string %}
     '{{ entity_json['values']['repFirstName'] }}',
+        {% else %}
+    '{{ entity_json['values']['repFirstName'][0] }}',
         {% endif %}
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'repLastName' in entity_json['values'] %}
-        {% if entity_json['values']['repLastName'] is iterable %}
-    '{{ entity_json['values']['repLastName'][0] }}'
-        {% else %}
+        {% if entity_json['values']['repLastName'] is string %}
     '{{ entity_json['values']['repLastName'] }}'
+        {% else %}
+    '{{ entity_json['values']['repLastName'][0] }}'
         {% endif %}
     {% else %}null{% endif %}
 ){% if not loop.last %},{% endif %}
