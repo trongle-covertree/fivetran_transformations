@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: prod_policies_cancellation_price
+    description: "Cancellation Price data"
+    columns:
+      - name: ID
+        description: "PK and SK surrogate key"
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: SK
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: POLICY_MODIFICATION_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: COMMISSIONS
+        description: ""
+        data_type: VARIANT
+      - name: EXPOSURE_PRICES
+        description: ""
+        data_type: VARIANT
+      - name: FEES
+        description: ""
+        data_type: VARIANT
+      - name: GROSS_COMMISSIONS_CHANGE
+        description: ""
+        data_type: FLOAT
+      - name: GROSS_FEES_CHANGE
+        description: ""
+        data_type: FLOAT
+      - name: GROSS_PREMIUM_CHANGE
+        description: ""
+        data_type: FLOAT
+      - name: GROSS_TAXES_CHANGE
+        description: ""
+        data_type: FLOAT
+      - name: HOLDBACKS
+        description: ""
+        data_type: VARIANT
+      - name: NEW_GROSS_COMMISSIONS
+        description: ""
+        data_type: FLOAT
+      - name: NEW_GROSS_FEES
+        description: ""
+        data_type: FLOAT
+      - name: NEW_GROSS_PREMIUM
+        description: ""
+        data_type: FLOAT
+      - name: NEW_GROSS_TAXES
+        description: ""
+        data_type: FLOAT
+      - name: NEW_TOTAL
+        description: ""
+        data_type: FLOAT
+      - name: TAX_GROUPS
+        description: ""
+        data_type: VARIANT
+      - name: TOTAL_CHANGE
+        description: ""
+        data_type: FLOAT
