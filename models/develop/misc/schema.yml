@@ -60,3 +60,88 @@ models:
       - name: TOTAL_CHANGE
         description: ""
         data_type: FLOAT
+  - name: develop_policyholders_locator_sk_entity
+    description: "Policyholder locator entity data"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: ACCOUNT_LOCATOR
+        description: "Sort key (action)"
+        data_type: VARCHAR(256)
+      - name: COMPLETED
+        description: ""
+        data_type: BOOLEAN
+      - name: CREATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: FLAGS
+        description: ""
+        data_type: VARIANT
+      - name: LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: REVISION
+        description: ""
+        data_type: VARCHAR(256)
+      - name: UPDATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: EMAIL_ADDRESS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: FIRST_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: LAST_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_CITY_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_COUNTRY_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_COUNTY_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_LOT_UNIT_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_STATE_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_STREET_ADDRESS_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MAILING_ZIP_CODE_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MIDDLE_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRIMARY_CONTACT_NUMBER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: THIRD_PARTY_NOTIFICATION_NON_CONSUMER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: TYPE_OF_INSURED
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ORGANIZATION_TYPE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ORGANIZATION_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: POLICYHOLDER_ID
+        description: ""
+        data_type: VARCHAR(256)
+      - name: RELATIONSHIP_ORGANIZATION
+        description: ""
+        data_type: VARCHAR(256)
+      - name: REP_FIRST_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: REP_LAST_NAME
