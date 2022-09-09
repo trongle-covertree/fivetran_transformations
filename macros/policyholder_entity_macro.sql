@@ -3,7 +3,7 @@
 {% set policyholder_modern_query %}
 select entity, pk
 from {{ env }}.{{ prefix }}_policyholders_person_locator
-where SK = {{ policyholder_type }} and entity like '%email_address%'
+where SK = '{{ policyholder_type }}' and entity like '%email_address%'
 
 {% endset %}
 
@@ -17,7 +17,7 @@ where SK = {{ policyholder_type }} and entity like '%email_address%'
 {% set policyholder_legacy_query %}
 select entity, pk
 from {{ env }}.{{ prefix }}_policyholders_person_locator
-where SK = {{ policyholder_type }} and entity like '%emailAddress%'
+where SK = '{{ policyholder_type }}' and entity like '%emailAddress%'
 {% endset %}
 
 {% set results_legacy = run_query(policyholder_legacy_query)%}
