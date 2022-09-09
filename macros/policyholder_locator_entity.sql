@@ -51,7 +51,7 @@ FROM VALUES
     '{{ entity_json.updatedTimestamp }}',
     {% if 'values' in entity_json and 'email_address' in entity_json['values'] %}'{{ entity_json['values']['email_address'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'first_name' in entity_json['values'] %}'{{ entity_json['values']['first_name'][0] }}',{% else %}null,{% endif %}
-    {% if 'values' in entity_json and 'last_name' in entity_json['values'] %}'{{ entity_json['values']['last_name'][0] | replace("'", "\\'") | replace ("`", "") }}',{% else %}null,{% endif %}
+    {% if 'values' in entity_json and 'last_name' in entity_json['values'] %}'{{ entity_json['values']['last_name'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_city_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_city_policyholder'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_country_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_country_policyholder'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_county_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_county_policyholder'][0] }}',{% else %}null,{% endif %}
@@ -230,9 +230,9 @@ FROM VALUES
     {% else %}null,{% endif %}
     {% if 'values' in entity_json and 'repLastName' in entity_json['values'] %}
         {% if entity_json['values']['repLastName'] is iterable %}
-    '{{ entity_json['values']['repLastName'][0] }}',
+    '{{ entity_json['values']['repLastName'][0] }}'
         {% else %}
-    '{{ entity_json['values']['repLastName'] }}',
+    '{{ entity_json['values']['repLastName'] }}'
         {% endif %}
     {% else %}null{% endif %}
 ){% if not loop.last %},{% endif %}
