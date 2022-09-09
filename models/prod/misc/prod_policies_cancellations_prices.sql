@@ -1,3 +1,3 @@
 {{ config(materialized='table') }}
 
-{{ run_cancellations( env='dynamodb', prefix='prod_' )}}
+{{ run_cancellations( env='transformations_dynamodb', prefix='prod' )}}

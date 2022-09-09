@@ -3,7 +3,7 @@
 {% set cancellations_query %}
 select price, pk, sk, POLICY_MODIFICATION_LOCATOR
 {# {{ log(pk[loop.index0], info=True) }} #}
-from {{ env }}.{{ prefix }}policies_cancellation
+from {{ env }}.{{ prefix }}_policies_cancellation
 
 {% endset %}
 
