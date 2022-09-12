@@ -34,7 +34,7 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
     '{{ mod_json.createdTimestamp or null }}',
     '{{ mod_json.displayId or null }}',
     '{{ mod_json.effectiveTimestamp or null }}',
-    '{{ tojson(mod_json.exposureModifications) or null }}',
+    '{{ tojson(mod_json.exposureModifications) | replace("'", "\\'") or null }}',
     '{{ tojson(mod_json.fieldGroupsByLocator) or null }}',
     '{{ tojson(mod_json.fieldValues) or null }}',
     '{{ mod_json.issuedTimestamp or null }}',
