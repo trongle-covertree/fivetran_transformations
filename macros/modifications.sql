@@ -20,6 +20,7 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
         to_timestamp(Column20) as POLICY_END_TIMESTAMP, Column21 as POLICY_LOCATOR, Column22 as POLICYHOLDER_LOCATOR, Column23 as PREMIUM_CHANGE, Column24 as PREMIUM_CHANGE_CURRENCY,
         Column25 as PRODUCT_LOCATOR, to_timestamp(Column26) as UPDATED_TIMESTAMP FROM VALUES
 {% for modification in modifications %}
+    {% set outer_loop = loop %}
     {% if modification %}
         {% for mod_json in fromjson(modification) %}
 {# {{ log(mod, info=True) }} #}
@@ -50,7 +51,7 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
     '{{ mod_json.premiumChangeCurrency or null }}',
     '{{ mod_json.productLocator or null }}',
     '{{ mod_json.updatedTimestamp or null }}'
-){% if not loop.last %},{% endif %}
+){% if not outer_loop.last %},{% endif %}
     {% endfor %}
     {% endif %}
 {% endfor %}
