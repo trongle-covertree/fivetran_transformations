@@ -26,9 +26,9 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
 (
     '{{ pk[loop.index0] + '-' + mod_json.displayId }}',
     '{{ pk[loop.index0] }}',
-    {% if 'automatedUnderwritingResult' in mod_json and 'decision' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decision'] }}',{% else %}null,{% endif %},
-    {% if 'automatedUnderwritingResult' in mod_json and 'decisionTimestamp' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decisionTimestamp'] }}',{% else %}null,{% endif %},
-    {% if 'automatedUnderwritingResult' in mod_json and 'notes' in mod_json['automatedUnderwritingResult'] %}'{{ tojson(mod_json['automatedUnderwritingResult']['notes']) }}',{% else %}null,{% endif %},
+    {% if 'automatedUnderwritingResult' in mod_json and 'decision' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decision'] }}'{% else %}null{% endif %},
+    {% if 'automatedUnderwritingResult' in mod_json and 'decisionTimestamp' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decisionTimestamp'] }}'{% else %}null{% endif %},
+    {% if 'automatedUnderwritingResult' in mod_json and 'notes' in mod_json['automatedUnderwritingResult'] %}'{{ tojson(mod_json['automatedUnderwritingResult']['notes']) }}'{% else %}null{% endif %},
     '{{ mod_json.configVersion or null }}',
     '{{ mod_json.createdTimestamp or null }}',
     '{{ mod_json.displayId or null }}',
