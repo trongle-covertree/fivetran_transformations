@@ -34,9 +34,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     {% if char %}
         {% for char_json in fromjson(char) %}
 {# {{ log(mod, info=True) }} #}
-(
             {% for field_group_key in char_json['fieldGroupsByLocator'].keys() %}
-
     {% if 'quote_inception_date' in char_json['fieldGroupsByLocator'][field_group_key] %}
         {% do char_field_group_keys.update({ 'quote_inception_date': char_json.fieldGroupsByLocator[field_group_key].quote_inception_date[0] }) %}
     {% endif %}
@@ -158,7 +156,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
         {% do char_field_group_keys.update({ 'previous_state_policyholder': char_json.fieldGroupsByLocator[field_group_key].previous_state_policyholder[0] }) %}
      {% endif %}
             {% endfor %}
-
+(
     '{{ pk[loop.index0] }}',
     {% if char_field_group_keys['quote_inception_date']|length > 0 %}'{{ char_field_group_keys['quote_inception_date']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['auto_policy_with_agency']|length > 0 %}'{{ char_field_group_keys['auto_policy_with_agency']}}'{% else %}null{% endif %},
