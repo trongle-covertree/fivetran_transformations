@@ -25,8 +25,8 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
         {% for mod_json in fromjson(modification) %}
 {# {{ log(mod, info=True) }} #}
 (
-    '{{ pk[loop.index0] + '-' + mod_json.displayId }}',
-    '{{ pk[loop.index0] }}',
+    '{{ pk[outer_loop.index0] + '-' + mod_json.displayId }}',
+    '{{ pk[outer_loop.index0] }}',
     {% if 'automatedUnderwritingResult' in mod_json and 'decision' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decision'] }}'{% else %}null{% endif %},
     {% if 'automatedUnderwritingResult' in mod_json and 'decisionTimestamp' in mod_json['automatedUnderwritingResult'] %}'{{ mod_json['automatedUnderwritingResult']['decisionTimestamp'] }}'{% else %}null{% endif %},
     {% if 'automatedUnderwritingResult' in mod_json and 'notes' in mod_json['automatedUnderwritingResult'] %}'{{ tojson(mod_json['automatedUnderwritingResult']['notes']) | replace("\\n", " ") }}'{% else %}null{% endif %},

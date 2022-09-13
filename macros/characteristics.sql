@@ -157,7 +157,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
      {% endif %}
             {% endfor %}
 (
-    '{{ pk[loop.index0] }}',
+    '{{ pk[outer_loop.index0] }}',
     {% if char_field_group_keys['quote_inception_date']|length > 0 %}'{{ char_field_group_keys['quote_inception_date']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['auto_policy_with_agency']|length > 0 %}'{{ char_field_group_keys['auto_policy_with_agency']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['date_of_birth']|length > 0 %}'{{ char_field_group_keys['date_of_birth']}}'{% else %}null{% endif %},
