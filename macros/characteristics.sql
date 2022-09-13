@@ -41,7 +41,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     {% if 'reason_code' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['reason_code'][0] }}'{% else %}null{% endif %},
     {% if 'prior_carrier_name' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['prior_carrier_name'][0] }}'{% else %}null{% endif %},
     {% if 'prior_policy_expiration_date' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['prior_policy_expiration_date'][0] }}'{% else %}null{% endif %},
-    {% if 'prior_insurance' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['prior_insurance'][0] }}'{% else %}null{% endif %},
+    {% if 'prior_insurance' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['prior_insurance'][0] | replace("'", "\\'") }}'{% else %}null{% endif %},
     {% if 'additionalinsured_date_of_birth' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['additionalinsured_date_of_birth'][0] }}'{% else %}null{% endif %},
     {% if 'ad_last_name' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['ad_last_name'][0] }}'{% else %}null{% endif %},
     {% if 'ad_first_name' in char_json['fieldGroupsByLocator'][field_group_key] %}'{{ char_json['fieldGroupsByLocator'][field_group_key]['ad_first_name'][0] }}'{% else %}null{% endif %},
