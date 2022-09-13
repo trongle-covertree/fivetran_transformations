@@ -51,7 +51,7 @@ SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DE
     '{{ mod_json.premiumChangeCurrency or null }}',
     '{{ mod_json.productLocator or null }}',
     '{{ mod_json.updatedTimestamp or null }}'
-){% if not outer_loop.last %},{% endif %}
+){% if not outer_loop.last or not loop.last %},{% endif %}
     {% endfor %}
     {% endif %}
 {% endfor %}
