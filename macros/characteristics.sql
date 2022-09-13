@@ -169,7 +169,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     {% if char_field_group_keys['prior_policy_expiration_date']|length > 0 %}'{{ char_field_group_keys['prior_policy_expiration_date']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['prior_insurance']|length > 0 %}'{{ char_field_group_keys['prior_insurance'] | replace("'", "\\'") }}'{% else %}null{% endif %},
     {% if char_field_group_keys['additionalinsured_date_of_birth']|length > 0 %}'{{ char_field_group_keys['additionalinsured_date_of_birth']}}'{% else %}null{% endif %},
-    {% if char_field_group_keys['ad_last_name']|length > 0 %}'{{ char_field_group_keys['ad_last_name'] | replace("'", "\\'")} }'{% else %}null{% endif %},
+    {% if char_field_group_keys['ad_last_name']|length > 0 %}'{{ char_field_group_keys['ad_last_name'] | replace("'", "\\'") }}'{% else %}null{% endif %},
     {% if char_field_group_keys['ad_first_name']|length > 0 %}'{{ char_field_group_keys['ad_first_name']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['relationship_to_policyholder']|length > 0 %}'{{ char_field_group_keys['relationship_to_policyholder']}}'{% else %}null{% endif %},
     {% if char_field_group_keys['claim_amount']|length > 0 %}'{{ char_field_group_keys['claim_amount']}}'{% else %}null{% endif %},
