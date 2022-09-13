@@ -310,3 +310,159 @@ models:
       - name: UPDATED_TIMESTAMP
         description: ""
         data_type: TIMESTAMP_TZ
+  - name: prod_policy_characteristics
+    description: "Policy characteristics data"
+    columns:
+      - name: PK
+        decription: "PK from Policy table"
+        data_type: VARCHAR(256)
+      - name: QUOTE_INCEPTION_DATE
+        description: ""
+        data_type: DATE
+      - name: AUTO_POLICY_WITH_AGENCY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: DATE_OF_BIRTH
+        description: ""
+        data_type: DATE
+      - name: REASON_DESCRIPTION
+        description: ""
+        data_type: VARCHAR(256)
+      - name: REASON_CODE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRIOR_CARRIER_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRIOR_POLICY_EXPIRATION_DATE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRIOR_INSURANCE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ADDITIONALINSURED_DATE_OF_BIRTH
+        description: ""
+        data_type: DATE
+      - name: AD_LAST_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: AD_FIRST_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: RELATIONSHIP_TO_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CLAIM_AMOUNT
+        description: ""
+        data_type: NUMBER
+      - name: CLAIM_NUMBER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: DESCRIPTION_OF_LOSS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CLAIM_CAT
+        description: ""
+        data_type: BOOLEAN
+      - name: CLAIM_SOURCE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CATEGORY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CLAIM_DATE
+        description: ""
+        data_type: DATE
+      - name: COUNTRY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: AGENCY_PHONE_NUMBER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: EMAIL_ADDRESS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CITY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: AGENT_ID
+        description: ""
+        data_type: VARCHAR(256)
+      - name: LOT_UNIT
+        description: ""
+        data_type: VARCHAR(256)
+      - name: AGENCY_CONTACT_NAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: STATE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: AGENCY_LICENSE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: STREET_ADDRESS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ZIP_CODE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ANIMAL_BITE
+        description: ""
+        data_type: BOOLEAN
+      - name: CONVICTION
+        description: ""
+        data_type: BOOLEAN
+      - name: CANCELLATION_RENEW
+        description: ""
+        data_type: BOOLEAN
+      - name: PREVIOUS_STREET_ADDRESS_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PREVIOUS_COUNTRY_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PREVIOUS_ZIP_CODE_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PREVIOUS_CITY_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PREVIOUS_LOT_UNIT_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PREVIOUS_STATE_POLICYHOLDER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: ASSOCIATION_DISCOUNT
+        description: ""
+        data_type: BOOLEAN
+      - name: PAPERLESS_DISCOUNT
+        description: ""
+        data_type: BOOLEAN
+      - name: MULTI_POLICY_DISCOUNT
+        description: ""
+        data_type: BOOLEAN
+      - name: APPLICATION_INTIATION
+        description: ""
+        data_type: VARCHAR(256)
+      - name: INSURANCE_SCORE
+        description: ""
+        data_type: NUMBER
+      - name: GROSS_PREMIUM
+        description: ""
+        data_type: DOUBLE
+      - name: GROSS_PREMIUM_CURRENCY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: GROSS_TAXES
+        description: ""
+        data_type: DOUBLE
+      - name: GROSS_TAXES_CURRENCY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: CREATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: UPDATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
