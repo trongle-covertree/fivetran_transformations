@@ -218,7 +218,7 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     '{{ char_json.locator or null }}',
     '{{ tojson(char_json.mediaByLocator) or null }}',
     '{{ char_json.policyStartTimestamp or null }}',
-    '{{ char_json.policyEndTimestamp or null }}'
+    '{{ char_json.policyEndTimestamp or null }}',
     '{{ char_json.policyLocator or null }}',
     '{{ char_json.policyholderLocator or null }}',
     '{{ char_json.productLocator or null }}',
