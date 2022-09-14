@@ -466,3 +466,42 @@ models:
       - name: UPDATED_TIMESTAMP
         description: ""
         data_type: TIMESTAMP_TZ
+      - name: CREATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: UPDATED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: END_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: ISSUED_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: MEDIA_BY_LOCATOR
+        description: ""
+        data_type: VARIANT
+      - name: POLICY_START_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: POLICY_END_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: POLICY_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: POLICYHOLDER_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PRODUCT_LOCATOR
+        description: ""
+        data_type: VARCHAR(256)
+      - name: START_TIMESTAMP
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: TAX_GROUPS
+        description: ""
+        data_type: VARIANT

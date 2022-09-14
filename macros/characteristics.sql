@@ -28,7 +28,10 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     Column39 AS PREVIOUS_CITY_POLICYHOLDER, Column40 AS PREVIOUS_LOT_UNIT_POLICYHOLDER, Column41 AS PREVIOUS_STATE_POLICYHOLDER,
     Column42 AS ASSOCIATION_DISCOUNT, Column43 AS PAPERLESS_DISCOUNT, Column44 AS MULTI_POLICY_DISCOUNT, Column45 AS APPLICATION_INTIATION,
     Column46 AS INSURANCE_SCORE, Column47 AS GROSS_PREMIUM, Column48 AS GROSS_PREMIUM_CURRENCY, Column49 AS GROSS_TAXES, Column50 AS GROSS_TAXES_CURRENCY,
-    to_timestamp(Column51) AS CREATED_TIMESTAMP, to_timestamp(Column52) AS UPDATED_TIMESTAMP FROM VALUES
+    to_timestamp(Column51) AS CREATED_TIMESTAMP, to_timestamp(Column52) AS UPDATED_TIMESTAMP, to_timestamp(Column53) AS END_TIMESTAMP,
+    to_timestamp(Column54) AS ISSUED_TIMESTAMP, Column55 AS LOCATOR, parse_json(Column56) AS MEDIA_BY_LOCATOR, to_timestamp(Column57) AS POLICY_START_TIMESTAMP,
+    to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
+    to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS FROM VALUES
 {% for char in characteristics %}
     {% set outer_loop = loop %}
     {% if char %}
@@ -209,7 +212,18 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     '{{ char_json.grossTaxes or null }}',
     '{{ char_json.grossTaxesCurrency or null }}',
     '{{ char_json.createdTimestamp or null }}',
-    '{{ char_json.updatedTimestamp or null }}'
+    '{{ char_json.updatedTimestamp or null }}',
+    '{{ char_json.endTimestamp or null }}',
+    '{{ char_json.issuedTimestamp or null }}',
+    '{{ char_json.locator or null }}',
+    '{{ tojson(char_json.mediaByLocator) or null }}',
+    '{{ char_json.policyStartTimestamp or null }}',
+    '{{ char_json.policyEndTimestamp or null }}'
+    '{{ char_json.policyLocator or null }}',
+    '{{ char_json.policyholderLocator or null }}',
+    '{{ char_json.productLocator or null }}',
+    '{{ char_json.startTimestamp or null }}',
+    '{{ tojson(char_json.taxGroups) or null }}'
 ){% if not outer_loop.last or not loop.last %},{% endif %}
         {% endfor %}
     {% endif %}
