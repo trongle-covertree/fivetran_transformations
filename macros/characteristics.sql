@@ -16,7 +16,7 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% set char_field_value_keys = { association_discount: none, paperless_discount: none, multi_policy_discount: none, application_intiation: none, insurance_score: none } %}
 
 
-SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WITH_AGENCY, Column4 AS DATE_OF_BIRTH,
+SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WITH_AGENCY, to_date(Column4) AS DATE_OF_BIRTH,
     Column5 AS REASON_DESCRIPTION, Column6 AS REASON_CODE, Column7 AS PRIOR_CARRIER_NAME, Column8 AS PRIOR_POLICY_EXPIRATION_DATE,
     Column9 AS PRIOR_INSURANCE, Column10 AS ADDITIONALINSURED_DATE_OF_BIRTH, Column11 AS AD_LAST_NAME, Column12 AS AD_FIRST_NAME,
     Column13 AS RELATIONSHIP_TO_POLICYHOLDER, Column14 AS CLAIM_AMOUNT, Column15 AS CLAIM_NUMBER, Column16 AS DESCRIPTION_OF_LOSS,
