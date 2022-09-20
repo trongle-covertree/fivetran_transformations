@@ -30,7 +30,7 @@ FROM VALUES
     '{{ sk[loop.index0] }}',
     '{{ pol_mod_locator[loop.index0] }}',
     '{{ tojson(price_json.commissions) }}',
-    '{{ tojson(price_json.exposurePrices) }}',
+    '{{ tojson(price_json.exposurePrices) | replace("'", "\\'") }}',
     '{{ tojson(price_json.fees) }}',
     {{ price_json.grossCommissionsChange or 'null' }},
     {{ price_json.grossFeesChange or 'null' }},
