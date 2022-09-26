@@ -12,9 +12,6 @@ from {{ env }}.{{ prefix }}_policies_policy
     {% set pk = results.columns[1].values() %}
 {% endif %}
 
-{% set char_field_group_keys = { quote_inception_date: none, auto_policy_with_agency: none, date_of_birth: none, reason_description: none, reason_code: none, prior_carrier_name: none, prior_policy_expiration_date: none, prior_insurance: none, additionalinsured_date_of_birth: none, ad_last_name: none, ad_first_name: none, relationship_to_policyholder: none, claim_amount: none, claim_number: none, description_of_loss: none, claim_cat: none, claim_source: none, category: none, claim_date: none, country: none, agency_phone_number: none, email_address: none, city: none, agent_id: none, lot_unit: none, agency_id: none, agency_contact_name: none, state: none, agency_license: none, street_address: none, zip_code: none, animal_bite: none, conviction: none, cancellation_renew: none, previous_street_address_policyholder: none, previous_country_policyholder: none, previous_zip_code_policyholder: none, previous_city_policyholder: none, previous_lot_unit_policyholder: none, previous_state_policyholder: none } %}
-{% set char_field_value_keys = { association_discount: none, paperless_discount: none, multi_policy_discount: none, application_intiation: none, insurance_score: none } %}
-
 
 SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WITH_AGENCY, to_date(Column4) AS DATE_OF_BIRTH,
     Column5 AS REASON_DESCRIPTION, Column6 AS REASON_CODE, Column7 AS PRIOR_CARRIER_NAME, Column8 AS PRIOR_POLICY_EXPIRATION_DATE,
@@ -34,8 +31,10 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS FROM VALUES
 {% for char in characteristics %}
     {% set outer_loop = loop %}
+
     {% if char %}
         {% for char_json in fromjson(char) %}
+            {% set char_field_group_keys = { quote_inception_date: none, auto_policy_with_agency: none, date_of_birth: none, reason_description: none, reason_code: none, prior_carrier_name: none, prior_policy_expiration_date: none, prior_insurance: none, additionalinsured_date_of_birth: none, ad_last_name: none, ad_first_name: none, relationship_to_policyholder: none, claim_amount: none, claim_number: none, description_of_loss: none, claim_cat: none, claim_source: none, category: none, claim_date: none, country: none, agency_phone_number: none, email_address: none, city: none, agent_id: none, lot_unit: none, agency_id: none, agency_contact_name: none, state: none, agency_license: none, street_address: none, zip_code: none, animal_bite: none, conviction: none, cancellation_renew: none, previous_street_address_policyholder: none, previous_country_policyholder: none, previous_zip_code_policyholder: none, previous_city_policyholder: none, previous_lot_unit_policyholder: none, previous_state_policyholder: none } %}
 {# {{ log(mod, info=True) }} #}
             {% for field_group_key in char_json['fieldGroupsByLocator'].keys() %}
     {% if 'quote_inception_date' in char_json['fieldGroupsByLocator'][field_group_key] %}
