@@ -3,7 +3,7 @@
 select
   pk,
   sk,
-  {{ dbt_date.from_unixtimestamp("updated_at", format="milliseconds") }} as updated_at,
+  to_timestamp_ntz(to_varchar(updated_at), 3) as updated_at,
   partner_name,
   partner_key,
   lead_id
