@@ -5,7 +5,7 @@ select price, pk, sk, POLICY_MODIFICATION_LOCATOR, CREATED_TIMESTAMP, ISSUED_TIM
 {# {{ log(pk[loop.index0], info=True) }} #}
 from {{ env }}.{{ prefix }}_policies_cancellation
 {% if is_incremental() %}
-   where CREATED_TIMESTAMP > (select CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policies_cancellations_price order by CREATED_TIMESTAMP desc limit 1)
+   where CREATED_TIMESTAMP > (select CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policies_cancellations_prices order by CREATED_TIMESTAMP desc limit 1)
 {% endif %}
 {% endset %}
 
