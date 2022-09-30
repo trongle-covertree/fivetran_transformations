@@ -4,9 +4,9 @@
 select price, pk, sk, POLICY_MODIFICATION_LOCATOR, CREATED_TIMESTAMP, ISSUED_TIMESTAMP, EFFECTIVE_TIMESTAMP
 {# {{ log(pk[loop.index0], info=True) }} #}
 from {{ env }}.{{ prefix }}_policies_cancellation
-{# {% if is_incremental() %}
-   where CREATED_TIMESTAMP >= (select max(CREATED_TIMESTAMP) from {{ this }})
-{% endif %} #}
+{% if is_incremental() %}
+   where CREATED_TIMESTAMP > (select created_timestamp from {{ this }} order by created_timestamp desc limit 1)
+{% endif %}
 {% endset %}
 
 {% set results = run_query(cancellations_query) %}
