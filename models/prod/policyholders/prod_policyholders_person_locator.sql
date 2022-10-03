@@ -4,9 +4,9 @@ select
   PK,
   SK,
   IS_ELIGIBLE_FOR_INSURANCE,
-  to_timestamp_ntz(to_varchar(CREATED_TIMESTAMP)) as CREATED_TIMESTAMP,
+  to_timestamp_ltz(to_varchar(CREATED_TIMESTAMP)) as CREATED_TIMESTAMP,
   VERSION,
-  to_timestamp_ntz(to_varchar(UPDATED_TIMESTAMP)) as UPDATED_TIMESTAMP,
+  to_timestamp_ltz(to_varchar(UPDATED_TIMESTAMP)) as UPDATED_TIMESTAMP,
   LOCATOR,
   ENTITY,
   _fivetran_synced
