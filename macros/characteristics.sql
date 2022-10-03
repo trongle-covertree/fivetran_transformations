@@ -1,8 +1,12 @@
 {% macro run_characteristics(env, prefix) %}
 
 {% set characteristic_query %}
-select characteristics, pk
+select characteristics, pk, created_timestamp, updated_timestamp
 from {{ env }}.{{ prefix }}_policies_policy
+{% if is_incremental() %}
+    WHERE created_timestamp > (select POLICY_CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_CREATED_TIMESTAMP desc limit 1)
+      or updated_timestamp > (select POLICY_UPDATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_UPDATED_TIMESTAMP desc limit 1)
+{% endif %}
 {% endset %}
 
 {% set results = run_query(characteristic_query) %}
@@ -10,6 +14,8 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% if execute %}
     {% set characteristics = results.columns[0].values() %}
     {% set pk = results.columns[1].values() %}
+    {% set created_timestamps = results.columns[2].values() %}
+    {% set updated_timestamps = results.columns[3].values() %}
 {% endif %}
 
 
@@ -28,7 +34,8 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     to_timestamp(Column51) AS CREATED_TIMESTAMP, to_timestamp(Column52) AS UPDATED_TIMESTAMP, to_timestamp(Column53) AS END_TIMESTAMP,
     to_timestamp(Column54) AS ISSUED_TIMESTAMP, Column55 AS LOCATOR, parse_json(Column56) AS MEDIA_BY_LOCATOR, to_timestamp(Column57) AS POLICY_START_TIMESTAMP,
     to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
-    to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS FROM VALUES
+    to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS, to_timestamp(Column64) AS POLICY_CREATED_TIMESTAMP,
+    to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP FROM VALUES
 {% for char in characteristics %}
     {% set outer_loop = loop %}
 
@@ -222,7 +229,9 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
     '{{ char_json.policyholderLocator or null }}',
     '{{ char_json.productLocator or null }}',
     '{{ char_json.startTimestamp or null }}',
-    '{{ tojson(char_json.taxGroups) or null }}'
+    '{{ tojson(char_json.taxGroups) or null }}',
+    '{{ created_timestamps[outer_loop.index0] }}',
+    '{{ updated_timestamps[outer_loop.index0] }}'
 ){% if not outer_loop.last or not loop.last %},{% endif %}
         {% endfor %}
     {% endif %}
