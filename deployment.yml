@@ -26,12 +26,6 @@ jobs:
      - name: run develop models
        command: dbt run --models develop
 
- - name: develop-weekdays-model-breakdowns
-   schedule: 45 7 * * 1-5 # The example will run every weekday at 7:45am.
-   steps:
-     - name: run develop models
-       command: dbt run --models develop_model_breakdowns
-
  - name: develop-weekdays-exposure-perils
    schedule: 45 7 * * 1-5 # The example will run every weekday at 7:45am.
    steps:
