@@ -16,13 +16,13 @@ models:
         data_type: BOOLEAN
       - name: CREATED_TIMESTAMP
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP_TZ
       - name: VERSION
         description: ""
         data_type: FIXED
       - name: UPDATED_TIMESTAMP
         description: ""
-        data_type: FIXED
+        data_type: TIMESTAMP_TZ
       - name: LOCATOR
         description: ""
         data_type: VARCHAR(256)
