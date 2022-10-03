@@ -1,10 +1,7 @@
 {{ config(materialized='table') }}
 
 select
-  {{ dbt_utils.surrogate_key(
-    'pk',
-    'created_timestamp'
-  )}} as policy_id,
+  {{ dbt_utils.surrogate_key(['pk', 'created_timestamp']) }} as policy_id,
   pk,
   sk,
   documents,
