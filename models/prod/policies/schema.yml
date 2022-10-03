@@ -112,7 +112,7 @@ models:
         data_type: VARIANT
       - name: created_timestamp
         description: ""
-        data_type: TIMESTAMP
+        data_type: TIMESTAMP_LTZ
       - name: policy_modification_locator
         description: ""
         data_type: VARCHAR(256)
@@ -121,7 +121,7 @@ models:
         data_type: FIXED
       - name: updated_timestamp
         description: ""
-        data_type: TIMESTAMP
+        data_type: TIMESTAMP_LTZ
       - name: display_id
         description: ""
         data_type: FIXED
@@ -133,10 +133,10 @@ models:
         data_type: VARCHAR(256)
       - name: end_timestamp
         description: ""
-        data_type: TIMESTAMP
+        data_type: TIMESTAMP_LTZ
       - name: start_timestamp
         description: ""
-        data_type: TIMESTAMP
+        data_type: TIMESTAMP_LTZ
       - name: total_due
         description: ""
         data_type: REAL
@@ -148,7 +148,7 @@ models:
         data_type: VARIANT
       - name: due_timestamp
         description: ""
-        data_type: TIMESTAMP
+        data_type: TIMESTAMP_LTZ
       - name: statuses
         description: ""
         data_type: VARIANT
