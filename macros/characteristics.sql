@@ -193,7 +193,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         {% if char_field_group_keys['city']|length > 0 %}'{{ char_field_group_keys['city']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['agent_id']|length > 0 %}'{{ char_field_group_keys['agent_id']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['lot_unit']|length > 0 %}'{{ char_field_group_keys['lot_unit']}}'{% else %}null{% endif %},
-        {% if char_field_group_keys['quote_inception_date']|length > 0 %}'{{ char_field_group_keys['quote_inception_date']}}'{% else %}null{% endif %},
+        {% if char_field_group_keys['agency_id']|length > 0 %}'{{ char_field_group_keys['agency_id']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['agency_contact_name']|length > 0 %}'{{ char_field_group_keys['agency_contact_name']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['state']|length > 0 %}'{{ char_field_group_keys['state']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['agency_license']|length > 0 %}'{{ char_field_group_keys['agency_license']}}'{% else %}null{% endif %},
