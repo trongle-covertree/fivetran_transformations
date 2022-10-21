@@ -43,7 +43,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         '{{ tojson(mod_json.exposureModifications) or null }}',
         '{{ tojson(mod_json.fieldGroupsByLocator) or null }}',
         '{{ tojson(mod_json.fieldValues) or null }}',
-        '{{ mod_json.issuedTimestamp or null }}',
+        {% if mod_json.issuedTimestamp|length > 0%}'{{ mod_json.issuedTimestamp }}'{% else %}null{% endif %},
         '{{ mod_json.locator or null }}',
         '{{ tojson(mod_json.mediaByLocator) or null }}',
         '{{ mod_json.name or null }}',
