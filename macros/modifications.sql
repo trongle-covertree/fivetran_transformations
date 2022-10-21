@@ -50,7 +50,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         '{{ mod_json.newPolicyCharacteristicsLocator or null }}',
         '{{ tojson(mod_json.newPolicyCharacteristicsLocators) or null }}',
         '{{ mod_json.number or null }}',
-        '{{ mod_json.policyEndTimestamp or null }}',
+        {% if mod_json.policyEndTimestamp|length > 0%}'{{ mod_json.policyEndTimestamp }}'{% else %}null{% endif %},
         '{{ mod_json.policyLocator or null }}',
         '{{ mod_json.policyholderLocator or null }}',
         '{{ mod_json.premiumChange or null }}',

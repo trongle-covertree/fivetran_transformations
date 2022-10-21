@@ -224,7 +224,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         '{{ char_json.createdTimestamp or null }}',
         '{{ char_json.updatedTimestamp or null }}',
         '{{ char_json.endTimestamp or null }}',
-        '{{ char_json.issuedTimestamp or null }}',
+        {% if char_json.issuedTimestamp|length > 0%}'{{ char_json.issuedTimestamp }}'{% else %}null{% endif %},
         '{{ char_json.locator or null }}',
         '{{ tojson(char_json.mediaByLocator) or null }}',
         '{{ char_json.policyStartTimestamp or null }}',
