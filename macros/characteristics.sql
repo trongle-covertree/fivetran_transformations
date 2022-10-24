@@ -208,7 +208,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         {% if char_field_group_keys['previous_street_address_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_street_address_policyholder']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_country_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_country_policyholder']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_zip_code_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_zip_code_policyholder']}}'{% else %}null{% endif %},
-        {% if char_field_group_keys['previous_city_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_city_policyholder']}}'{% else %}null{% endif %},
+        {% if char_field_group_keys['previous_city_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_city_policyholder'] | replace("'", "\\'") }}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_lot_unit_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_lot_unit_policyholder']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_state_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_state_policyholder']}}'{% else %}null{% endif %},
     {# fieldValues #}
