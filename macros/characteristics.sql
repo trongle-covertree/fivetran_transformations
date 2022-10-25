@@ -189,7 +189,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         {% if char_field_group_keys['description_of_loss']|length > 0 %}'{{ char_field_group_keys['description_of_loss']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['claim_source']|length > 0 %}'{{ char_field_group_keys['claim_source']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['category']|length > 0 %}'{{ char_field_group_keys['category']}}'{% else %}null{% endif %},
-        {% if char_field_group_keys['quote_inception_date']|length > 0 %}'{{ char_field_group_keys['quote_inception_date']}}'{% else %}null{% endif %},
+        {% if char_field_group_keys['claim_date']|length > 0 %}'{{ char_field_group_keys['claim_date']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['country']|length > 0 %}'{{ char_field_group_keys['country']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['agency_phone_number']|length > 0 %}'{{ char_field_group_keys['agency_phone_number']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['email_address']|length > 0 %}'{{ char_field_group_keys['email_address']}}'{% else %}null{% endif %},
