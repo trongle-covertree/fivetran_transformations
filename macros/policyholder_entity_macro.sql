@@ -39,8 +39,10 @@ where SK = '{{ policyholder_type }}' and entity like '%emailAddress%'
 SELECT * FROM {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity
 {% endif %}
 {% if modern_entities|length > 0 %}
+{% if is_incremental() %}
 UNION
 (
+{% endif %}
 SELECT Column1 as PK, Column2 as ACCOUNT_LOCATOR, Column3 as COMPLETED, to_timestamp(Column4) as CREATED_TIMESTAMP, parse_json(column5) as FLAGS,
     Column6 as LOCATOR, Column7 as REVISION, to_timestamp(Column8) as UPDATED_TIMESTAMP, Column9 as EMAIL_ADDRESS, Column10 as FIRST_NAME,
      Column11 as LAST_NAME, Column12 as MAILING_CITY_POLICYHOLDER, Column13 as MAILING_COUNTRY_POLICYHOLDER, Column14 as MAILING_COUNTY_POLICYHOLDER,
@@ -85,7 +87,9 @@ FROM VALUES
 ){% if not loop.last %},{% endif %}
     {% endif %}
 {% endfor %}
+{% if is_incremental() %}
 )
+{% endif %}
 {% endif %}
 
 {% if legacy_entities|length > 0 %}
