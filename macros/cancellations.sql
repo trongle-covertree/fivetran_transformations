@@ -21,7 +21,14 @@ from {{ env }}.{{ prefix }}_policies_cancellation
     {% set effective_timestamps = results.columns[6].values() %}
 {% endif %}
 
+{% if is_incremental() %}
+SELECT * FROM {{ env }}.{{ prefix }}_policies_cancellations_prices
+{% endif %}
 {% if prices|length > 0 %}
+{% if is_incremental %}
+UNION
+    (
+{% endif %}
     SELECT  Column1 AS ID, Column2 AS PK, Column3 AS SK, Column4 AS POLICY_MODIFICATION_LOCATOR, parse_json(Column5) AS COMMISSIONS, parse_json(Column6) AS EXPOSURE_PRICES,
         parse_json(Column7) AS FEES, Column8 AS GROSS_COMMISSIONS_CHANGE, Column9 AS GROSS_FEES_CHANGE, Column10 AS GROSS_PREMIUM_CHANGE, Column11 AS GROSS_TAXES_CHANGE,
         parse_json(Column12) AS HOLDBACKS, to_double(Column13) AS NEW_GROSS_COMMISSIONS, Column14 AS NEW_GROSS_FEES, Column15 AS NEW_GROSS_PREMIUM,
@@ -57,5 +64,8 @@ from {{ env }}.{{ prefix }}_policies_cancellation
     ){% if not loop.last %},{% endif %}
         {% endif %}
     {% endfor %}
+{% if is_incremental %}
+    )
+{% endif %}
 {% endif %}
 {% endmacro %}
