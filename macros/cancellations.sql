@@ -25,7 +25,7 @@ from {{ env }}.{{ prefix }}_policies_cancellation
 SELECT * FROM {{ env }}.{{ prefix }}_policies_cancellations_prices
 {% endif %}
 {% if prices|length > 0 %}
-{% if is_incremental %}
+{% if is_incremental() %}
 UNION
     (
 {% endif %}
@@ -64,7 +64,7 @@ UNION
     ){% if not loop.last %},{% endif %}
         {% endif %}
     {% endfor %}
-{% if is_incremental %}
+{% if is_incremental() %}
     )
 {% endif %}
 {% endif %}

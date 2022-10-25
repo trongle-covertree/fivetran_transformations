@@ -18,11 +18,11 @@ from {{ env }}.{{ prefix }}_policies_policy
     {% set updated_timestamps = results.columns[3].values() %}
 {% endif %}
 
-{% if is_incremental %}
+{% if is_incremental() %}
 SELECT * FROM {{ env }}.{{ prefix }}_policy_characteristics
 {% endif %}
 {% if characteristics|length > 0 %}
-{% if is_incremental %}
+{% if is_incremental() %}
 UNION
     (
 {% endif %}
@@ -247,7 +247,7 @@ UNION
             {% endfor %}
         {% endif %}
     {% endfor %}
-{% if is_incremental %}
+{% if is_incremental() %}
     )
 {% endif %}
 {% endif %}
