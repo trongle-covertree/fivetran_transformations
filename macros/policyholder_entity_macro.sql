@@ -1,9 +1,16 @@
 {% macro run_policyholders(env, prefix, policyholder_type ) %}
 
 {% set policyholder_modern_query %}
-select entity, pk
+select entity, pk, created_timestamp, updated_timestamp
 from {{ env }}.{{ prefix }}_policyholders_person_locator
 where SK = '{{ policyholder_type }}' and entity like '%email_address%'
+{% if is_incremental() %}
+and (( created_timestamp > (select created_timestamp from {{ env }}.{{ prefix }}_policyholders_locator_sk_entity order by created_timestamp desc limit 1)
+      or updated_timestamp > (select updated_timestamp from {{ env }}.{{ prefix }}_policyholders_locator_sk_entity order by updated_timestamp desc limit 1))
+    or ( created_timestamp > (select created_timestamp from {{ env }}.{{ prefix }}_policyholders_person_sk_entity order by created_timestamp desc limit 1)
+      or updated_timestamp > (select updated_timestamp from {{ env }}.{{ prefix }}_policyholders_person_sk_entity order by updated_timestamp desc limit 1))
+)
+{% endif %}
 
 {% endset %}
 
