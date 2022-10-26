@@ -36,7 +36,10 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
                     {% set address_char_keys = { id: none, country: none, city: none, lot_unit: none, state: none, county: none, street_address: none, zip_code: none, created_timestamp: none, updated_timestamp: none } %}
                     {% for current_char_key in char.fieldGroupsByLocator.keys() %}
-                        {% if 'street_address' in char.fieldGroupsByLocator[current_char_key] and ('officer_first_name' not in char.fieldGroupsByLocator[current_char_key] or 'officer_last_name' not in char.fieldGroupsByLocator[current_char_key] or 'officer_mail_address' not in char.fieldGroupsByLocator[current_char_key]) %}
+                        {% if 'street_address' in char.fieldGroupsByLocator[current_char_key]
+                            and ('officer_first_name' not in char.fieldGroupsByLocator[current_char_key] or 'officer_last_name' not in char.fieldGroupsByLocator[current_char_key] or 'officer_mail_address' not in char.fieldGroupsByLocator[current_char_key])
+                            and ('account_number' not in char.fieldGroupsByLocator[current_char_key] or 'additional_interest_id' not in char.fieldGroupsByLocator[current_char_key]) %}
+
                             {% do address_char_keys.update({ 'country': char.fieldGroupsByLocator[current_char_key].country[0] }) %}
                             {% do address_char_keys.update({ 'city': char.fieldGroupsByLocator[current_char_key].city[0] }) %}
                             {% if 'lot_unit' in char.fieldGroupsByLocator[current_char_key] %}
