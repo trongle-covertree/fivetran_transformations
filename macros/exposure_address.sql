@@ -34,10 +34,8 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
         {% if exposure %}
             {% for exposure_json in fromjson(exposure) %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
-                    {% set peril_loop = loop %}
                     {% set address_char_keys = { id: none, country: none, city: none, lot_unit: none, state: none, county: none, street_address: none, zip_code: none, created_timestamp: none, updated_timestamp: none } %}
                     {% for current_char_key in char.fieldGroupsByLocator.keys() %}
-                        {% set char_loop = loop %}
                         {% if 'street_address' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do address_char_keys.update({ 'country': char.fieldGroupsByLocator[current_char_key].country[0] }) %}
                             {% do address_char_keys.update({ 'city': char.fieldGroupsByLocator[current_char_key].city[0] }) %}
@@ -50,10 +48,9 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
                             {% endif %}
                             {% do address_char_keys.update({ 'street_address': char.fieldGroupsByLocator[current_char_key].street_address[0] }) %}
                             {% do address_char_keys.update({ 'zip_code': char.fieldGroupsByLocator[current_char_key].zip_code[0] }) %}
-                        {% endif %}
-                    {% do address_char_keys.update({ 'id': char.locator }) %}
-                    {% do address_char_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
-                    {% do address_char_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
+                            {% do address_char_keys.update({ 'id': char.locator }) %}
+                            {% do address_char_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
+                            {% do address_char_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
     (
         {% if address_char_keys.id|length > 0 %}'{{ address_char_keys.id }}'{% else %}null{% endif %},
         '{{ pk[outer_loop.index0] }}',
@@ -68,7 +65,8 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
         {% if address_char_keys.updated_timestamp|length > 0 %}'{{ address_char_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or not peril_loop.last or not char_loop.last or not loop.last %},{% endif %}
+    ){% if not outer_loop.last %},{% endif %}
+                        {% endif %}
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
