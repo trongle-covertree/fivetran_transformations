@@ -19,6 +19,15 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% endif %}
 
 {% if exposures|length > 0 %}
+    {% if is_incremental() %}
+        {% set delete_query %}
+        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in (
+        {% endset %}
+        {% for policy in pk %}
+            delete_query ~ '{{ policy }}'{% if not loop.last %}','{% else %}){% endif %}
+        {% endfor %}
+    {% endif %}
+
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_UNIT, Column5 AS CITY, Column6 AS STATE, Column7 AS ZIP_CODE,
     Column8 AS COUNTY, Column9 AS COUNTRY, to_timestamp(Column10) AS CREATED_TIMESTAMP, to_timestamp(Column11) AS UPDATED_TIMESTAMP,
     to_timestamp(Column12) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column13) AS POLICY_UPDATED_TIMESTAMP FROM VALUES
