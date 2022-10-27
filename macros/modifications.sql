@@ -19,6 +19,12 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% endif %}
 
 {% if modifications|length > 0 %}
+    {% if is_incremental() %}
+        {% set delete_query %}
+        DELETE FROM {{ env }}.{{ prefix }}_policy_modifications where PK in {{ pk }}
+        {% endset %}
+        {% do run_query(delete_query) %}
+    {% endif %}
     SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DECISION, to_timestamp(Column4) as AUTOMATED_UNDERWRITING_RESULT_DECISION_TIMESTAMP,
             parse_json(Column5) as AUTOMATED_UNDERWRITING_RESULT_NOTES, Column6 as CONFIG_VERSION, to_timestamp(Column7) as CREATED_TIMESTAMP, Column8 as DISPLAY_ID, to_timestamp(Column9) as EFFECTIVE_TIMESTAMP,
             parse_json(Column10) as EXPOSURE_MODIFICATIONS, parse_json(Column11) as FIELD_GROUPS_BY_LOCATOR, parse_json(Column12) as FIELD_VALUES, to_timestamp(Column13) as ISSUED_TIMESTAMP, Column14 as LOCATOR,

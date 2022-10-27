@@ -19,6 +19,12 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% endif %}
 
 {% if characteristics|length > 0 %}
+    {% if is_incremental() %}
+        {% set delete_query %}
+        DELETE FROM {{ env }}.{{ prefix }}_policy_characteristics where PK in {{ pk }}
+        {% endset %}
+        {% do run_query(delete_query) %}
+    {% endif %}
     SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WITH_AGENCY, to_date(Column4) AS DATE_OF_BIRTH,
         Column5 AS REASON_DESCRIPTION, Column6 AS REASON_CODE, Column7 AS PRIOR_CARRIER_NAME, Column8 AS PRIOR_POLICY_EXPIRATION_DATE,
         Column9 AS PRIOR_INSURANCE, Column10 AS ADDITIONALINSURED_DATE_OF_BIRTH, Column11 AS AD_LAST_NAME, Column12 AS AD_FIRST_NAME,
