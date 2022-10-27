@@ -78,6 +78,9 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
                         {% if 'short_term_rental_surcharge' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do plan_info_keys.update({ 'short_term_rental_surcharge': char.fieldGroupsByLocator[current_char_key].short_term_rental_surcharge[0] }) %}
                         {% endif %}
+                        {% if 'unusual_risk' in char.fieldGroupsByLocator[current_char_key] %}
+                            {% do plan_info_keys.update({ 'unusual_risk': char.fieldGroupsByLocator[current_char_key].unusual_risk[0] }) %}
+                        {% endif %}
                         {% if plan_info_keys.policy_usage|length > 0 and plan_info_keys.community_policy_discount|length > 0 %}
     (
         {% if plan_info_keys.id|length > 0 or plan_info_keys is not none %}'{{ plan_info_keys.id }}'{% else %}null{% endif %},
@@ -94,6 +97,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
         {% if plan_info_keys.unit_location|length > 0 %}'{{ plan_info_keys.unit_location }}'{% else %}null{% endif %},
         {% if plan_info_keys.policy_usage|length > 0 %}'{{ plan_info_keys.policy_usage }}'{% else %}null{% endif %},
         {% if plan_info_keys.short_term_rental_surcharge|length > 0 %}'{{ plan_info_keys.short_term_rental_surcharge }}'{% else %}null{% endif %},
+        {% if plan_info_keys.unusual_risk|length > 0 %}'{{ plan_info_keys.unusual_risk }}'{% else %}null{% endif %},
         {% if plan_info_keys.created_timestamp|length > 0 %}'{{ plan_info_keys.created_timestamp }}'{% else %}null{% endif %},
         {% if plan_info_keys.updated_timestamp|length > 0 %}'{{ plan_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
