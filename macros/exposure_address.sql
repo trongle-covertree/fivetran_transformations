@@ -21,11 +21,9 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
         {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in (
+        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in {{ pk }}
         {% endset %}
-        {% for policy in pk %}
-            {{ delete_query ~ '{{ policy }}' ~ {% if not loop.last %}','{% else %}){% endif %} }}
-        {% endfor %}
+        {% do run_query(delete_query) %}
     {% endif %}
 
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_UNIT, Column5 AS CITY, Column6 AS STATE, Column7 AS ZIP_CODE,
