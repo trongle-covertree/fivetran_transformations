@@ -24,7 +24,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in (
         {% endset %}
         {% for policy in pk %}
-            delete_query ~ '{{ policy }}'{% if not loop.last %}','{% else %}){% endif %}
+            {{ delete_query ~ '{{ policy }}' ~ {% if not loop.last %}','{% else %}){% endif %} }}
         {% endfor %}
     {% endif %}
 
