@@ -62,7 +62,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
         {% if address_char_keys.updated_timestamp|length > 0 %}'{{ address_char_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last %},{% else %}TEST{% endif %}
+    ){% if not outer_loop.last %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
