@@ -85,7 +85,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
         {% if plan_info_keys.community_policy_discount|length > 0 %}'{{ plan_info_keys.community_policy_discount }}'{% else %}null{% endif %},
         {% if plan_info_keys.personalized_plan_type|length > 0 %}'{{ plan_info_keys.personalized_plan_type }}'{% else %}null{% endif %},
         {% if plan_info_keys.acv|length > 0 %}'{{ plan_info_keys.acv | replace(",", "") }}'{% else %}null{% endif %},
-        {% if plan_info_keys.park_name|length > 0 %}'{{ plan_info_keys.park_name }}'{% else %}null{% endif %},
+        {% if plan_info_keys.park_name|length > 0 %}'{{ plan_info_keys.park_name | replace("'", "\\'") }}'{% else %}null{% endif %},
         {% if plan_info_keys.form|length > 0 %}'{{ plan_info_keys.form }}'{% else %}null{% endif %},
         {% if plan_info_keys.rcv|length > 0 %}'{{ plan_info_keys.rcv | replace(",", "") }}'{% else %}null{% endif %},
         {% if plan_info_keys.valuation_id|length > 0 %}'{{ plan_info_keys.valuation_id }}'{% else %}null{% endif %},
