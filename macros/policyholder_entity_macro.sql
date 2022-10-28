@@ -94,6 +94,15 @@ FROM VALUES
 ){% if not loop.last %},{% endif %}
     {% endif %}
 {% endfor %}
+{% else %}
+SELECT Column1 as PK, Column2 as ACCOUNT_LOCATOR, Column3 as COMPLETED, to_timestamp(Column4) as CREATED_TIMESTAMP, parse_json(column5) as FLAGS,
+    Column6 as LOCATOR, Column7 as REVISION, to_timestamp(Column8) as UPDATED_TIMESTAMP, Column9 as EMAIL_ADDRESS, Column10 as FIRST_NAME,
+     Column11 as LAST_NAME, Column12 as MAILING_CITY_POLICYHOLDER, Column13 as MAILING_COUNTRY_POLICYHOLDER, Column14 as MAILING_COUNTY_POLICYHOLDER,
+     Column15 as MAILING_LOT_UNIT_POLICYHOLDER, Column16 as MAILING_STATE_POLICYHOLDER, Column17 as MAILING_STREET_ADDRESS_POLICYHOLDER,
+     Column18 as MAILING_ZIP_CODE_POLICYHOLDER, Column19 as MIDDLE_NAME, Column20 as PRIMARY_CONTACT_NUMBER,
+      Column21 as THIRD_PARTY_NOTIFICATION_NON_CONSUMER, Column22 as TYPE_OF_INSURED, Column23 as ORGANIZATION_TYPE, Column24 as ORGANIZATION_NAME,
+      Column25 as POLICYHOLDER_ID, Column26 as RELATIONSHIP_ORGANIZATION, Column27 as REP_FIRST_NAME, Column28 as REP_LAST_NAME
+FROM VALUES ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 
 {% if legacy_entities|length > 0 %}
