@@ -120,5 +120,12 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ROOF_YEAR_YYYY, Column4 AS SKIRT
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS ID, Column2 AS PK, Column3 AS ROOF_YEAR_YYYY, Column4 AS SKIRTING_TYPE, Column5 AS ROOF_SHAPE, Column6 AS ROOF_MATERIAL, Column7 AS HOME_HUD_NUMBER,
+    Column8 AS TOTAL_SQUARE_FOOTAGE, Column9 AS HOME_TYPE, Column10 AS MODEL_YEAR, Column11 AS MANUFACTURER_NAME, Column12 AS ROOF_CONDITION, Column13 AS HOME_FIXTURES,
+    Column14 AS INSPECTION_INTERIOR, Column15 AS INSPECTION_EXTERIOR, Column16 AS INSPECTION_AERIAL, to_timestamp(Column17) AS CREATED_TIMESTAMP,
+    to_timestamp(Column18) AS UPDATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column20) AS POLICY_UPDATED_TIMESTAMP
+    FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

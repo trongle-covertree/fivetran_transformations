@@ -69,5 +69,14 @@ from {{ env }}.{{ prefix }}_policies_policy
         {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+    SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DECISION, to_timestamp(Column4) as AUTOMATED_UNDERWRITING_RESULT_DECISION_TIMESTAMP,
+            parse_json(Column5) as AUTOMATED_UNDERWRITING_RESULT_NOTES, Column6 as CONFIG_VERSION, to_timestamp(Column7) as CREATED_TIMESTAMP, Column8 as DISPLAY_ID, to_timestamp(Column9) as EFFECTIVE_TIMESTAMP,
+            parse_json(Column10) as EXPOSURE_MODIFICATIONS, parse_json(Column11) as FIELD_GROUPS_BY_LOCATOR, parse_json(Column12) as FIELD_VALUES, to_timestamp(Column13) as ISSUED_TIMESTAMP, Column14 as LOCATOR,
+            parse_json(Column15) as MEDIA_BY_LOCATOR, Column16 as NAME, Column17 as NEW_POLICY_CHARACTERISTICS_LOCATOR, parse_json(Column18) as NEW_POLICY_CHARACTERISTICS_LOCATORS, Column19 as NUMBER,
+            to_timestamp(Column20) as POLICY_END_TIMESTAMP, Column21 as POLICY_LOCATOR, Column22 as POLICYHOLDER_LOCATOR, Column23 as PREMIUM_CHANGE, Column24 as PREMIUM_CHANGE_CURRENCY,
+            Column25 as PRODUCT_LOCATOR, to_timestamp(Column26) as UPDATED_TIMESTAMP, to_timestamp(Column27) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column28) AS POLICY_UPDATED_TIMESTAMP
+    FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

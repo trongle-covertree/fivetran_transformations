@@ -246,5 +246,25 @@ from {{ env }}.{{ prefix }}_policies_policy
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WITH_AGENCY, to_date(Column4) AS DATE_OF_BIRTH,
+        Column5 AS REASON_DESCRIPTION, Column6 AS REASON_CODE, Column7 AS PRIOR_CARRIER_NAME, Column8 AS PRIOR_POLICY_EXPIRATION_DATE,
+        Column9 AS PRIOR_INSURANCE, Column10 AS ADDITIONALINSURED_DATE_OF_BIRTH, Column11 AS AD_LAST_NAME, Column12 AS AD_FIRST_NAME,
+        Column13 AS RELATIONSHIP_TO_POLICYHOLDER, Column14 AS CLAIM_AMOUNT, Column15 AS CLAIM_NUMBER, Column16 AS DESCRIPTION_OF_LOSS,
+        Column17 AS CLAIM_CAT, Column18 AS CLAIM_SOURCE, Column19 AS CATEGORY, Column20 AS CLAIM_DATE, Column21 AS COUNTRY,
+        Column22 AS AGENCY_PHONE_NUMBER, Column23 AS EMAIL_ADDRESS, Column24 AS CITY, Column25 AS AGENT_ID, Column26 AS LOT_UNIT,
+        Column27 AS AGENCY_ID, Column28 AS AGENCY_CONTACT_NAME, Column29 AS STATE, Column30 AS AGENCY_LICENSE, Column31 AS STREET_ADDRESS,
+        Column32 AS ZIP_CODE, Column33 AS ANIMAL_BITE, Column34 AS CONVICTION, Column35 AS CANCELLATION_RENEW,
+        Column36 AS PREVIOUS_STREET_ADDRESS_POLICYHOLDER, Column37 AS PREVIOUS_COUNTRY_POLICYHOLDER, Column38 AS PREVIOUS_ZIP_CODE_POLICYHOLDER,
+        Column39 AS PREVIOUS_CITY_POLICYHOLDER, Column40 AS PREVIOUS_LOT_UNIT_POLICYHOLDER, Column41 AS PREVIOUS_STATE_POLICYHOLDER,
+        Column42 AS ASSOCIATION_DISCOUNT, Column43 AS PAPERLESS_DISCOUNT, Column44 AS MULTI_POLICY_DISCOUNT, Column45 AS APPLICATION_INTIATION,
+        Column46 AS INSURANCE_SCORE, Column47 AS GROSS_PREMIUM, Column48 AS GROSS_PREMIUM_CURRENCY, Column49 AS GROSS_TAXES, Column50 AS GROSS_TAXES_CURRENCY,
+        to_timestamp(Column51) AS CREATED_TIMESTAMP, to_timestamp(Column52) AS UPDATED_TIMESTAMP, to_timestamp(Column53) AS END_TIMESTAMP,
+        to_timestamp(Column54) AS ISSUED_TIMESTAMP, Column55 AS LOCATOR, parse_json(Column56) AS MEDIA_BY_LOCATOR, to_timestamp(Column57) AS POLICY_START_TIMESTAMP,
+        to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
+        to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS, to_timestamp(Column64) AS POLICY_CREATED_TIMESTAMP,
+        to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD FROM VALUES
+        ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

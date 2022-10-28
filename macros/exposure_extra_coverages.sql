@@ -157,5 +157,13 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS DIVING_BOARD, Column5 AS PLEASE_DESCRIBE, Column6 AS BUSINESS_ON_PREMISES, Column7 AS BUSINESS_EMPLOYEES_ON_PREMISES,
+    Column8 AS TRAMPOLINE_LIABILITY, Column9 AS SOURCE_OF_HEAT_INSTALLATION, Column10 AS PROPERTY_WITH_FIRE_PROTECTION, Column11 AS THERMO_STATIC_CONTROL, Column12 AS TYPE_OF_FUEL, Column13 AS UNIT_IS_TIED,
+    Column14 AS SOURCE_OF_HEAT, Column15 AS UNREPAIRED_DAMAGES, Column16 AS FOUR_FEET_FENCE, Column17 AS DAYCARE_ON_PREMISES, Column18 AS UTILITY_SERVICES, Column19 AS WROUGHT_IRON, Column20 AS MORTGAGE,
+    Column21 AS SECURE_RAILS, Column22 AS BUSINESS_DESCRIPTION, Column23 AS TRAMPOLINE_SAFETY_NET, Column24 AS SWIMMING_POOL, Column25 AS BURGLAR_ALARM, to_timestamp(Column26) AS CREATED_TIMESTAMP,
+    to_timestamp(Column27) AS UPDATED_TIMESTAMP, to_timestamp(Column28) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column29) AS POLICY_UPDATED_TIMESTAMP
+    FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

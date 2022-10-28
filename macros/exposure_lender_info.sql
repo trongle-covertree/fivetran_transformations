@@ -119,5 +119,11 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME, Column5 AS OFFICER_FIRST_NAME, Column6 AS OFFICER_LAST_NAME, Column7 AS OFFICER_MAIL_ADDRESS,
+    Column8 AS STREET_ADDRESS, Column9 AS LOT_UNIT, Column10 AS STATE, Column11 AS ZIP_CODE, Column12 AS CITY, Column13 AS COUNTRY, Column14 AS TYPE, Column15 AS ADDITIONAL_INTEREST_ID,
+    to_timestamp(Column16) AS CREATED_TIMESTAMP, to_timestamp(Column17) AS UPDATED_TIMESTAMP, to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP
+    FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

@@ -116,5 +116,12 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Column4 AS PERSONALIZED_PLAN_TYPE, Column5 AS ACV, Column6 AS PARK_NAME, Column7 AS FORM,
+    Column8 AS RCV, Column9 AS VALUATION_ID, Column10 AS PURCHASE_DATE, Column11 AS UNIT_ID, Column12 AS UNIT_LOCATION, Column13 AS POLICY_USAGE,
+    Column14 AS SHORT_TERM_RENTAL_SURCHARGE, Column15 AS UNUSUAL_RISK, to_timestamp(Column16) AS CREATED_TIMESTAMP, to_timestamp(Column17) AS UPDATED_TIMESTAMP,
+    to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP
+    FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

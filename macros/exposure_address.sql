@@ -84,5 +84,10 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_U
             {% endfor %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_UNIT, Column5 AS CITY, Column6 AS STATE, Column7 AS ZIP_CODE,
+    Column8 AS COUNTY, Column9 AS COUNTRY, to_timestamp(Column10) AS CREATED_TIMESTAMP, to_timestamp(Column11) AS UPDATED_TIMESTAMP,
+    to_timestamp(Column12) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column13) AS POLICY_UPDATED_TIMESTAMP FROM VALUES
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}

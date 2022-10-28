@@ -63,5 +63,12 @@ from {{ env }}.{{ prefix }}_policies_cancellation
     ){% if not loop.last %},{% endif %}
         {% endif %}
     {% endfor %}
+{% else %}
+SELECT  Column1 AS ID, Column2 AS PK, Column3 AS SK, Column4 AS POLICY_MODIFICATION_LOCATOR, parse_json(Column5) AS COMMISSIONS, parse_json(Column6) AS EXPOSURE_PRICES,
+        parse_json(Column7) AS FEES, Column8 AS GROSS_COMMISSIONS_CHANGE, Column9 AS GROSS_FEES_CHANGE, Column10 AS GROSS_PREMIUM_CHANGE, Column11 AS GROSS_TAXES_CHANGE,
+        parse_json(Column12) AS HOLDBACKS, to_double(Column13) AS NEW_GROSS_COMMISSIONS, Column14 AS NEW_GROSS_FEES, Column15 AS NEW_GROSS_PREMIUM,
+        Column16 AS NEW_GROSS_TAXES, Column17 AS NEW_TOTAL, parse_json(Column18) AS TAX_GROUPS, Column19 AS TOTAL_CHANGE, to_timestamp(Column20) as CREATED_TIMESTAMP,
+        to_timestamp(Column21) AS ISSUED_TIMESTAMP, to_timestamp(Column22) as EFFECTIVE_TIMESTAMP
+    FROM VALUES ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}
