@@ -44,7 +44,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
-                    {% set lender_info_keys = { id: none, country: none, city: none, lot_unit: none, state: none, county: none, street_address: none, zip_code: none, created_timestamp: none, updated_timestamp: none } %}
+                    {% set lender_info_keys = { id: none, account_number: none, name: none, officer_first_name: none, officer_last_name: none, officer_mail_address: none, type: none, additional_interest_id: none, country: none, city: none, lot_unit: none, state: none, county: none, street_address: none, zip_code: none, created_timestamp: none, updated_timestamp: none } %}
                     {% for current_char_key in char.fieldGroupsByLocator.keys() %}
                         {% if 'officer_first_name' in char.fieldGroupsByLocator[current_char_key] or 'officer_last_name' in char.fieldGroupsByLocator[current_char_key] or 'officer_mail_address' in char.fieldGroupsByLocator[current_char_key]
                             or 'account_number' in char.fieldGroupsByLocator[current_char_key] or 'additional_interest_id' in char.fieldGroupsByLocator[current_char_key] %}
@@ -90,6 +90,8 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
                             {% do lender_info_keys.update({ 'id': char.locator }) %}
                             {% do lender_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                             {% do lender_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
+                        {% endif %}
+                        {% if loop.last %}
     (
         {% if lender_info_keys.id|length > 0 %}'{{ lender_info_keys.id }}'{% else %}null{% endif %},
         '{{ pk[outer_loop.index0] }}',
