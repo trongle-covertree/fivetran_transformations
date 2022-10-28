@@ -1,5 +1,5 @@
 {{ config(materialized='incremental',
-    post_hook = "DELETE FROM fivetran_covertree.transformations_dynamodb_develop.develop.develop_policyholders_person_sk_entity where PK = 'NO FIELDS' " ) }}
+    post_hook = "DELETE FROM FIVETRAN_COVERTREE.TRANSFORMATIONS_DYNAMODB_DEVELOP.DEVELOP_POLICYHOLDERS_PERSON_SK_ENTITY where PK = 'NO FIELDS' " ) }}
 
 {{ run_policyholders(
     env='transformations_dynamodb_develop',
