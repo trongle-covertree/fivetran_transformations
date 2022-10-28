@@ -112,7 +112,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
                         {% if 'burglar_alarm' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do extra_cov_keys.update({ 'burglar_alarm': char.fieldGroupsByLocator[current_char_key].burglar_alarm[0] }) %}
                         {% endif %}
-                        {% if extra_cov_keys.business_on_premises|length > 0 %}
+                        {% if loop.last %}
     (
         {% if extra_cov_keys.id|length > 0 or extra_cov_keys is not none %}'{{ extra_cov_keys.id }}'{% else %}null{% endif %},
         '{{ pk[outer_loop.index0] }}',
@@ -144,7 +144,6 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
     ){% if not outer_loop.last or (outer_loop.last and exposure_json_loop.index0 != exposure_arr|length - 2) %},{% endif %}
-                        {% do extra_cov_keys.update({ 'business_on_premises': '' }) %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}

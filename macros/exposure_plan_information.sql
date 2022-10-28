@@ -81,7 +81,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
                         {% if 'unusual_risk' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do plan_info_keys.update({ 'unusual_risk': char.fieldGroupsByLocator[current_char_key].unusual_risk[0] }) %}
                         {% endif %}
-                        {% if plan_info_keys.policy_usage|length > 0 and plan_info_keys.community_policy_discount|length > 0 %}
+                        {% if loop.last %}
     (
         {% if plan_info_keys.id|length > 0 or plan_info_keys is not none %}'{{ plan_info_keys.id }}'{% else %}null{% endif %},
         '{{ pk[outer_loop.index0] }}',
@@ -103,7 +103,6 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
     ){% if not outer_loop.last or (outer_loop.last and exposure_json_loop.index0 != exposure_arr|length - 2) %},{% endif %}
-                        {% do plan_info_keys.update({ 'policy_usage': '' })%}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
