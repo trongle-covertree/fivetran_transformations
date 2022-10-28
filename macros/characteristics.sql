@@ -264,7 +264,8 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
         to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
         to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS, to_timestamp(Column64) AS POLICY_CREATED_TIMESTAMP,
         to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD FROM VALUES
-        ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+        ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null)
 {% endif %}
 {% endmacro %}
