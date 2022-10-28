@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_extra_coverages where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_extra_coverages where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_extra_coverages where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS DIVING_BOARD, Column5 AS PLEASE_DESCRIBE, Column6 AS BUSINESS_ON_PREMISES, Column7 AS BUSINESS_EMPLOYEES_ON_PREMISES,
     Column8 AS TRAMPOLINE_LIABILITY, Column9 AS SOURCE_OF_HEAT_INSTALLATION, Column10 AS PROPERTY_WITH_FIRE_PROTECTION, Column11 AS THERMO_STATIC_CONTROL, Column12 AS TYPE_OF_FUEL, Column13 AS UNIT_IS_TIED,

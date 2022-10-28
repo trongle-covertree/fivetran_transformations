@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_address where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS STREET_ADDRESS, Column4 AS LOT_UNIT, Column5 AS CITY, Column6 AS STATE, Column7 AS ZIP_CODE,

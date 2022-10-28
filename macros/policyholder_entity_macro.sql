@@ -38,10 +38,17 @@ and ( created_timestamp > (select created_timestamp from {{ env }}.{{ prefix }}_
 
 {% if modern_entities|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity where PK in {{ modern_pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity where PK in {{ modern_pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity where PK in {{ modern_pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 SELECT Column1 as PK, Column2 as ACCOUNT_LOCATOR, Column3 as COMPLETED, to_timestamp(Column4) as CREATED_TIMESTAMP, parse_json(column5) as FLAGS,
     Column6 as LOCATOR, Column7 as REVISION, to_timestamp(Column8) as UPDATED_TIMESTAMP, Column9 as EMAIL_ADDRESS, Column10 as FIRST_NAME,

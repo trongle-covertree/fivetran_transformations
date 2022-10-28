@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_home_info where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_home_info where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_home_info where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS ROOF_YEAR_YYYY, Column4 AS SKIRTING_TYPE, Column5 AS ROOF_SHAPE, Column6 AS ROOF_MATERIAL, Column7 AS HOME_HUD_NUMBER,
     Column8 AS TOTAL_SQUARE_FOOTAGE, Column9 AS HOME_TYPE, Column10 AS MODEL_YEAR, Column11 AS MANUFACTURER_NAME, Column12 AS ROOF_CONDITION, Column13 AS HOME_FIXTURES,

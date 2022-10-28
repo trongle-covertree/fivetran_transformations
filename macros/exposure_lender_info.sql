@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_lender_info where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_lender_info where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_lender_info where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME, Column5 AS OFFICER_FIRST_NAME, Column6 AS OFFICER_LAST_NAME, Column7 AS OFFICER_MAIL_ADDRESS,

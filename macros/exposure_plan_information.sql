@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if exposures|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_plan_information where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_plan_information where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_exposures_plan_information where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Column4 AS PERSONALIZED_PLAN_TYPE, Column5 AS ACV, Column6 AS PARK_NAME, Column7 AS FORM,
     Column8 AS RCV, Column9 AS VALUATION_ID, Column10 AS PURCHASE_DATE, Column11 AS UNIT_ID, Column12 AS UNIT_LOCATION, Column13 AS POLICY_USAGE,
