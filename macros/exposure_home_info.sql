@@ -113,8 +113,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ROOF_YEAR_YYYY, Column4 AS SKIRT
         {% if home_info_keys.updated_timestamp|length > 0 %}'{{ home_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or (outer_loop.last and exposure_json_loop.index0 != exposure_arr|length - 2) %},{% endif %}
-                        {% do home_info_keys.update({ 'model_year': '' }) %}
+    ){% if not outer_loop.last %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}

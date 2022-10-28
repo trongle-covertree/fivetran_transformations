@@ -150,7 +150,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
         {% if extra_cov_keys.updated_timestamp|length > 0 %}'{{ extra_cov_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or (outer_loop.last and exposure_json_loop.index0 != exposure_arr|length - 2) %},{% endif %}
+    ){% if not outer_loop.last %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
