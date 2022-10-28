@@ -87,12 +87,9 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
                             {% if 'zip_code' in char.fieldGroupsByLocator[current_char_key] %}
                                 {% do lender_info_keys.update({ 'zip_code': char.fieldGroupsByLocator[current_char_key].zip_code[0] }) %}
                             {% endif %}
-
-                        {% endif %}
-                        {% if loop.last %}
-                        {% do lender_info_keys.update({ 'id': char.locator }) %}
-                        {% do lender_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
-                        {% do lender_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
+                            {% do lender_info_keys.update({ 'id': char.locator }) %}
+                            {% do lender_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
+                            {% do lender_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
     (
         {% if lender_info_keys.id|length > 0 %}'{{ lender_info_keys.id }}'{% else %}null{% endif %},
         '{{ pk[outer_loop.index0] }}',
@@ -113,7 +110,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
         {% if lender_info_keys.updated_timestamp|length > 0 %}'{{ lender_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and exposure_json_loop.index0 != exposure_arr|length - 2) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
