@@ -44,6 +44,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
+                    {% set char_loop = loop %}
                     {% set lender_info_keys = { id: none, account_number: none, name: none, officer_first_name: none, officer_last_name: none, officer_mail_address: none, type: none, additional_interest_id: none, country: none, city: none, lot_unit: none, state: none, county: none, street_address: none, zip_code: none, created_timestamp: none, updated_timestamp: none } %}
                     {% for current_char_key in char.fieldGroupsByLocator.keys() %}
                         {% if 'officer_first_name' in char.fieldGroupsByLocator[current_char_key] or 'officer_last_name' in char.fieldGroupsByLocator[current_char_key] or 'officer_mail_address' in char.fieldGroupsByLocator[current_char_key]
@@ -112,7 +113,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
         {% if lender_info_keys.updated_timestamp|length > 0 %}'{{ lender_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or (outer_loop.last and not exposure_json_loop.last ) %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and not char_loop.last ) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}

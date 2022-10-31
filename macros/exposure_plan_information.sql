@@ -44,6 +44,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
+                    {% set char_loop = loop %}
                     {% set plan_info_keys = { id: none, community_policy_discount: none, personalized_plan_type: none, acv: none, park_name: none, form: none, rcv: none, valuation_id: none, purchase_date: none, unit_id: none, unit_location: none, policy_usage: none, short_term_rental_surcharge: none, unusual_risk: none, created_timestamp: none, updated_timestamp: none } %}
                     {% do plan_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                     {% do plan_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
@@ -109,7 +110,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
         {% if plan_info_keys.updated_timestamp|length > 0 %}'{{ plan_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or (outer_loop.last and not exposure_json_loop.last ) %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and not char_loop.last ) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
