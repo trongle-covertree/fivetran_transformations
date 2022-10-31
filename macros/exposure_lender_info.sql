@@ -112,7 +112,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ACCOUNT_NUMBER, Column4 AS NAME,
         {% if lender_info_keys.updated_timestamp|length > 0 %}'{{ lender_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and not exposure_json_loop.last ) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
