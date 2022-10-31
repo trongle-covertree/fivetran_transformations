@@ -23,10 +23,17 @@ from {{ env }}.{{ prefix }}_policies_cancellation
 
 {% if prices|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policies_cancellations_prices where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policies_cancellations_prices where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policies_cancellations_prices where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
     SELECT  Column1 AS ID, Column2 AS PK, Column3 AS SK, Column4 AS POLICY_MODIFICATION_LOCATOR, parse_json(Column5) AS COMMISSIONS, parse_json(Column6) AS EXPOSURE_PRICES,
         parse_json(Column7) AS FEES, Column8 AS GROSS_COMMISSIONS_CHANGE, Column9 AS GROSS_FEES_CHANGE, Column10 AS GROSS_PREMIUM_CHANGE, Column11 AS GROSS_TAXES_CHANGE,

@@ -20,10 +20,17 @@ from {{ env }}.{{ prefix }}_policies_policy
 
 {% if modifications|length > 0 %}
     {% if is_incremental() %}
-        {% set delete_query %}
-        DELETE FROM {{ env }}.{{ prefix }}_policy_modifications where PK in {{ pk }}
-        {% endset %}
-        {% do run_query(delete_query) %}
+        {% if pk|length == 1 %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_modifications where PK in {{ pk|replace(",", "") }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% else %}
+            {% set delete_query %}
+            DELETE FROM {{ env }}.{{ prefix }}_policy_modifications where PK in {{ pk }}
+            {% endset %}
+            {% do run_query(delete_query) %}
+        {% endif %}
     {% endif %}
     SELECT Column1 as ID, Column2 as PK, Column3 as AUTOMATED_UNDERWRITING_RESULT_DECISION, to_timestamp(Column4) as AUTOMATED_UNDERWRITING_RESULT_DECISION_TIMESTAMP,
             parse_json(Column5) as AUTOMATED_UNDERWRITING_RESULT_NOTES, Column6 as CONFIG_VERSION, to_timestamp(Column7) as CREATED_TIMESTAMP, Column8 as DISPLAY_ID, to_timestamp(Column9) as EFFECTIVE_TIMESTAMP,
