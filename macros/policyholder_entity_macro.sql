@@ -38,7 +38,7 @@ and ( created_timestamp > (select created_timestamp from {{ env }}.{{ prefix }}_
 
 {% if modern_entities|length > 0 %}
     {% if is_incremental() %}
-        {% if pk|length == 1 %}
+        {% if modern_pk|length == 1 %}
             {% set delete_query %}
             DELETE FROM {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity where PK in {{ modern_pk|replace(",", "") }}
             {% endset %}
