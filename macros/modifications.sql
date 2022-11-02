@@ -84,6 +84,6 @@ from {{ env }}.{{ prefix }}_policies_policy
             to_timestamp(Column20) as POLICY_END_TIMESTAMP, Column21 as POLICY_LOCATOR, Column22 as POLICYHOLDER_LOCATOR, Column23 as PREMIUM_CHANGE, Column24 as PREMIUM_CHANGE_CURRENCY,
             Column25 as PRODUCT_LOCATOR, to_timestamp(Column26) as UPDATED_TIMESTAMP, to_timestamp(Column27) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column28) AS POLICY_UPDATED_TIMESTAMP
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

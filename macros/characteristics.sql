@@ -273,6 +273,6 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
         to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD FROM VALUES
         ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null, null, null)
+        null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

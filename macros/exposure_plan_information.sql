@@ -123,6 +123,6 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
     Column14 AS SHORT_TERM_RENTAL_SURCHARGE, Column15 AS UNUSUAL_RISK, to_timestamp(Column16) AS CREATED_TIMESTAMP, to_timestamp(Column17) AS UPDATED_TIMESTAMP,
     to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

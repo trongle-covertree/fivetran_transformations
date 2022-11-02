@@ -126,6 +126,6 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS ROOF_YEAR_YYYY, Column4 AS SKIRT
     Column14 AS INSPECTION_INTERIOR, Column15 AS INSPECTION_EXTERIOR, Column16 AS INSPECTION_AERIAL, to_timestamp(Column17) AS CREATED_TIMESTAMP,
     to_timestamp(Column18) AS UPDATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column20) AS POLICY_UPDATED_TIMESTAMP
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

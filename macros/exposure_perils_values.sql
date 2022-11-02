@@ -115,6 +115,6 @@ from {{ env }}.{{ prefix }}_policies_policy
     SELECT Column1 AS PK, Column2 AS PERIL_LOCATOR, Column3 AS LOCATOR, Column4 AS COVERAGE, Column5 AS NAME, Column6 AS VALUE, Column7 AS SPP_DESC, Column8 AS SPP_TYPE,
         Column9 AS SPP_VALUE, to_timestamp(Column10) AS CREATED_TIMESTAMP, to_timestamp(Column11) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column12) AS POLICY_UPDATED_TIMESTAMP
         FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null)
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

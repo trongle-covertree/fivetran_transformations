@@ -102,7 +102,7 @@ SELECT Column1 as PK, Column2 as ACCOUNT_LOCATOR, Column3 as COMPLETED, to_times
      Column18 as MAILING_ZIP_CODE_POLICYHOLDER, Column19 as MIDDLE_NAME, Column20 as PRIMARY_CONTACT_NUMBER,
       Column21 as THIRD_PARTY_NOTIFICATION_NON_CONSUMER, Column22 as TYPE_OF_INSURED, Column23 as ORGANIZATION_TYPE, Column24 as ORGANIZATION_NAME,
       Column25 as POLICYHOLDER_ID, Column26 as RELATIONSHIP_ORGANIZATION, Column27 as REP_FIRST_NAME, Column28 as REP_LAST_NAME
-FROM VALUES ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+FROM VALUES ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 
 {% if legacy_entities|length > 0 %}

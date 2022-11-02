@@ -164,6 +164,6 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
     Column21 AS SECURE_RAILS, Column22 AS BUSINESS_DESCRIPTION, Column23 AS TRAMPOLINE_SAFETY_NET, Column24 AS SWIMMING_POOL, Column25 AS BURGLAR_ALARM, to_timestamp(Column26) AS CREATED_TIMESTAMP,
     to_timestamp(Column27) AS UPDATED_TIMESTAMP, to_timestamp(Column28) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column29) AS POLICY_UPDATED_TIMESTAMP
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}
