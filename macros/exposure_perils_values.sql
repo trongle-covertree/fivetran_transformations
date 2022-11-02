@@ -3,10 +3,10 @@
 {% set exposures_perils_values_query %}
 select exposures, pk, created_timestamp, updated_timestamp
 from {{ env }}.{{ prefix }}_policies_policy
-{# {% if is_incremental() %}
+{% if is_incremental() %}
   WHERE created_timestamp > (select policy_created_timestamp from {{ env }}.{{ prefix }}_policy_exposures_perils_values order by created_timestamp desc limit 1)
       or updated_timestamp > (select policy_updated_timestamp from {{ env }}.{{ prefix }}_policy_exposures_perils_values order by updated_timestamp desc limit 1)
-{% endif %} #}
+{% endif %}
 {% endset %}
 
 {% set results = run_query(exposures_perils_values_query) %}
