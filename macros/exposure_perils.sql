@@ -6,6 +6,7 @@ from {{ env }}.{{ prefix }}_policies_policy
 {% if is_incremental() %}
   WHERE created_timestamp > (select policy_created_timestamp from {{ env }}.{{ prefix }}_policy_exposures_perils order by created_timestamp desc limit 1)
       or updated_timestamp > (select policy_updated_timestamp from {{ env }}.{{ prefix }}_policy_exposures_perils order by updated_timestamp desc limit 1)
+      limit 5
 {% endif %}
 {% endset %}
 
