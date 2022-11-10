@@ -5,9 +5,9 @@ select exposures, pk, created_timestamp, updated_timestamp
 from {{ env }}.{{ prefix }}_policies_policy
 {% if is_incremental() %}
   WHERE
-    (created_timestamp > (select policy_created_timestamp from {{ env }}.{{ prefix }}_policy_exposures_address order by created_timestamp desc limit 1)
+    ((created_timestamp > (select policy_created_timestamp from {{ env }}.{{ prefix }}_policy_exposures_address order by created_timestamp desc limit 1)
       or updated_timestamp > (select policy_updated_timestamp from {{ env }}.{{ prefix }}_policy_exposures_address order by updated_timestamp desc limit 1))
-    or pk not in (select distinct pk from {{ env }}.{{ prefix }}_policy_exposures_address)
+    or pk not in (select distinct pk from {{ env }}.{{ prefix }}_policy_exposures_address)) and array_size(exposures) != 0
 {% endif %}
 {% endset %}
 
