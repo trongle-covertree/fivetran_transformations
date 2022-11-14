@@ -44,7 +44,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
-                    {% set grid_info_keys = { id: none, loc_code: none, grid_id: none, please_describe: none, territory_code_floods: none, territory_code_aop: none, uw_admitted: none, lat: none, long: none, territory_code_hurricane: none, territory_code_wild_fire: none, territory_code_windhail: none, territory_code_earthquake: none, created_timestamp: none, updated_timestamp: none } %}
+                    {% set grid_info_keys = { id: none, loc_code: none, grid_id: none, please_describe: none, territory_code_floods: none, territory_code_aop: none, uw_admitted: none, lat: none, long: none, territory_code_hurricane: none, territory_code_wild_fire: none, territory_code_windhail: none, territory_code_earthquake: none, created_timestamp: none, updated_timestamp: none, county_fips: none, ct_mhcid: none, distance_to_coast: none } %}
                     {% do grid_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                     {% do grid_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
                     {% do grid_info_keys.update({ 'id': char.locator })%}
@@ -82,6 +82,15 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
                         {% if 'territory_code_earthquake' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do grid_info_keys.update({ 'territory_code_earthquake': char.fieldGroupsByLocator[current_char_key].territory_code_earthquake[0] }) %}
                         {% endif %}
+                        {% if 'county_fips' in char.fieldGroupsByLocator[current_char_key] %}
+                            {% do grid_info_keys.update({ 'county_fips': char.fieldGroupsByLocator[current_char_key].county_fips[0] }) %}
+                        {% endif %}
+                        {% if 'ct_mhcid' in char.fieldGroupsByLocator[current_char_key] %}
+                            {% do grid_info_keys.update({ 'ct_mhcid': char.fieldGroupsByLocator[current_char_key].ct_mhcid[0] }) %}
+                        {% endif %}
+                        {% if 'distance_to_coast' in char.fieldGroupsByLocator[current_char_key] %}
+                            {% do grid_info_keys.update({ 'distance_to_coast': char.fieldGroupsByLocator[current_char_key].distance_to_coast[0] }) %}
+                        {% endif %}
                         {% if loop.last %}
     (
         {% if grid_info_keys.id|length > 0 or grid_info_keys is not none %}'{{ grid_info_keys.id }}'{% else %}null{% endif %},
@@ -100,7 +109,10 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
         {% if grid_info_keys.created_timestamp|length > 0 %}'{{ grid_info_keys.created_timestamp }}'{% else %}null{% endif %},
         {% if grid_info_keys.updated_timestamp|length > 0 %}'{{ grid_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
-        '{{ updated_timestamps[outer_loop.index0] }}'
+        '{{ updated_timestamps[outer_loop.index0] }}',
+        {% if grid_info_keys.county_fips|length > 0 %}'{{ grid_info_keys.county_fips }}'{% else %}null{% endif %},
+        {% if grid_info_keys.ct_mhcid|length > 0 %}'{{ grid_info_keys.ct_mhcid }}'{% else %}null{% endif %},
+        {% if grid_info_keys.distance_to_coast|length > 0 %}'{{ grid_info_keys.distance_to_coast }}'{% else %}null{% endif %}
     ){% if not outer_loop.last %},{% endif %}
                         {% endif %}
                     {% endfor %}
@@ -111,8 +123,9 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
 {% else %}
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Column5 AS TERRITORY_CODE_FLOODS, Column6 AS TERRITORY_CODE_AOP, Column7 AS UW_ADMITTED,
     Column8 AS LAT, Column9 AS LONG, Column10 AS TERRITORY_CODE_HURRICANE, Column11 AS TERRITORY_CODE_WILD_FIRE, Column12 AS TERRITORY_CODE_WINDHAIL, Column13 AS TERRITORY_CODE_EARTHQUAKE,
-    to_timestamp(Column14) AS CREATED_TIMESTAMP, to_timestamp(Column15) AS UPDATED_TIMESTAMP, to_timestamp(Column16) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column17) AS POLICY_UPDATED_TIMESTAMP
+    to_timestamp(Column14) AS CREATED_TIMESTAMP, to_timestamp(Column15) AS UPDATED_TIMESTAMP, to_timestamp(Column16) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column17) AS POLICY_UPDATED_TIMESTAMP,
+    Column18 AS COUNTY_FIPS, Column19 AS CT_MHCID, Column20 AS DISTANCE_TO_COAST
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}

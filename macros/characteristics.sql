@@ -4,8 +4,10 @@
 select characteristics, pk, created_timestamp, updated_timestamp
 from {{ env }}.{{ prefix }}_policies_policy
 {% if is_incremental() %}
-    WHERE created_timestamp > (select POLICY_CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_CREATED_TIMESTAMP desc limit 1)
-      or updated_timestamp > (select POLICY_UPDATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_UPDATED_TIMESTAMP desc limit 1)
+    WHERE
+        (created_timestamp > (select POLICY_CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_CREATED_TIMESTAMP desc limit 1)
+            or updated_timestamp > (select POLICY_UPDATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics order by POLICY_UPDATED_TIMESTAMP desc limit 1))
+        or pk not in (select distinct pk from {{ env }}.{{ prefix }}_policy_characteristics) and array_size(characteristics) != 0
 {% endif %}
 {% endset %}
 
