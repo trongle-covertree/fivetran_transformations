@@ -82,7 +82,7 @@ SELECT PK, POLICY_LOCATOR, partner_name, community_manager_email, community_mana
                     '{{ partners_community_manager_name[loop.index0] | replace("'", "\\'") }}',
                     '{{ partners_community_name[loop.index0] | replace("'", "\\'") }}',
                     '{{ partners_pk[loop.index0] }}',
-                    '{{ dbt_date.now("America/New_York") }}'
+                    {{ dbt_date.now("America/New_York") }}
                 ){% if not outer_loop.last or (outer_loop.last and pk|length > 0) %},{% endif %}
             {% endif %}
         {% endfor %}
