@@ -123,7 +123,7 @@ SELECT Column1 AS PK, Column2 AS  POLICY_LOCATOR, Column3 AS partner_name, Colum
     {% endfor %}
 {% endif %}
 
-{% if pk|length == 0 and hubspot_manual_referrals_pk|length == 0 %}
+{% if pks|length == 0 and hubspot_manual_referrals_pk|length == 0 %}
     (null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}
