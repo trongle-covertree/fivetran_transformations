@@ -51,9 +51,15 @@ where pk like 'FRIENDBUY#%' and _fivetran_deleted = false
     {% set partners_name = partners_results.columns[4].values() %}
 {% endif %}
 
+{% if pks|length > 0 or hubspot_manual_referrals_pk|length > 0 %}
 SELECT Column1 AS PK, Column2 AS  POLICY_LOCATOR, Column3 AS partner_name, Column4 AS community_manager_email, Column5 AS community_manager_name, Column6 AS community_name,
     Column7 AS friendbuy_pk, Column8 AS CREATED_TIMESTAMP
     FROM VALUES
+{% else %}
+SELECT Column1 AS PK, Column2 AS  POLICY_LOCATOR, Column3 AS partner_name, Column4 AS community_manager_email, Column5 AS community_manager_name, Column6 AS community_name,
+    Column7 AS friendbuy_pk, Column8 AS CREATED_TIMESTAMP
+    FROM VALUES (null, null, null, null, null, null, null, null) limit 0
+{% endif %}
 
 {% if hubspot_manual_referrals_pk|length > 0 %}
     {% if is_incremental() %}
@@ -123,7 +129,4 @@ SELECT Column1 AS PK, Column2 AS  POLICY_LOCATOR, Column3 AS partner_name, Colum
     {% endfor %}
 {% endif %}
 
-{% if pks|length == 0 and hubspot_manual_referrals_pk|length == 0 %}
-    (null, null, null, null, null, null, null, null) limit 0
-{% endif %}
 {% endmacro %}
