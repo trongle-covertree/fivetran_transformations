@@ -35,7 +35,8 @@ from {{ env }}.{{ prefix }}_policies_policy
     {% endif %}
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Column5 AS TERRITORY_CODE_FLOODS, Column6 AS TERRITORY_CODE_AOP, Column7 AS UW_ADMITTED,
     Column8 AS LAT, Column9 AS LONG, Column10 AS TERRITORY_CODE_HURRICANE, Column11 AS TERRITORY_CODE_WILD_FIRE, Column12 AS TERRITORY_CODE_WINDHAIL, Column13 AS TERRITORY_CODE_EARTHQUAKE,
-    to_timestamp(Column14) AS CREATED_TIMESTAMP, to_timestamp(Column15) AS UPDATED_TIMESTAMP, to_timestamp(Column16) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column17) AS POLICY_UPDATED_TIMESTAMP
+    to_timestamp(Column14) AS CREATED_TIMESTAMP, to_timestamp(Column15) AS UPDATED_TIMESTAMP, to_timestamp(Column16) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column17) AS POLICY_UPDATED_TIMESTAMP,
+    Column18 AS COUNTY_FIPS, Column19 AS CT_MHCID, Column20 AS DISTANCE_TO_COAST
     FROM VALUES
     {% for exposure in exposures %}
         {% set outer_loop = loop %}
