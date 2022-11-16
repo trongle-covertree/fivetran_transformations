@@ -21,7 +21,7 @@ where pk like 'FRIENDBUY#%' and policy_locator is not null
 {% set hubspot_manual_referrals_query %}
 select pk, referrer_communities, locator
 from {{ env }}.hubspot_referrals
-where locator not in (select policy_locator from {{ env }}.{{ prefix }}_leads where policy_locator is not null and pk like 'FRIENDBUY%')
+where locator not in (select policy_locator from {{ env }}.{{ prefix }}_leads where policy_locator is not null and pk like 'FRIENDBUY%') and referrer_communities != 'undefined'
 {% if is_incremental() %}
     and locator not in (select policy_locator from {{ env }}.{{ prefix }}_policies_referrals)
 {% endif %}
