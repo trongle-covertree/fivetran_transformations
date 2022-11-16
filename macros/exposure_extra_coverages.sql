@@ -46,6 +46,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
+                    {% set char_loop = loop %}
                     {% set extra_cov_keys = { id: none, visitors_in_a_month: none, diving_board: none, please_describe: none, business_on_premises: none, business_employees_on_premises: none, trampoline_liability: none, source_of_heat_installation: none, property_with_fire_protection: none, thermo_static_control: none, type_of_fuel: none, unit_is_tied: none, source_of_heat: none, unrepaired_damages: none, four_feet_fence: none, daycare_on_premises: none, utility_services: none, wrought_iron: none, mortgage: none, secure_rails: none, business_description: none, trampoline_safety_net: none, swimming_pool: none, burglar_alarm: none, created_timestamp: none, updated_timestamp: none } %}
                     {% do extra_cov_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                     {% do extra_cov_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
@@ -151,7 +152,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS VISITORS_IN_A_MONTH, Column4 AS 
         {% if extra_cov_keys.updated_timestamp|length > 0 %}'{{ extra_cov_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and not char_loop.last) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}

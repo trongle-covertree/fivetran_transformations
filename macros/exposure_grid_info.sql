@@ -45,6 +45,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
             {% for exposure_json in exposure_arr %}
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
+                    {% set char_loop = loop %}
                     {% set grid_info_keys = { id: none, loc_code: none, grid_id: none, please_describe: none, territory_code_floods: none, territory_code_aop: none, uw_admitted: none, lat: none, long: none, territory_code_hurricane: none, territory_code_wild_fire: none, territory_code_windhail: none, territory_code_earthquake: none, created_timestamp: none, updated_timestamp: none, county_fips: none, ct_mhcid: none, distance_to_coast: none } %}
                     {% do grid_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                     {% do grid_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
@@ -114,7 +115,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS LOC_CODE, Column4 AS GRID_ID, Co
         {% if grid_info_keys.county_fips|length > 0 %}'{{ grid_info_keys.county_fips }}'{% else %}null{% endif %},
         {% if grid_info_keys.ct_mhcid|length > 0 %}'{{ grid_info_keys.ct_mhcid }}'{% else %}null{% endif %},
         {% if grid_info_keys.distance_to_coast|length > 0 %}'{{ grid_info_keys.distance_to_coast }}'{% else %}null{% endif %}
-    ){% if not outer_loop.last %},{% endif %}
+    ){% if not outer_loop.last or (outer_loop.last and not char_loop.last) %},{% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
