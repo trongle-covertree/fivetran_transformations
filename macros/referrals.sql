@@ -6,8 +6,7 @@ select pk, policy_locator, created_at
 from {{ env }}.{{ prefix }}_leads
 where pk like 'FRIENDBUY#%' and policy_locator is not null
 {% if is_incremental() %}
-    and ((created_at > (select CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policies_referrals order by CREATED_TIMESTAMP desc limit 1))
-        or policy_locator not in (select policy_locator from {{ env }}.{{ prefix }}_policies_referrals))
+    and policy_locator not in (select policy_locator from {{ env }}.{{ prefix }}_policies_referrals)
 {% endif %}
 {% endset %}
 
