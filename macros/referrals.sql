@@ -1,7 +1,7 @@
 {% macro run_referrals(env, prefix, partners_db) %}
 
 {% set referrals_query %}
-select pk, policy_locator, created_at
+select pk, to_varchar(policy_locator) as policy_locator, created_at
 {# {{ log(pk[loop.index0], info=True) }} #}
 from {{ env }}.{{ prefix }}_leads
 where pk like 'FRIENDBUY#%' and policy_locator is not null
