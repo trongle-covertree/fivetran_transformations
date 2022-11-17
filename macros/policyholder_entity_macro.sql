@@ -8,6 +8,7 @@ where SK = '{{ policyholder_type }}' and entity like '%email_address%'
 -- and pk not in (select pk from {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type}}_sk_entity)
 and ( created_timestamp > (select created_timestamp from {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type}}_sk_entity order by created_timestamp desc limit 1)
       or updated_timestamp > (select updated_timestamp from {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity order by updated_timestamp desc limit 1))
+      or pk not in (select pk from {{ env }}.{{ prefix }}_policyholders_{{ policyholder_type }}_sk_entity)
 {% endif %}
 
 {% endset %}
