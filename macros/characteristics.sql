@@ -50,7 +50,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         to_timestamp(Column54) AS ISSUED_TIMESTAMP, Column55 AS LOCATOR, parse_json(Column56) AS MEDIA_BY_LOCATOR, to_timestamp(Column57) AS POLICY_START_TIMESTAMP,
         to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
         to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS, to_timestamp(Column64) AS POLICY_CREATED_TIMESTAMP,
-        to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD FROM VALUES
+        to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD, to_timestamp(Column67) AS REPLACED_TIMESTAMP FROM VALUES
     {% for char in characteristics %}
         {% set outer_loop = loop %}
 
@@ -250,7 +250,8 @@ from {{ env }}.{{ prefix }}_policies_policy
         '{{ tojson(char_json.taxGroups) or null }}',
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}',
-        {% if char_field_group_keys['agent_on_record']|length > 0 %}'{{ char_field_group_keys['agent_on_record']}}'{% else %}null{% endif %}
+        {% if char_field_group_keys['agent_on_record']|length > 0 %}'{{ char_field_group_keys['agent_on_record']}}'{% else %}null{% endif %},
+        {% if char_json.replacedTimestamp|length > 0 %}'{{ char_json.replacedTimestamp }}'{% else %}null{% endif %}
     ){% if not outer_loop.last or not loop.last %},{% endif %}
             {% endfor %}
         {% endif %}
@@ -272,9 +273,9 @@ SELECT Column1 AS PK, Column2 AS QUOTE_INCEPTION_DATE, Column3 AS AUTO_POLICY_WI
         to_timestamp(Column54) AS ISSUED_TIMESTAMP, Column55 AS LOCATOR, parse_json(Column56) AS MEDIA_BY_LOCATOR, to_timestamp(Column57) AS POLICY_START_TIMESTAMP,
         to_timestamp(Column58) AS POLICY_END_TIMESTAMP, Column59 AS POLICY_LOCATOR, Column60 AS POLICYHOLDER_LOCATOR, Column61 AS PRODUCT_LOCATOR,
         to_timestamp(Column62) AS START_TIMESTAMP, parse_json(Column63) AS TAX_GROUPS, to_timestamp(Column64) AS POLICY_CREATED_TIMESTAMP,
-        to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD FROM VALUES
+        to_timestamp(Column65) AS POLICY_UPDATED_TIMESTAMP, Column66 as AGENT_ON_RECORD, to_timestamp(Column67) AS REPLACED_TIMESTAMP FROM VALUES
         ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}
