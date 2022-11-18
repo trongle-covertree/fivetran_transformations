@@ -1,10 +1,5 @@
 {{ config(materialized='view') }}
 
-select *
-FROM
-(
-    SELECT *,
-        ROW_NUMBER() OVER (PARTITION BY pk ORDER BY created_timestamp desc, start_timestamp desc) num
-    FROM {{ ref('develop_policy_characteristics')}}
-) inn
-where inn.num = 1
+SELECT *,
+FROM {{ ref('develop_policy_characteristics')}}
+where (start_timestamp < current_timestamp() and end_timestamp > current_timestamp() and replaced_timestamp is null) or (start_timestamp = end_timestamp)
