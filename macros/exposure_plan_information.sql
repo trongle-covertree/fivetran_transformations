@@ -36,7 +36,7 @@ from {{ env }}.{{ prefix }}_policies_policy
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Column4 AS PERSONALIZED_PLAN_TYPE, Column5 AS ACV, Column6 AS PARK_NAME, Column7 AS FORM,
     Column8 AS RCV, Column9 AS VALUATION_ID, Column10 AS PURCHASE_DATE, Column11 AS UNIT_ID, Column12 AS UNIT_LOCATION, Column13 AS POLICY_USAGE,
     Column14 AS SHORT_TERM_RENTAL_SURCHARGE, Column15 AS UNUSUAL_RISK, to_timestamp(Column16) AS CREATED_TIMESTAMP, to_timestamp(Column17) AS UPDATED_TIMESTAMP,
-    to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP
+    to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP, Column20 AS RCV_360_VALUE
     FROM VALUES
     {% for exposure in exposures %}
         {% set outer_loop = loop %}
@@ -46,7 +46,7 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
                 {% set exposure_json_loop = loop %}
                 {% for char in exposure_json.characteristics if exposure_json.name != 'Policy Level Coverages' %}
                     {% set char_loop = loop %}
-                    {% set plan_info_keys = { id: none, community_policy_discount: none, personalized_plan_type: none, acv: none, park_name: none, form: none, rcv: none, valuation_id: none, purchase_date: none, unit_id: none, unit_location: none, policy_usage: none, short_term_rental_surcharge: none, unusual_risk: none, created_timestamp: none, updated_timestamp: none } %}
+                    {% set plan_info_keys = { id: none, community_policy_discount: none, personalized_plan_type: none, acv: none, park_name: none, form: none, rcv: none, valuation_id: none, purchase_date: none, unit_id: none, unit_location: none, policy_usage: none, short_term_rental_surcharge: none, unusual_risk: none, created_timestamp: none, updated_timestamp: none, rcv_360value: none } %}
                     {% do plan_info_keys.update({ 'created_timestamp': char.createdTimestamp }) %}
                     {% do plan_info_keys.update({ 'updated_timestamp': char.updatedTimestamp }) %}
                     {% do plan_info_keys.update({ 'id': char.locator })%}
@@ -90,6 +90,9 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
                         {% if 'unusual_risk' in char.fieldGroupsByLocator[current_char_key] %}
                             {% do plan_info_keys.update({ 'unusual_risk': char.fieldGroupsByLocator[current_char_key].unusual_risk[0] }) %}
                         {% endif %}
+                        {% if 'rcv_360value' in char.fieldGroupsByLocator[current_char_key] %}
+                            {% do plan_info_keys.update({ 'rcv_360value': char.fieldGroupsByLocator[current_char_key].rcv_360value[0] }) %}
+                        {% endif %}
                         {% if loop.last %}
     (
         {% if plan_info_keys.id|length > 0 or plan_info_keys is not none %}'{{ plan_info_keys.id }}'{% else %}null{% endif %},
@@ -110,7 +113,8 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
         {% if plan_info_keys.created_timestamp|length > 0 %}'{{ plan_info_keys.created_timestamp }}'{% else %}null{% endif %},
         {% if plan_info_keys.updated_timestamp|length > 0 %}'{{ plan_info_keys.updated_timestamp }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
-        '{{ updated_timestamps[outer_loop.index0] }}'
+        '{{ updated_timestamps[outer_loop.index0] }}',
+        {% if plan_info_keys.rcv_360value|length > 0 %}'{{ plan_info_keys.rcv_360value }}'{% else %}null{% endif %}
     ){% if not outer_loop.last or (outer_loop.last and not char_loop.last ) %},{% endif %}
                         {% endif %}
                     {% endfor %}
@@ -122,8 +126,8 @@ SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Colum
 SELECT Column1 AS ID, Column2 AS PK, Column3 AS COMMUNITY_POLICY_DISCOUNT, Column4 AS PERSONALIZED_PLAN_TYPE, Column5 AS ACV, Column6 AS PARK_NAME, Column7 AS FORM,
     Column8 AS RCV, Column9 AS VALUATION_ID, Column10 AS PURCHASE_DATE, Column11 AS UNIT_ID, Column12 AS UNIT_LOCATION, Column13 AS POLICY_USAGE,
     Column14 AS SHORT_TERM_RENTAL_SURCHARGE, Column15 AS UNUSUAL_RISK, to_timestamp(Column16) AS CREATED_TIMESTAMP, to_timestamp(Column17) AS UPDATED_TIMESTAMP,
-    to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP
+    to_timestamp(Column18) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column19) AS POLICY_UPDATED_TIMESTAMP, Column20 AS RCV_360_VALUE
     FROM VALUES
-    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
+    ('NO FIELDS', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) limit 0
 {% endif %}
 {% endmacro %}
