@@ -2,8 +2,8 @@
 
 SELECT pk, quote_inception_date, auto_policy_with_agency, date_of_birth, reason_description, reason_code, prior_carrier_name, prior_policy_expiration_date,
     prior_insurance, additionalinsured_date_of_birth, ad_last_name, ad_first_name, relationship_to_policyholder, claim_amount, claim_number, description_of_loss,
-    claim_cat, claim_source, category, claim_date, country, agency_phone_number, email_address, city, trim(agent_id) as agent_id, lot_unit, trim(agency_id) as agency_id,
-    upper(trim(agency_contact_name)) as agency_contact_name, state, agency_license, street_address, zip_code, animal_bite, conviction, cancellation_renew,
+    claim_cat, claim_source, category, claim_date, country, agency_phone_number, email_address, city, trim(regexp_replace(agent_id, '[^a-zA-Z0-9 ]+')) as agent_id, lot_unit,
+    trim(regexp_replace(agency_id, '[^a-zA-Z0-9 ]+')) as agency_id, upper(trim(regexp_replace(agency_contact_name, '[^a-zA-Z0-9 ]+'))) as agency_contact_name, state, agency_license, street_address, zip_code, animal_bite, conviction, cancellation_renew,
     previous_street_address_policyholder, previous_country_policyholder, previous_zip_code_policyholder, previous_city_policyholder, previous_lot_unit_policyholder,
     previous_state_policyholder, association_discount, paperless_discount, multi_policy_discount, APPLICATION_INTIATION, insurance_score, gross_premium,
     gross_premium_currency, gross_taxes, gross_taxes_currency, created_timestamp, updated_timestamp, end_timestamp, issued_timestamp, locator, media_by_locator,
