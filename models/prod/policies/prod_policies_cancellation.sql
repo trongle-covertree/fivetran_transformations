@@ -3,7 +3,7 @@
 select
   pk,
   sk,
-  iff(cancellation_category is null and title = 'Lapse', 'Lapse', cancellation_category),
+  iff(cancellation_category is null and title = 'Lapse', 'Lapse', cancellation_category) as cancellation_category,
   {{ dbt_date.from_unixtimestamp("effective_timestamp", format="milliseconds") }} as effective_timestamp,
   documents,
   {{ dbt_date.from_unixtimestamp("created_timestamp", format="milliseconds") }} as created_timestamp,
