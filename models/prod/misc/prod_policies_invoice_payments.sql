@@ -4,4 +4,4 @@ select pk, payments[0]:amount::double as amount, payments[0]:amountCurrency::var
     payments[0]:fieldValues:stripe_id[0]::varchar as stripe_id, payments[0]:invoiceLocator::varchar as invoice_locator, payments[0]:locator::varchar as locator,
     payments[0]:mediaByLocator as media_by_locator, payments[0]:postedTimestamp::timestamp as posted_timestamp
 from {{ ref('prod_policies_cancellation') }}
-where array_size(payments) > 0 and payments is not null and array_size(payments) = 1;
+where array_size(payments) > 0 and payments is not null and array_size(payments) = 1
