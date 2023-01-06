@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-SELECT sk, status, created_timestamp, updated_timestamp
+SELECT sk AS PK, status, created_timestamp, updated_timestamp
 FROM
   ( select distinct sk, status, to_timestamp(to_varchar(created_at)) as created_timestamp, to_timestamp(to_varchar(updated_at)) as updated_timestamp
          , ROW_NUMBER() OVER(partition by sk order by SK, case when status = 'Quote-Expired' or status = 'Initial-Quote' then 1 else 0 end) AS RowNumber
