@@ -27,6 +27,7 @@ select
   cancellation,
   currency,
   status,
-  _fivetran_synced
+  _fivetran_synced,
+  quote_locator
 from dynamodb.prod_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE'
