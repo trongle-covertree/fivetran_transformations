@@ -1,3 +1,9 @@
 {{ config(materialized='table') }}
 
-select p.pk, p.name, iff(name = 'loss_of_use_percentage', to_double(left(value, 2))/100, value) as value from FIVETRAN_COVERTREE.TRANSFORMATIONS_DYNAMODB.prod_policy_perils_values_unique_view as p inner join FIVETRAN_COVERTREE.TRANSFORMATIONS_DYNAMODB.prod_policy_plan_information_unique_view as pi on pi.pk = p.pk where name in ('manufactured_home_limit', 'unscheduled_personal_property_limit', 'loss_of_use_percentage')
+select
+    pk,
+  max(case when name = 'manufactured_home_limit' then value end) coverage_a,
+  max(case when name = 'unscheduled_personal_property_limit' then value end) coverage_c,
+  max(case when name = 'loss_of_use_percentage' then to_double((left(value,2))/100) end) coverage_d
+from fivetran_covertree.transformations_dynamodb.prod_policy_perils_values_unique_view
+group by pk
