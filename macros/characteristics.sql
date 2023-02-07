@@ -219,7 +219,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         {% if char_field_group_keys['animal_bite']|length > 0 %}'{{ char_field_group_keys['animal_bite']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['conviction']|length > 0 %}'{{ char_field_group_keys['conviction']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['cancellation_renew']|length > 0 %}'{{ char_field_group_keys['cancellation_renew']}}'{% else %}null{% endif %},
-        {% if char_field_group_keys['previous_street_address_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_street_address_policyholder']}}'{% else %}null{% endif %},
+        {% if char_field_group_keys['previous_street_address_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_street_address_policyholder'] | replace("'", "\\'") }}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_country_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_country_policyholder']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_zip_code_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_zip_code_policyholder']}}'{% else %}null{% endif %},
         {% if char_field_group_keys['previous_city_policyholder']|length > 0 %}'{{ char_field_group_keys['previous_city_policyholder'] | replace("'", "\\'") }}'{% else %}null{% endif %},
