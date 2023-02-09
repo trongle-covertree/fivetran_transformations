@@ -1,4 +1,6 @@
-{{ config(materialized='table') }}
+{{
+    config(materialized='table',
+    post_hook = "{{ run_non_covertree_policy_update('transformations_dynamodb','prod' ) }}") }}
 
 
 select to_varchar(d.deal_id) as deal_id, d.property_policy_number, d.property_community_deal, lower(trim(c.property_communityname)) as property_communityname, c.property_lead_source, c.property_email,
@@ -7,6 +9,7 @@ select to_varchar(d.deal_id) as deal_id, d.property_policy_number, d.property_co
         when contains(lower(c.property_state), 'alaska') then 'AK'
         when contains(lower(c.property_state), 'arizona') then 'AZ'
         when contains(lower(c.property_state), 'connecticut') then 'CT'
+        when contains(lower(c.property_lead_source), 'roots') and lower(trim(d.property_carrier)) = 'amie' then 'FL'
         when contains(lower(c.property_state), 'georgia') then 'GA'
         when contains(lower(c.property_state), 'hawaii') then 'AK'
         when contains(lower(c.property_state), 'iowa') then 'IA'
