@@ -505,3 +505,68 @@ models:
       - name: TAX_GROUPS
         description: ""
         data_type: VARIANT
+  - name: prod_non_covertree_policies
+    description: "Non Covertree policy data"
+    columns:
+      - name: DEAL_ID
+        data_type: VARCHAR(256)
+      - name: PROPERTY_POLICY_NUMBER
+        decription: "Policy number from different carrier if exists"
+        data_type: VARCHAR(256)
+      - name: PROPERTY_COMMUNITY_DEAL
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_COMMUNITYNAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_LEAD_SOURCE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_EMAIL
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_COMMUNITY_REFERRER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_ADDRESS
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_CITY
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_STATE
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_ZIP
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_POLICY_EFFECTIVE_DATE
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: PROPERTY_POLICY_END_DATE
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: PROPERTY_AMOUNT
+        description: ""
+        data_type: DOUBLE
+      - name: PROPERTY_CANCELLATION_REASON
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_CARRIER
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_CLOSEDATE
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: PROPERTY_CREATEDATE
+        description: ""
+        data_type: TIMESTAMP_TZ
+      - name: PROPERTY_DEALNAME
+        description: ""
+        data_type: VARCHAR(256)
+      - name: PROPERTY_HS_IS_CLOSED
+        description: ""
+        data_type: BOOLEAN
+      - name: PROPERTY_HS_IS_CLOSED_WON
+        description: ""
+        data_type: BOOLEAN
