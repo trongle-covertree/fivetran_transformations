@@ -10,4 +10,6 @@ SELECT pk, quote_inception_date, auto_policy_with_agency, date_of_birth, reason_
     policy_start_timestamp, policy_end_timestamp, policy_locator, policyholder_locator, product_locator, start_timestamp, tax_groups, policy_created_timestamp,
     policy_updated_timestamp, upper(trim(agent_on_record)) as agent_on_record, replaced_timestamp
 FROM {{ ref('prod_policy_characteristics')}}
-where (start_timestamp < current_timestamp() and end_timestamp > current_timestamp() and replaced_timestamp is null) or (start_timestamp = end_timestamp) or (current_timestamp() < start_timestamp and replaced_timestamp is null)
+where (start_timestamp < current_timestamp() and end_timestamp > current_timestamp() and replaced_timestamp is null)
+    or (start_timestamp = end_timestamp) or (current_timestamp() < start_timestamp and replaced_timestamp is null)
+    or (pk not in (select pk from {{ this }}))
