@@ -35,9 +35,10 @@ select to_varchar(d.deal_id) as deal_id, d.property_policy_number, d.property_co
         when contains(lower(c.property_state), 'virgina') then 'VA'
         when contains(lower(c.property_state), 'west virginia') then 'WV'
         else upper(left(c.property_state, 2))
-    end as property_state, c.property_zip, d.property_policy_effective_date::varchar::timestamp as property_policy_effective_date,
-    d.property_policy_end_date::varchar::timestamp as property_policy_end_date, d.property_amount, d.property_cancellation_reason, d.property_carrier, d.property_closedate,
-    d.property_createdate, d.property_dealname, d.property_hs_is_closed, d.property_hs_is_closed_won
+    end as property_state, c.property_zip, d.property_policy_effective_date::varchar::timestamp_ntz as property_policy_effective_date,
+    d.property_policy_end_date::varchar::timestamp_ntz as property_policy_end_date, d.property_amount, d.property_cancellation_reason, d.property_carrier,
+    d.property_closedate::timestamp_ntz as property_closedate, d.property_createdate::timestamp_ntz as property_createdate, d.property_dealname,
+    d.property_hs_is_closed, d.property_hs_is_closed_won
 from fivetran_covertree.hubspot.deal as d inner join fivetran_covertree.hubspot.deal_contact as dc on dc.deal_id = d.deal_id
     inner join fivetran_covertree.hubspot.contact as c on c.id = dc.contact_id
 where property_hs_is_closed_won = true and d.is_deleted = false and lower(d.property_carrier) != 'covertree'
