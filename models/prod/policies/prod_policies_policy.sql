@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='incremental') }}
 
 select
   pk,
@@ -34,3 +34,6 @@ where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' an
   locator not in ('101255772', '100599038', '100640796', '100712180', '100825636', '100825766', '100825954',
   '100826086', '100849710', '100902420', '100902972', '100903084', '100931144', '100931232', '100957670',
   '100979166', '101178036', '101132926', '101298090', '101298206', '101298618', '101298854', '101299186')
+{% if is_incremental() %}
+  and (created_timestamp > (select max(created_timestamp) from {{ this }}) or updated_timestamp > (select max(updated_timestamp)))
+{% endif }
