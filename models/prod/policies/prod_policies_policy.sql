@@ -36,5 +36,5 @@ where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' an
   '100979166', '101178036', '101132926', '101298090', '101298206', '101298618', '101298854', '101299186',
   '101255196', '101227402', '101290498', '101291026', '101291182', '101291550', '101291884', '101212396')
 {% if is_incremental() %}
-  and (created_timestamp > (select created_timestamp from {{ this }} order by created_timestamp desc limit 1) or updated_timestamp > (select max(updated_timestamp) from {{ this }} order by updated_timestamp desc limit 1))
+  and (created_timestamp > (select created_timestamp from fivetran_covertree.prod_policies_policy order by created_timestamp desc limit 1) or updated_timestamp > (select updated_timestamp from fivetran_covertree.prod_policies_policy order by updated_timestamp desc limit 1))
 {% endif %}
