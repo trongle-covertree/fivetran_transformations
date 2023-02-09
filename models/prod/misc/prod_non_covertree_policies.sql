@@ -39,4 +39,4 @@ select d.deal_id, d.property_policy_number, d.property_community_deal, c.propert
     d.property_createdate, d.property_dealname, d.property_hs_is_closed, d.property_hs_is_closed_won
 from fivetran_covertree.hubspot.deal as d inner join fivetran_covertree.hubspot.deal_contact as dc on dc.deal_id = d.deal_id
     inner join fivetran_covertree.hubspot.contact as c on c.id = dc.contact_id
-where property_hs_is_closed_won = true and d.is_deleted = false and lower(d.property_carrier) != 'covertree';
+where property_hs_is_closed_won = true and d.is_deleted = false and lower(d.property_carrier) != 'covertree'
