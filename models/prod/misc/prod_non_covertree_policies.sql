@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-select d.deal_id, d.property_policy_number, d.property_community_deal, c.property_communityname, c.property_lead_source, c.property_email,
+select d.deal_id, d.property_policy_number, d.property_community_deal, lower(trim(c.property_communityname)), c.property_lead_source, c.property_email,
     c.property_community_referrer, c.property_address, c.property_city,
     case
         when contains(lower(c.property_state), 'alaska') then 'AK'
