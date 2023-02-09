@@ -43,7 +43,19 @@ merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_characteristics as c
 {% endset %}
 {% do run_query(char_merge_query) %}
 
-    {% if deal_ids|length == 1 %}
+{% set grid_info_check %}
+select count(deal_id)
+from {{ env }}.{{ prefix }}_non_covertree_policies
+where deal_id not in (select pk from {{ env }}.{{ prefix }}_policy_exposures_grid_info)
+{% endset %}
+
+{% set results = run_query(grid_info_check) %}
+
+{% if execute %}
+    {% set deal_id_length = results.columns[2].values() %}
+{% endif %}
+
+    {% if deal_id_length == 1 %}
         {% set community_partners_query %}
             select ct_mhcid, deal_id, ncp.property_lead_source
             from {{ env }}.communities_partner_lookup as c right outer join {{ env }}.{{ prefix }}_non_covertree_policies as ncp
