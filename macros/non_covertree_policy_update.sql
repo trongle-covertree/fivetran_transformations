@@ -43,59 +43,18 @@ merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_characteristics as c
 {% endset %}
 {% do run_query(char_merge_query) %}
 
-{% set grid_info_check %}
-select count(deal_id)
-from {{ env }}.{{ prefix }}_non_covertree_policies
-where deal_id not in (select pk from {{ env }}.{{ prefix }}_policy_exposures_grid_info)
+{% set grid_info_merge_query %}
+merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_exposures_grid_info as g using (
+        select deal_id, ct_mhcid
+        from fivetran_covertree.{{ env }}.communities_partner_lookup right outer join fivetran_covertree.{{ env }}.{{ prefix }}_non_covertree_policies
+            on lower(trim(name)) = property_communityname) as ncp
+    on g.pk = ncp.deal_id
+    when not matched then
+        insert (pk, ct_mhcid)
+        values (ncp.deal_id, ncp.ct_mhcid)
 {% endset %}
+{% do run_query(grid_info_merge_query) %}
 
-{% set results = run_query(grid_info_check) %}
-
-{% if execute %}
-    {% set deal_id_length = results.columns[2].values() %}
-{% endif %}
-
-    {% if deal_id_length == 1 %}
-        {% set community_partners_query %}
-            select ct_mhcid, deal_id, ncp.property_lead_source
-            from {{ env }}.communities_partner_lookup as c right outer join {{ env }}.{{ prefix }}_non_covertree_policies as ncp
-            on lower(trim(c.name)) = ncp.property_communityname where deal_id in {{ deal_ids|replace(",", "") }}
-        {% endset %}
-
-        {% set community_partners_results = run_query(community_partners_query) %}
-
-        {% if execute %}
-            {% set ct_mhcids = community_partners_results.columns[0].values() %}
-            {% set grid_info_deal_ids = community_partners_results.columns[1].values() %}
-            {% set grid_lead_sources = community_partners_results.columns[2].values() %}
-        {% endif %}
-        INSERT INTO fivetran_covertree.{{ env }}.{{ prefix }}_policy_exposures_grid_info (pk, ct_mhcid) VALUES
-            (
-                {% if grid_info_deal_ids[0] is not none or grid_info_deal_ids[0]|length > 0 %}'{{ grid_info_deal_ids[0] }}'{% else %}null{% endif %},
-                {% if ct_mhcids[0] is not none or ct_mhcids[0]|length > 0 %}'{{ ct_mhcids[0] }}'{% elif 'roots' in grid_lead_sources[0]|lower %}'999999999999999999'{% else %}null{% endif %}
-            )
-    {% else %}
-        {% set community_partners_query %}
-            select ct_mhcid, deal_id, ncp.property_lead_source
-            from {{ env }}.communities_partner_lookup as c right outer join {{ env }}.{{ prefix }}_non_covertree_policies as ncp
-            on lower(trim(c.name)) = ncp.property_communityname where deal_id in {{ deal_ids }}
-        {% endset %}
-
-        {% set community_partners_results = run_query(community_partners_query) %}
-
-        {% if execute %}
-            {% set ct_mhcids = community_partners_results.columns[0].values() %}
-            {% set grid_info_deal_ids = community_partners_results.columns[1].values() %}
-            {% set grid_lead_sources = community_partners_results.columns[2].values() %}
-        {% endif %}
-            INSERT INTO fivetran_covertree.{{ env }}.{{ prefix }}_policy_exposures_grid_info (pk, ct_mhcid) VALUES
-        {% for ct_id in ct_mhcids %}
-            (
-                {% if grid_info_deal_ids[loop.index0] is not none and grid_info_deal_ids[loop.index0]|length > 0 %}'{{ grid_info_deal_ids[loop.index0] }}'{% else %}null{% endif %},
-                {% if ct_id is not none and ct_id|length > 0 %}'{{ ct_id }}'{% elif 'roots' in grid_lead_sources[loop.index0]|lower %}'999999999999999999'{% else %}null{% endif %}
-            ){% if not loop.last %},{% endif %}
-        {% endfor %}
-    {% endif %}
 {% else %}
 SELECT Column1 AS ID
     FROM VALUES
