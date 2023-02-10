@@ -60,4 +60,27 @@ SELECT Column1 AS ID
     FROM VALUES
     ('NO FIELDS') limit 0
 {% endif %}
+
+{% set cancelled_policy_check %}
+select deal_id from hubspot.deal where deal_pipeline_stage_id = '25360262' and deal_id::varchar in (select pk from {{ env }}.{{ prefix }}_policies_policy)
+{{% endset %}}
+
+{% set cancelled_policy_results = run_query(cancelled_policy_check) %}
+
+{% if execute %}
+    {% set cancelled_deals = results.columns[0].values() %}
+{% endif %}
+
+{% if cancelled_deals|length == 1 %}
+    {% set set_cancelled_policy_queries %}
+        UPDATE {{ env }}.{{ prefix }}_policies_policy SET status = 'Policy-Cancelled' where pk in {{ cancelled_deals|replace(",", "") }}
+    {% endset %}
+    {% do run_query(set_cancelled_policy_queries) %}
+{% elif cancelled_deals > 1 %}
+    {% set set_cancelled_policy_queries %}
+        UPDATE {{ env }}.{{ prefix }}_policies_policy SET status = 'Policy-Cancelled' where pk in {{ cancelled_deals }}
+    {% endset %}
+    {% do run_query(set_cancelled_policy_queries) %}
+{% endif %}
+
 {% endmacro %}
