@@ -45,7 +45,7 @@ merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_characteristics as c
 
 {% set grid_info_merge_query %}
 merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_exposures_grid_info as g using (
-        select deal_id, ct_mhcid
+        select deal_id, iff(ct_mhcid is null and contains(lower(trim(property_lead_source)), 'roots'), '999999999999999999', ct_mhcid) as ct_mhcid
         from fivetran_covertree.{{ env }}.communities_partner_lookup right outer join fivetran_covertree.{{ env }}.{{ prefix }}_non_covertree_policies
             on lower(trim(name)) = property_communityname) as ncp
     on g.pk = ncp.deal_id
