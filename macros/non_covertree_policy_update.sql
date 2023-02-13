@@ -62,7 +62,7 @@ SELECT Column1 AS ID
 {% endif %}
 
 {% set cancelled_policy_check %}
-select deal_id from hubspot.deal where deal_pipeline_stage_id = '25360262' and deal_id::varchar in (select pk from {{ env }}.{{ prefix }}_policies_policy)
+select deal_id from fivetran_covertree.hubspot.deal where deal_pipeline_stage_id = '25360262' and deal_id::varchar in (select pk from {{ env }}.{{ prefix }}_policies_policy)
 {% endset %}
 
 {% set cancelled_policy_results = run_query(cancelled_policy_check) %}
