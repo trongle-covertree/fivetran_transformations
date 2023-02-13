@@ -68,7 +68,7 @@ select deal_id from hubspot.deal where deal_pipeline_stage_id = '25360262' and d
 {% set cancelled_policy_results = run_query(cancelled_policy_check) %}
 
 {% if execute %}
-    {% set cancelled_deals = results.columns[0].values() %}
+    {% set cancelled_deals = cancelled_policy_results.columns[0].values() %}
 {% endif %}
 
 {% if cancelled_deals|length == 1 %}
