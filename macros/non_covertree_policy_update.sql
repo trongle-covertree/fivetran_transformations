@@ -71,12 +71,12 @@ select deal_id from fivetran_covertree.hubspot.deal where deal_pipeline_stage_id
     {% set cancelled_deals = cancelled_policy_results.columns[0].values() %}
 {% endif %}
 
-{% if cancelled_deals|length == 1 %}
+{% if cancelled_deals is defined and cancelled_deals|length == 1 %}
     {% set set_cancelled_policy_queries %}
         UPDATE {{ env }}.{{ prefix }}_policies_policy SET status = 'Policy-Cancelled' where pk in {{ cancelled_deals|replace(",", "") }}
     {% endset %}
     {% do run_query(set_cancelled_policy_queries) %}
-{% elif cancelled_deals > 1 %}
+{% elif cancelled_deals is defined and cancelled_deals|length > 1 %}
     {% set set_cancelled_policy_queries %}
         UPDATE {{ env }}.{{ prefix }}_policies_policy SET status = 'Policy-Cancelled' where pk in {{ cancelled_deals }}
     {% endset %}
