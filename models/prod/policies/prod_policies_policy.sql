@@ -39,4 +39,4 @@ where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' an
 union
 (select deal_id, null, null, property_createdate, property_policy_effective_date, null, null, null, null, null, null, null, null, null, null, property_policy_end_date,
   null, null, null, null, null, null, property_policy_number, null, null, iff(property_policy_end_date > current_timestamp(), 'Policy-Activated', 'Policy-Cancelled'),
-  null, null from prod_non_covertree_policies)
+  null, null from transformations_dynamodb.prod_non_covertree_policies)
