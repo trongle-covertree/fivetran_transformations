@@ -36,7 +36,7 @@ jobs:
    schedule: '*/15 * * * *'
    steps:
      - name: run prod models
-       command: dbt run --models models/prod/policies models/prod/quotes models/prod/policyholders models/prod/leads models/prod/claims models/prod/misc
+       command: dbt run --models models/prod/policies models/prod/quotes models/prod/policyholders models/prod/leads models/prod/claims models/prod/misc models/prod/non_covertree_policies
 
 #  - name: every10minutes
 #    targetName: dev
