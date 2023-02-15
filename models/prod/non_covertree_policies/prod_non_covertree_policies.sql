@@ -1,6 +1,4 @@
-{{
-    config(materialized='table',
-    post_hook = "{{ run_non_covertree_policy_update('transformations_dynamodb','prod' ) }}") }}
+{{ config(materialized='table') }}
 
 
 select to_varchar(d.deal_id) as deal_id, d.property_policy_number, d.property_community_deal, lower(trim(c.property_communityname)) as property_communityname, c.property_lead_source, c.property_email,

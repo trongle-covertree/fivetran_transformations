@@ -1,4 +1,5 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table',
+    post_hook = "{{ run_non_covertree_policy_update('transformations_dynamodb','prod' ) }}") }}
 
 select
   pk,
