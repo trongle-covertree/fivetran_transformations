@@ -1,4 +1,4 @@
-{{ config(materialized='incremental') }}
+{{ config(materialized='table') }}
 
 select
   pk,
@@ -35,6 +35,3 @@ where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' an
   '100826086', '100849710', '100902420', '100902972', '100903084', '100931144', '100931232', '100957670',
   '100979166', '101178036', '101132926', '101298090', '101298206', '101298618', '101298854', '101299186',
   '101255196', '101227402', '101290498', '101291026', '101291182', '101291550', '101291884', '101212396')
-{% if is_incremental() %}
-  and ({{ dbt_date.from_unixtimestamp("created_timestamp", format="milliseconds") }} > (select max(created_timestamp) from {{ this }}) or {{ dbt_date.from_unixtimestamp("updated_timestamp", format="milliseconds") }} > (select max(updated_timestamp) from {{ this }}))
-{% endif %}
