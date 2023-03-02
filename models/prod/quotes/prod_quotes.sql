@@ -15,4 +15,4 @@ where (pk like 'QUOTE#%' and sk like 'POLICY#%') and _fivetran_deleted='FALSE' a
   lower(sk) not in ('', 'policy#101255772', 'policy#100599038', 'policy#100640796', 'policy#100712180', 'policy#100825636', 'policy#100825766', 'policy#100825954',
   'policy#100826086', 'policy#100849710', 'policy#100902420', 'policy#100902972', 'policy#100903084', 'policy#100931144', 'policy#100931232', 'policy#100957670',
   'policy#100979166', 'policy#101178036', 'policy#101132926', 'policy#101298090', 'policy#101298206', 'policy#101298618', 'policy#101298854', 'policy#101299186',
-  'policy#101436546')
+  'policy#101436546', 'policy#101468294', 'policy#101468958')
