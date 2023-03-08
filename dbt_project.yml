@@ -40,6 +40,10 @@ models:
       +schema: dynamodb
     develop:
       +schema: dynamodb_develop
+    test_socotra:
+      +schema: test_socotra
+    socotra:
+      +schema: prod_socotra
 
 vars:
   hubspot_email_event_enabled: false

@@ -38,6 +38,12 @@ jobs:
      - name: run prod models
        command: dbt run --models models/prod/policies models/prod/quotes models/prod/policyholders models/prod/leads models/prod/claims models/prod/misc models/prod/non_covertree_policies
 
+ - name: socotra15min
+   schedule: '*/15 * * * *'
+   steps:
+     - name: run socotra models
+       command: dbt run --models models/socotra
+
 #  - name: every10minutes
 #    targetName: dev
 #    schedule: '*/10 * * * *' # The example will run every 10 minutes. Note that the cron string is quoted as otherwise it will be treated as invalid alias node (see https://yaml.org/spec/1.2/spec.html#*%20alias// for details)
