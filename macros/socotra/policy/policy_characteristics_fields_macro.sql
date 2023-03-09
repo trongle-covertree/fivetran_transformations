@@ -15,6 +15,7 @@ from {{ socotra_db }}.policy_characteristics_fields
 where (
     to_timestamp_tz(datamart_created_timestamp) > (select datamart_created_timestamp from {{ sf_schema }}.policy_characteristics_fields order by datamart_created_timestamp desc limit 1)
     or to_timestamp_tz(datamart_updated_timestamp) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_characteristics_fields order by datamart_updated_timestamp desc limit 1))
+    and _fivetran_deleted = false
 {% endif %}
 
 {% endmacro %}
