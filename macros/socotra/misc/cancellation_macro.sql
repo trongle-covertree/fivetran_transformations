@@ -19,9 +19,9 @@ select
     iff(issued_date_pt = to_date(convert_timezone('America/Los_Angeles', current_timestamp())), true, false) as issued_is_current_date
 from {{ socotra_db }}.cancellation
 {% if is_incremental() %}
-where ( to_timestamp_tz(created_timestamp) > (select created_timestamp from {{ sf_schema }}.cancellation order by created_timestamp desc limit 1)
-    or to_timestamp_tz(datamart_created_timestamp) > (select datamart_created_timestamp from {{ sf_schema }}.cancellation order by datamart_created_timestamp desc limit 1)
-    or to_timestamp_tz(datamart_updated_timestamp) > (select datamart_updated_timestamp from {{ sf_schema }}.cancellation order by datamart_updated_timestamp desc limit 1))
+where ( to_timestamp_tz(created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.cancellation order by created_timestamp desc limit 1)
+    or to_timestamp_tz(datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.cancellation order by datamart_created_timestamp desc limit 1)
+    or to_timestamp_tz(datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.cancellation order by datamart_updated_timestamp desc limit 1))
     and _fivetran_deleted = false
 {% endif %}
 

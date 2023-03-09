@@ -24,10 +24,10 @@ select
     to_timestamp_tz(datamart_updated_timestamp/1000) as datamart_updated_timestamp
 from {{ socotra_db }}.invoice
 {% if is_incremental() %}
-where ( to_timestamp_tz(created_timestamp) > (select created_timestamp from {{ sf_schema }}.invoice order by created_timestamp desc limit 1)
-    or to_timestamp_tz(updated_timestamp) > (select updated_timestamp from {{ sf_schema }}.invoice order by updated_timestamp desc limit 1)
-    or to_timestamp_tz(datamart_created_timestamp) > (select datamart_created_timestamp from {{ sf_schema }}.invoice order by datamart_created_timestamp desc limit 1)
-    or to_timestamp_tz(datamart_updated_timestamp) > (select datamart_updated_timestamp from {{ sf_schema }}.invoice order by datamart_updated_timestamp desc limit 1))
+where ( to_timestamp_tz(created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.invoice order by created_timestamp desc limit 1)
+    or to_timestamp_tz(updated_timestamp/1000) > (select updated_timestamp from {{ sf_schema }}.invoice order by updated_timestamp desc limit 1)
+    or to_timestamp_tz(datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.invoice order by datamart_created_timestamp desc limit 1)
+    or to_timestamp_tz(datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.invoice order by datamart_updated_timestamp desc limit 1))
     and _fivetran_deleted = false
 {% endif %}
 

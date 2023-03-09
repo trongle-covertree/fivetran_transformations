@@ -24,8 +24,8 @@ from  {{ socotra_db }}.exposure_characteristics_fields as ecf
 		on ec.locator = ecf.exposure_characteristics_locator
 	where parent_name = 'additional_interest'
 {% if is_incremental() %}
-    and (to_timestamp_tz(ecf.datamart_created_timestamp) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(ecf.datamart_updated_timestamp) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_updated_timestamp desc limit 1))
+    and (to_timestamp_tz(ecf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_created_timestamp desc limit 1)
+      or to_timestamp_tz(ecf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_updated_timestamp desc limit 1))
 {% endif %}
 group by ecf.exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
 {% endmacro %}
