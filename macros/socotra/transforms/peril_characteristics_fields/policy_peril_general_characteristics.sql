@@ -6,6 +6,7 @@ select
 	min(Case when field_name = 'manufactured_home_limit' then field_value::int End) manufactured_home_limit,
 	min(Case when field_name = 'unscheduled_personal_property_limit' then field_value::int end) unscheduled_personal_property_limit,
 	min(Case when field_name = 'cov_c_settlement_option' then field_value End) cov_c_settlement_option,
+	min(Case when field_name = 'personal_liability' then field_value End) personal_liability,
 	min(Case when field_name = 'loss_of_use_percentage' then regexp_replace(field_value, '[%]')/100 end) loss_of_use_percentage,
 	min(Case when field_name = 'medical_payment_to_others_limit_PerPerson' then field_value end) medical_payment_to_others_limit_PerPerson,
 	min(Case when field_name = 'damage_to_property_of_others' then regexp_replace(field_value, '[$,]')::int end) damage_to_property_of_others,
