@@ -18,7 +18,7 @@ from  {{ socotra_db }}.quote_exposure_characteristics_fields as ecf
 	where parent_name = 'unit_address'
 {% if is_incremental() %}
     and (ecf.datamart_created_timestamp > (select datamart_created_timestamp from {{ sf_schema }}.quote_exposure_unit_address order by datamart_created_timestamp desc limit 1)
-      or ecf.datamart_updated_timestamp > (select datamart_updated_timestamp from {{ sf_schema }}.quote order by datamart_updated_timestamp desc limit 1))
+      or ecf.datamart_updated_timestamp > (select datamart_updated_timestamp from {{ sf_schema }}.quote_exposure_unit_address order by datamart_updated_timestamp desc limit 1))
 {% endif %}
 group by ecf.quote_exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
 {% endmacro %}
