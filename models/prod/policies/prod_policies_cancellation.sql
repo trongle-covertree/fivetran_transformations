@@ -12,7 +12,7 @@ select
   price,
   conflict_handling,
   name,
-  {{ dbt_date.from_unixtimestamp("issued_timestamp", format="milliseconds") }} as issued_timestamp,
+  to_timestamp_ntz(to_number(issued_timestamp)/1000) as issued_timestamp,
   policy_locator,
   state,
   locator,
