@@ -2,6 +2,7 @@
 
 select
      min(case when field_name = 'country' then field_value end) as country,
+     min(case when field_name = 'county' then field_value end) as county,
      min(case when field_name = 'city' then field_value end) as city,
      min(case when field_name = 'agent_id' then field_value::varchar end) as agent_id,
      min(case when field_name = 'lot_unit' then field_value end) as lot_unit,
