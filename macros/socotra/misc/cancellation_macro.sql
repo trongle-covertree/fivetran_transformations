@@ -18,7 +18,7 @@ select
     to_date(convert_timezone('America/Los_Angeles', to_timestamp_ntz(sc.issued_timestamp/1000))) as issued_date_pt,
     to_date(convert_timezone('America/New_York', to_timestamp_ntz(sc.issued_timestamp/1000))) as issued_date_et
 from {{ socotra_db }}.cancellation as sc
-    join {{ dynamo_schema }}.prod_policies_cancellation as dc on dc.locator = sc.locator
+    left join {{ dynamo_schema }}.prod_policies_cancellation as dc on dc.locator = sc.locator
 {% if is_incremental() %}
 where ( to_timestamp_tz(sc.created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.cancellation order by created_timestamp desc limit 1)
     or to_timestamp_tz(sc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.cancellation order by datamart_created_timestamp desc limit 1)
