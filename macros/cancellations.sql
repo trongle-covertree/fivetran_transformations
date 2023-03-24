@@ -65,8 +65,8 @@ from {{ env }}.{{ prefix }}_policies_cancellation
         '{{ tojson(price_json.taxGroups) }}',
         {{ price_json.totalChange or 'null' }},
         '{{ created_timestamps[loop.index0] }}',
-        '{{ issued_timestamps[loop.index0] or null }}',
-        '{{ effective_timestamps[loop.index0] or null }}'
+        {% if issued_timestamps[loop.index0] is not none %}'{{ issued_timestamps[loop.index0] }}'{% else %}null{% endif %},
+        {% if effective_timestamps[loop.index0] is not none %}'{{ effective_timestamps[loop.index0] }}'{% else %}null{% endif %}
     ){% if not loop.last %},{% endif %}
         {% endif %}
     {% endfor %}
