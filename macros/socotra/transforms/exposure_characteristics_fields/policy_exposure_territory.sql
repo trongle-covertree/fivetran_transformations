@@ -13,6 +13,7 @@ select
 	min(case when field_name = 'territory_code_wild_fire' then field_value end) as territory_code_wild_fire,
 	min(case when field_name = 'territory_code_hurricane' then field_value end) as territory_code_hurricane,
 	min(case when field_name = 'county_fips' then field_value end) as county_fips,
+	min(case when field_name = 'windpool' then field_value end) as windpool,
 	min(case when field_name = 'distance_to_coast' then field_value end) as distance_to_coast,
 	min(case when field_name = 'ct_mhcid' then field_value::varchar end) as ct_mhcid,
 	exposure_locator,
