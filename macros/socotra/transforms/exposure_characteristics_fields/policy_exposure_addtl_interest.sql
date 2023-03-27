@@ -15,6 +15,7 @@ select
 	min(case when field_name = 'officer_first_name' then field_value end) as officer_first_name,
 	min(case when field_name = 'officer_last_name' then field_value end) as officer_last_name,
 	min(case when field_name = 'officer_mail_address' then field_value end) as officer_mail_address,
+	exposure_locator,
 	exposure_characteristics_locator,
     ec.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(ecf.datamart_created_timestamp/1000) as datamart_created_timestamp,
@@ -27,5 +28,5 @@ from  {{ socotra_db }}.exposure_characteristics_fields as ecf
     and (to_timestamp_tz(ecf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(ecf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_exposure_addtl_interest order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by ecf.exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
+group by exposure_locator, ecf.exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
 {% endmacro %}

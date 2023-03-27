@@ -4,6 +4,7 @@ select
 	min(case when field_name = 'interior' then field_value::boolean end) as interior,
 	min(case when field_name = 'exterior' then field_value::boolean end) as exterior,
 	min(case when field_name = 'aerial' then field_value::boolean end) as aerial,
+	exposure_locator,
 	exposure_characteristics_locator,
     ec.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(ecf.datamart_created_timestamp/1000) as datamart_created_timestamp,
@@ -16,5 +17,5 @@ from  {{ socotra_db }}.exposure_characteristics_fields as ecf
     and (to_timestamp_tz(ecf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_inspections order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(ecf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_exposure_inspections order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by ecf.exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
+group by exposure_locator, ecf.exposure_characteristics_locator, ecf.datamart_created_timestamp, ecf.datamart_updated_timestamp, ec.policy_locator
 {% endmacro %}
