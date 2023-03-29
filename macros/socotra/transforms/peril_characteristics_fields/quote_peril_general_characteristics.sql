@@ -37,7 +37,7 @@ select
 from {{ socotra_db }}.quote_peril_characteristics_fields as pcf
 	inner join {{ socotra_db }}.quote_peril_characteristics as pc
 		on pc.locator = pcf.quote_peril_characteristics_locator
-	inner join {{ socotra_db }}.peril as p
+	inner join {{ socotra_db }}.quote_peril as p
 		on p.locator = pc.quote_peril_locator
 where parent_name is null
 {% if is_incremental() %}
