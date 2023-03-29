@@ -31,7 +31,7 @@ select
 	min(Case when field_name = 'residence_burglary_limit' then regexp_replace(field_value, '[$,]')::int End) residence_burglary_limit,
 	min(Case when field_name = 'equipment_breakdown_limit' then regexp_replace(field_value, '[$,]')::int end) equipment_breakdown_limit,
 	quote_exposure_locator,
-	quote_policy_locator,
+	pc.quote_policy_locator,
 	pc.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(pcf.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pcf.datamart_updated_timestamp/1000) as datamart_updated_timestamp

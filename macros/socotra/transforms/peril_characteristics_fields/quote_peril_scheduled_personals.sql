@@ -5,7 +5,7 @@ select
 	min(Case when field_name = 'spp_type' then field_value end) spp_type,
 	min(Case when field_name = 'spp_desc' then field_value End) spp_desc,
 	quote_exposure_locator,
-	quote_policy_locator,
+	pc.quote_policy_locator,
 	pc.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(pcf.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pcf.datamart_updated_timestamp/1000) as datamart_updated_timestamp
