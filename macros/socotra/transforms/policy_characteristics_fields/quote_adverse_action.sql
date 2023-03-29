@@ -12,8 +12,8 @@ from {{ socotra_db }}.quote_policy_characteristics_fields as pcf
     	on pc.locator = pcf.quote_policy_characteristics_locator
 	where parent_name = 'adverse_action'
 {% if is_incremental() %}
-    and (to_timestamp_tz(pcf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema}}.quote_policy_adverse_action order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(pcf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema}}.quote_policy_adverse_action order by datamart_updated_timestamp desc limit 1))
+    and (to_timestamp_tz(pcf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema}}.quote_adverse_action order by datamart_created_timestamp desc limit 1)
+      or to_timestamp_tz(pcf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema}}.quote_adverse_action order by datamart_updated_timestamp desc limit 1))
 {% endif %}
 group by pcf.quote_policy_characteristics_locator, pcf.datamart_created_timestamp, pcf.datamart_updated_timestamp, pc.policy_locator
 {% endmacro %}
