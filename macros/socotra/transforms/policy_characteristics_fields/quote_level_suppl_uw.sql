@@ -6,6 +6,7 @@ select
 	min(case when field_name = 'cancellation_renew' then field_value::boolean end) as cancellation_renew,
 	min(case when field_name = 'reason_cancellation_renew' then field_value end) as reason_cancellation_renew,
 	quote_policy_characteristics_locator,
+	quote_policy_locator,
     pc.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(pcf.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pcf.datamart_updated_timestamp/1000) as datamart_updated_timestamp
@@ -17,5 +18,5 @@ from {{ socotra_db }}.quote_policy_characteristics_fields as pcf
     and (to_timestamp_tz(pcf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.quote_level_suppl_uw order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(pcf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.quote_level_suppl_uw order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by pcf.quote_policy_characteristics_locator, pcf.datamart_created_timestamp, pcf.datamart_updated_timestamp, pc.policy_locator
+group by pcf.quote_policy_characteristics_locator, pcf.datamart_created_timestamp, pcf.datamart_updated_timestamp, pc.quote_policy_locator, pc.policy_locator
 {% endmacro %}

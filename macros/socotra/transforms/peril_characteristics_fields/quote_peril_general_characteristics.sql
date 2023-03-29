@@ -31,6 +31,7 @@ select
 	min(Case when field_name = 'residence_burglary_limit' then regexp_replace(field_value, '[$,]')::int End) residence_burglary_limit,
 	min(Case when field_name = 'equipment_breakdown_limit' then regexp_replace(field_value, '[$,]')::int end) equipment_breakdown_limit,
 	quote_exposure_locator,
+	quote_policy_locator,
 	pc.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(pcf.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pcf.datamart_updated_timestamp/1000) as datamart_updated_timestamp
@@ -44,5 +45,5 @@ where parent_name is null
     and (to_timestamp_tz(pcf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.quote_peril_general_characteristics order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(pcf.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.quote_peril_general_characteristics order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by quote_exposure_locator, pcf.datamart_created_timestamp, pcf.datamart_updated_timestamp, pc.policy_locator
+group by quote_exposure_locator, pcf.datamart_created_timestamp, pcf.datamart_updated_timestamp, pc.quote_policy_locator, pc.policy_locator
 {% endmacro %}
