@@ -14,9 +14,9 @@ select
     ec.policy_locator::varchar as policy_locator,
 	to_timestamp_tz(ecf.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(ecf.datamart_updated_timestamp/1000) as datamart_updated_timestamp
-from  {{ socotra_db }}.exposure_characteristics_fields as ecf
+from  {{ socotra_db }}.quote_exposure_characteristics_fields as ecf
 	inner join {{ socotra_db }}.quote_exposure_characteristics as ec
-		on ec.locator = ecf.quote_xposure_characteristics_locator
+		on ec.locator = ecf.quote_exposure_characteristics_locator
 	where parent_name is null
 {% if is_incremental() %}
     and (to_timestamp_tz(ecf.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.quote_policy_exposure_general_characteristics order by datamart_created_timestamp desc limit 1)

@@ -12,7 +12,7 @@ select
 	min(case when field_name = 'swimming_pool' then field_value::boolean end) as swimming_pool,
 	min(case when field_name = 'unit_is_tied' then field_value::boolean end) as unit_is_tied,
 	min(case when field_name = 'source_of_heat' then field_value::boolean end) as source_of_heat,
-	min(case when field_name = 'visitors_in_a_month' then field_value::smallint end) as visitors_in_a_month,
+	min(case when field_name = 'visitors_in_a_month' then field_value end) as visitors_in_a_month,
 	min(case when field_name = 'business_employees_on_premises' then field_value::boolean end) as business_employees_on_premises,
 	min(case when field_name = 'daycare_on_premises' then field_value::boolean end) as daycare_on_premises,
 	min(case when field_name = 'burglar_alarm' then field_value end) as burglar_alarm,
