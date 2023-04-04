@@ -83,7 +83,7 @@ FROM VALUES
     {% if 'values' in entity_json and 'mailing_state_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_state_policyholder'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_street_address_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_street_address_policyholder'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'mailing_zip_code_policyholder' in entity_json['values'] %}'{{ entity_json['values']['mailing_zip_code_policyholder'][0] }}',{% else %}null,{% endif %}
-    {% if 'values' in entity_json and 'middle_name' in entity_json['values'] %}'{{ entity_json['values']['middle_name'][0] }}',{% else %}null,{% endif %}
+    {% if 'values' in entity_json and 'middle_name' in entity_json['values'] %}'{{ entity_json['values']['middle_name'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'primary_contact_number' in entity_json['values'] %}'{{ entity_json['values']['primary_contact_number'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'third_party_notification_non_consumer' in entity_json['values'] %}'{{ entity_json['values']['third_party_notification_non_consumer'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'type_of_insured' in entity_json['values'] %}'{{ entity_json['values']['type_of_insured'][0] }}',{% else %}null,{% endif %}
