@@ -9,7 +9,7 @@ select
 	min(case when field_name = 'diving_board' then field_value::boolean end) as diving_board,
 	min(case when field_name = 'four_feet_fence' then field_value::boolean end) as four_feet_fence,
 	min(case when field_name = 'mortgage' then field_value::boolean end) as mortgage,
-	min(case when field_name = 'please_describe' then field_value::boolean end) as please_describe,
+	min(case when field_name = 'please_describe' then field_value end) as please_describe,
 	min(case when field_name = 'property_with_fire_protection' then field_value::boolean end) as property_with_fire_protection,
 	min(case when field_name = 'roof_payment_schedule' then field_value::boolean end) as roof_payment_schedule,
 	min(case when field_name = 'secure_rails' then field_value::boolean end) as secure_rails,

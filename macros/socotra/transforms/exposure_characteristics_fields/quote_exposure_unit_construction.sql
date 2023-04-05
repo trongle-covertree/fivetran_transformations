@@ -15,7 +15,7 @@ select
 	min(case when field_name = 'skirting_type' then field_value end) as skirting_type,
 	min(case when field_name = 'storm_mitigation_shutters' then field_value::boolean end) as storm_mitigation_shutters,
 	min(case when field_name = 'storm_mitigation_impactglass' then field_value::boolean end) as storm_mitigation_impactglass,
-	min(case when field_name = 'storm_mitigation_fortified' then field_value::boolean end) as storm_mitigation_fortified,
+	min(case when field_name = 'storm_mitigation_fortified' then field_value end) as storm_mitigation_fortified,
 	quote_exposure_locator,
 	quote_exposure_characteristics_locator,
 	quote_policy_locator,
