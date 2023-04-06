@@ -12,7 +12,10 @@ select
     to_timestamp_tz(issued_timestamp/1000) as issued_timestamp,
     to_date(convert_timezone('America/Los_Angeles', to_timestamp_ntz(issued_timestamp/1000))) as issued_date_pt,
     to_date(convert_timezone('America/New_York', to_timestamp_ntz(issued_timestamp/1000))) as issued_date_et,
-    iff(issued_date_pt = to_date(convert_timezone('America/Los_Angeles', current_timestamp())), true, false) issued_is_current_date
+    iff(issued_date_pt = to_date(convert_timezone('America/Los_Angeles', current_timestamp())), true, false) issued_is_current_date,
+    premium_change,
+    gross_taxes_change,
+    fee_change
 from {{ socotra_db }}.policy_modification
 {% if is_incremental() %}
 where (
