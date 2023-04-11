@@ -27,12 +27,12 @@ from {{ dynamodb_env }}.{{ dynamodb_prefix }}_policy_modifications
     {% if is_incremental() %}
         {% if pk|length == 1 %}
             {% set delete_query %}
-            DELETE FROM {{ socotra_env }}.peril_modifications where locator in {{ mod_locators|replace(",", "") }}
+            DELETE FROM {{ socotra_env }}.peril_modifications where modification_locator in {{ mod_locators|replace(",", "") }}
             {% endset %}
             {% do run_query(delete_query) %}
         {% else %}
             {% set delete_query %}
-            DELETE FROM {{ socotra_env }}.peril_modifications where locator in {{ mod_locators }}
+            DELETE FROM {{ socotra_env }}.peril_modifications where modification_locator in {{ mod_locators }}
             {% endset %}
             {% do run_query(delete_query) %}
         {% endif %}
