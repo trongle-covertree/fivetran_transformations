@@ -44,8 +44,9 @@ from {{ dynamodb_env }}.{{ dynamodb_prefix }}_policy_modifications
     {% for modification in modifications %}
         {% set outer_loop = loop %}
         {% if modification %}
-            {% set mod_arr = fromjson(modification) %}
+        {% set mod_arr = fromjson(modification) %}
             {% for mod_json in mod_arr %}
+                {% set mod_loop = loop%}
                 {% for exposure_mod in mod_json.perilModifications %}
     {# {{ log(modification, info=True) }} #}
     (
@@ -63,7 +64,7 @@ from {{ dynamodb_env }}.{{ dynamodb_prefix }}_policy_modifications
         {% if 'premiumChangeCurrency' in exposure_mod %}'{{ exposure_mod['premiumChangeCurrency'] }}'{% else %}null{% endif %},
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or not loop.last %},{% endif %}
+    ){% if not outer_loop.last or not mod_loop.last or not loop.last %},{% endif %}
             {% endfor %}
         {% endfor %}
         {% endif %}
