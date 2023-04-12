@@ -15,7 +15,7 @@ select
 	max(case when field_name = 'secure_rails' then field_value::boolean end) as secure_rails,
 	max(case when field_name = 'source_of_heat' then field_value::boolean end) as source_of_heat,
 	max(case when field_name = 'source_of_heat_installation' then field_value::boolean end) as source_of_heat_installation,
-	max(case when field_name = 'swimmaxg_pool' then field_value::boolean end) as swimmaxg_pool,
+	max(case when field_name = 'swimming_pool' then field_value::boolean end) as swimming_pool,
 	max(case when field_name = 'thermo_static_control' then field_value::boolean end) as thermo_static_control,
 	max(case when field_name = 'trampoline_liability' then field_value::boolean end) as trampoline_liability,
 	max(case when field_name = 'trampoline_safety_net' then field_value::boolean end) as trampoline_safety_net,
