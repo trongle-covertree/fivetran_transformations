@@ -32,5 +32,5 @@ from  {{ socotra_db }}.exposure_characteristics_fields as ecf
     and (to_timestamp_tz(ec.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_territory order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(ec.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_exposure_territory order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by exposure_locator, ecf.exposure_characteristics_locator, ec.datamart_created_timestamp, ec.datamart_updated_timestamp, ec.policy_locator, policy_mod
+group by exposure_locator, ecf.exposure_characteristics_locator, ec.datamart_created_timestamp, ec.datamart_updated_timestamp, ec.policy_locator, policy_modification_locator
 {% endmacro %}
