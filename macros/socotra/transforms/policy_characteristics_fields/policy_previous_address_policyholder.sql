@@ -8,7 +8,7 @@ select
 	max(case when field_name = 'previous_zip_code_policyholder' then field_value end) as previous_zip_code_policyholder,
 	max(case when field_name = 'previous_county_policyholder' then field_value end) as previous_county_policyholder,
 	max(case when field_name = 'previous_country_policyholder' then field_value end) as previous_country_policyholder,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

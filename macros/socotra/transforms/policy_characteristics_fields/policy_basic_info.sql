@@ -4,7 +4,7 @@ select
 	max(case when field_name = 'quote_inception_date' then field_value::date end) as quote_inception_date,
 	max(case when field_name = 'date_of_birth' then field_value::date end) as date_of_birth,
 	max(case when field_name = 'auto_policy_with_agency' then field_value::boolean end) as auto_policy_with_agency,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

@@ -3,7 +3,7 @@
 select
     max(case when field_name = 'uw_description' then field_value end) as uw_description,
     max(case when field_name = 'uw_manual' then field_value end) as uw_manual,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

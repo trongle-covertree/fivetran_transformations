@@ -15,7 +15,7 @@ select
      max(case when field_name = 'state' then field_value end) as state,
      max(case when field_name = 'agency_license' then field_value::varchar end) as agency_license,
      max(case when field_name = 'agent_on_record' then field_value end) as agent_on_record,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
      pc.policy_locator::varchar as policy_locator,
      policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

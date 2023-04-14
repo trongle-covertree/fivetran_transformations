@@ -14,7 +14,7 @@ select
 	max(case when field_name = 'scope_of_claim' then field_value end) as scope_of_claim,
 	max(case when field_name = 'claims_processing_status' then field_value end) as claims_processing_status,
 	max(case when field_name = 'description_of_loss' then field_value end) as description_of_loss,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

@@ -4,7 +4,7 @@ select
 	max(case when field_name = 'prior_carrier_name' then field_value end) as prior_carrier_name,
 	max(case when field_name = 'prior_insurance' then field_value end) as prior_insurance,
 	max(case when field_name = 'prior_policy_expiration_date' then field_value end) as prior_policy_expiration_date,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

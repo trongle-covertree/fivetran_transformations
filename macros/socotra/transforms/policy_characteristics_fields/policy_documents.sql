@@ -3,7 +3,7 @@
 select
 	max(case when field_name = 'uploaded_file' then field_value end) as uploaded_file,
 	max(case when field_name = 'document_type' then field_value end) as document_type,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

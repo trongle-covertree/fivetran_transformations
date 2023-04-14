@@ -5,7 +5,7 @@ select
 	max(case when field_name = 'ad_first_name' then field_value end) as ad_first_name,
 	max(case when field_name = 'ad_last_name' then field_value end) as ad_last_name,
 	max(case when field_name = 'relationship_to_policyholder' then field_value end) as relationship_to_policyholder,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
     pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,

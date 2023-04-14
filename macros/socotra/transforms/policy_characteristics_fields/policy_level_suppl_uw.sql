@@ -5,7 +5,7 @@ select
 	max(case when field_name = 'conviction' then field_value::boolean end) as conviction,
 	max(case when field_name = 'cancellation_renew' then field_value::boolean end) as cancellation_renew,
 	max(case when field_name = 'reason_cancellation_renew' then field_value end) as reason_cancellation_renew,
-	policy_characteristics_locator,
+	pcf.policy_characteristics_locator,
 	policy_modification_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pc.datamart_updated_timestamp/1000) as datamart_updated_timestamp
