@@ -310,7 +310,7 @@ models:
       - name: UPDATED_TIMESTAMP
         description: ""
         data_type: TIMESTAMP_TZ
-  - name: develop_policy_characteristics
+  - name: develop_policy_characteristics_dynamo
     description: "Policy characteristics data"
     columns:
       - name: PK
