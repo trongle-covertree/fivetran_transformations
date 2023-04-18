@@ -1,0 +1,1335 @@
+
+version: 2
+
+models:
+  - name: policy
+    description: socotra policy table model
+    columns:
+      - name: locator
+        decription: policy locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_start_timestamp
+        description: beginning of policy
+        data_type: TIMESTAMP_TZ
+      - name: policy_end_timestamp
+        description: end of policy
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when the policy was issued
+        data_type: TIMESTAMP_TZ
+      - name: payment_schedule_name
+        description: payment schedule
+        data_type: varchar(256)
+      - name: policyholder_locator
+        description: locator for policyholder
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policyholder')
+              pk_column_name: locator
+      - name: product_name
+        decription: name of product being sold
+        data_type: varchar(256)
+      - name: created_timestamp
+        description: when quote was created
+        data_type: TIMESTAMP_TZ
+      - name: premium_report_name
+        data_type: varchar(256)
+      - name: config_version
+        data_type: bigint
+      - name: cancellation_timestamp
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: currency
+        data_type: varchar(3)
+  - name: policyholder
+    description: socotra policyholder table model
+    columns:
+      - name: locator
+        decription: policyholder locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: exposure
+    description: socotra policyholder table model
+    columns:
+      - name: locator
+        decription: exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: name
+        description: name of the exposure (owner occupied, landlord, policy level, etc.)
+        data_type: varchar(256)
+      - name: policy_locator
+        description: policy_locator exposure is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: peril
+    description: socotra coverages table model
+    columns:
+      - name: locator
+        decription: peril locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: name
+        description: name of the coverage
+        data_type: varchar(256)
+      - name: policy_locator
+        description: policy_locator peril is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: exposure_locator
+        description: policy_locator exposure is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure')
+              pk_column_name: locator
+      - name: renewal_group
+        description: locator for renewal_group(?)
+        data_type: varchar(36)
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: policy_characteristics
+    description: socotra policys characteristics table model
+    columns:
+      - name: locator
+        decription: exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator peril is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: replacement_of_locator
+        description: characteristic that replaced this one
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_characteristics')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: replaced_timestamp
+        description: when characteristic was replaced
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when characteristic was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: policy_characteristics_fields
+    description: socotra policys characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for characteristic
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for characteristic
+        data_type: string
+      - name: policy_characteristics_locator
+        description: characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: exposure_characteristics
+    description: socotra policys exposure characteristics table model
+    columns:
+      - name: locator
+        decription: exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: exposure_locator
+        description: exposure_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure')
+              pk_column_name: locator
+      - name: replacement_of_locator
+        description: characteristic that replaced this one
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure_characteristics')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: replaced_timestamp
+        description: when characteristic was replaced
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when characteristic was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: exposure_characteristics_fields
+    description: socotra policys exposure characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for characteristic
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for characteristic
+        data_type: string
+      - name: exposure_characteristics_locator
+        description: exposure characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: peril_characteristics
+    description: socotra policys coverage characteristics table model
+    columns:
+      - name: locator
+        decription: exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: peril_locator
+        description: peril_locator peril characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('peril')
+              pk_column_name: locator
+      - name: replacement_of_locator
+        description: characteristic that replaced this one
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure_characteristics')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: replaced_timestamp
+        description: when characteristic was replaced
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when characteristic was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: month_premium
+        description: monthly premium for coverage
+        data_type: decimal(24, 4)
+      - name: premium
+        description: full premium for coverage
+        data_type: decimal(24, 4)
+      - name: month_technical_premium
+        data_type: decimal(24, 4)
+      - name: technical_premium
+        data_type: decimal(24, 4)
+      - name: exposure_characteristics_locator
+        description: locator for exposure characteristic its associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure_characteristics')
+              pk_column_name: locator
+      - name: policy_characteristics_locator
+        description: policy characteristic locator its associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_characteristics')
+              pk_column_name: locator
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+  - name: peril_characteristics_fields
+    description: socotra policys coverage characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for coverage
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for coverage
+        data_type: string
+      - name: peril_characteristics_locator
+        description: coverage characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('peril_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: policyholder_fields
+    description: socotra policyholder fields table model
+    columns:
+      - name: field_name
+        description: socotra name for coverage
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for coverage
+        data_type: string
+      - name: policyholder_locator
+        description: policyholder parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policyholder')
+              pk_column_name: locator
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: version
+        data_type: bigint
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: reinstatement
+    description: socotra reinstatement table model
+    columns:
+      - name: locator
+        decription: exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: cancellation_locator
+        description: cancellation reinstatement is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('cancellation')
+              pk_column_name: locator
+      - name: state
+        description: current state reinstatement is in
+        data_type: varchar(36)
+      - name: issued_timestamp
+        description: when reinstatement was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when reinstatement was created
+        data_type: TIMESTAMP_TZ
+      - name: effective_timestamp
+        description: when reinstatement becomes effective
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ 
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+  - name: renewal
+    description: socotra renewal table model
+    columns:
+      - name: locator
+        decription: renewal locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: state
+        description: current state renewal is in
+        data_type: varchar(36)
+      - name: new_payment_schedule
+        data_type: varchar(256)
+      - name: issued_timestamp
+        description: when reinstatement was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when reinstatement was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ 
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+  - name: endorsement
+    description: socotra endorsement table model
+    columns:
+      - name: locator
+        decription: endorsement locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: state
+        description: current state endorsement is in
+        data_type: varchar(36)
+      - name: new_payment_schedule
+        data_type: varchar(256)
+      - name: start_timestamp
+        description: when endorsement began
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when endorsement was issued
+        data_type: TIMESTAMP_TZ
+      - name: new_policy_end_timestamp
+        description: new policy endorsement end timestamp
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when reinstatement was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ 
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+  - name: cancellation
+    description: socotra cancellation table model
+    columns:
+      - name: locator
+        decription: cancellation locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: reinstatement_locator
+        description: cancellation reinstatement is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('reinstatement')
+              pk_column_name: locator
+      - name: name
+        description: type of cancellation
+        data_type: varchar(128)
+      - name: policy_locator
+        description: policy_locator cancellation is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: state
+        description: current state cancellation is in
+        data_type: varchar(36)
+      - name: effective_timestamp
+        description: when cancellation becomes effective
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when cancellation was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ 
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+      - name: issued_timestamp
+        description: when cancellation was issued
+        data_type: TIMESTAMP_TZ
+  - name: policy_modification
+    description: socotra policy modifications table model
+    columns:
+      - name: locator
+        decription: modification locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator modification is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: name
+        description: full name of type of modification
+        data_type: varchar(256)
+      - name: effective_timestamp
+        description: when cancellation becomes effective
+        data_type: TIMESTAMP_TZ
+      - name: type
+        description: short name of type of modification
+        data_type: varchar(36)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ 
+      - name: issued_timestamp
+        description: when modification was issued
+        data_type: TIMESTAMP_TZ
+  - name: grace_period
+    description: socotra policys grace period table model
+    columns:
+      - name: locator
+        decription: grace period locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator grace period is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: cancellation_locator
+        description: cancellation associated with this grace period locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('cancellations')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when grace period started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when grace period ended
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when grace period was created
+        data_type: TIMESTAMP_TZ
+      - name: cancel_effective_timestamp
+        description: when cancel becomes effective
+        data_type: TIMESTAMP_TZ
+      - name: settled_timestamp
+        description: when cancellation was settled
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: financial_transaction
+    description: socotra policys financial transactions table model
+    columns:
+      - name: invoice_locator
+        description: invoice locator transaction is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('invoice')
+              pk_column_name: locator
+      - name: invoice_schedule_id
+        description: invoice schedule transaction is associated with
+        data_type: bigint
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('invoice_schedule')
+              pk_column_name: id
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+      - name: peril_characteristics_locator
+        description: coverage characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('peril_characteristics')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when grace period started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when grace period ended
+        data_type: TIMESTAMP_TZ
+      - name: amount
+        data_type: decimal(24, 4)
+      - name: type
+        description: type of transaction
+        data_type: varchar(36)
+      - name: peril_name
+        description: coverage payment is going towards
+        data_type: varchar(256)
+      - name: commission_recipient
+        data_type: varchar(255)
+      - name: fee_name
+        description: fee type if exists
+        data_type: varchar(256)
+      - name: tax_name
+        description: tax type if exists
+        data_type: varchar(256)
+      - name: posted_timestamp
+        description: when payment was posted
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: policy_locator
+        description: policy_locator grace period is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: invoice
+    description: socotra policys invoices table model
+    columns:
+      - name: locator
+        decription: invoice locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator invoice is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: total_due
+        data_type: decimal(24,4)
+      - name: start_timestamp
+        description: when invoice started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when invoice ended
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when invoice was issued
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when invoice was created
+        data_type: TIMESTAMP_TZ
+      - name: settlement_status
+        description: status of invoice
+        data_type: varchar(36)
+      - name: settlement_type
+        description: type of invoice
+        data_type: varchar(36)
+      - name: due_timestamp
+        description: when invoice is due
+        data_type: TIMESTAMP_TZ
+      - name: grace_period_locator
+        description: grace period locator invoice is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('grace_period')
+              pk_column_name: locator
+      - name: status
+        description: proper non-null(?) status of invoice
+        data_type: varchar(36)
+      - name: updated_timestamp
+        description: when invoice was updated
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: invoice_schedule
+    description: socotra policys invoice schedule table model
+    columns:
+      - name: id
+        decription: invoice schedule id and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: product_name
+        description: product invoice is going towards (mh_homeowners usually)
+        data_type: varchar(256)
+      - name: start_timestamp
+        description: when invoice started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when invoice ended
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when invoice was issued
+        data_type: TIMESTAMP_TZ
+      - name: due_timestamp
+        description: when invoice is due
+        data_type: TIMESTAMP_TZ
+      - name: write_off
+        data_type: boolean
+      - name: policy_locator
+        description: policy_locator invoice is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: deleted
+        data_type: boolean
+      - name: invoice_locator
+        description: invoice_locator invoice schedule is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('invoice')
+              pk_column_name: locator
+  - name: auxiliary_data
+    description: custom policy data table model
+    columns:
+      - name: locator
+        description: locator for outside data
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: key_name
+        data_type: varchar(256)
+      - name: var_value
+        data_type: string
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: underwriting_notes
+    description: socotra policys underwriting notes table model
+    columns:
+      - name: underwriting_result_locator
+        decription: underwriting result id and primary key
+        data_type: bigint
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('underwriting_results')
+              pk_column_name: locator
+      - name: note
+        description: notes associated with underwriting locator
+        data_type: text
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: underwriting_results
+    description: socotra policys underwriting results table model
+    columns:
+      - name: locator
+        decription: underwriting result id and primary key
+        data_type: bigint
+        tests:
+          - dbt_constraints.primary_key
+      - name: policy_locator
+        description: policy_locator underwriting result is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: quote_locator
+        description: quote_locator underwriting is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: endorsement_locator
+        description: endorsement_locator underwriting is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('endorsement')
+              pk_column_name: locator
+      - name: renewal_locator
+        description: renewal_locator underwriting is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: decision
+        description: underwriting accept, reject, or none
+        data_type: varchar(64)
+      - name: decision_timestamp
+        description: when underwriting decision happened
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: policy_modification_locator
+        description: modification locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy_modification')
+              pk_column_name: locator
+  - name: quote_policy
+    description: socotra quote table model
+    columns:
+      - name: locator
+        decription: quote locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: policyholder_locator
+        description: locator for policyholder
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policyholder')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator underwriting result is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: name
+        data_type: varchar(256)
+      - name: product_name
+        decription: name of product being sold
+        data_type: varchar(256)
+      - name: payment_schedule_name
+        description: payment schedule
+        data_type: varchar(256)
+      - name: state
+        description: status of quote (accepted, draft, discarded, declined, quoted)
+        data_type: varchar(36)
+      - name: selected
+        data_type: boolean
+      - name: contract_start_timestamp
+        description: beginning of quote
+        data_type: TIMESTAMP_TZ
+      - name: contract_end_timestamp
+        description: end of quote
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when quote was created
+        data_type: TIMESTAMP_TZ
+      - name: issued_timestamp
+        description: when the quote was issued
+        data_type: TIMESTAMP_TZ
+      - name: currency
+        data_type: varchar(3)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_exposure
+    description: socotra exposures for quotes table model
+    columns:
+      - name: locator
+        decription: quote exposure locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: quote_policy_locator
+        description: quote_locator exposure is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: name
+        description: name of the exposure (owner occupied, landlord, policy level, etc.)
+        data_type: varchar(256)
+      - name: policy_locator
+        description: policy_locator quote exposure is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: created_timestamp
+        description: when quote was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_peril
+    description: socotra quote coverages table model
+    columns:
+      - name: locator
+        decription: peril locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: quote_policy_locator
+        description: quote_locator coverage is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator peril is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: name
+        description: name of the coverage
+        data_type: varchar(256)
+      - name: quote_exposure_locator
+        description: quote_policy_locator coverage is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_exposure')
+              pk_column_name: locator
+      - name: renewal_group
+        description: locator for renewal_group(?)
+        data_type: varchar(36)
+      - name: created_timestamp
+        description: when coverage was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_policy_characteristics
+    description: socotra policys characteristics table model
+    columns:
+      - name: locator
+        decription: characteristic locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: quote_policy_locator
+        description: quote_locator characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator peril is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_policy_characteristics_fields
+    description: socotra quote policys characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for characteristic
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for characteristic
+        data_type: string
+      - name: quote_policy_characteristics_locator
+        description: characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: quote_exposure_characteristics
+    description: socotra policys exposure characteristics table model
+    columns:
+      - name: locator
+        decription: exposure characteristic locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: quote_policy_locator
+        description: quote_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: quote_exposure_locator
+        description: quote_exposure_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('exposure')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_exposure_characteristics_fields
+    description: socotra quote policys exposure characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for characteristic
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for characteristic
+        data_type: string
+      - name: quote_exposure_characteristics_locator
+        description: exposure characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_exposure_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+  - name: quote_peril_characteristics
+    description: socotra policys coverage characteristics table model
+    columns:
+      - name: locator
+        decription: coverage locator and primary key
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.primary_key
+      - name: quote_policy_locator
+        description: quote_locator coverage is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_policy')
+              pk_column_name: locator
+      - name: peril_locator
+        description: quote_peril_locator coverage characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_peril')
+              pk_column_name: locator
+      - name: policy_locator
+        description: policy_locator exposure characteristic is associated with
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('policy')
+              pk_column_name: locator
+      - name: start_timestamp
+        description: when characteristic started
+        data_type: TIMESTAMP_TZ
+      - name: end_timestamp
+        description: when characteristic ended
+        data_type: TIMESTAMP_TZ
+      - name: created_timestamp
+        description: when policyholder was created
+        data_type: TIMESTAMP_TZ
+      - name: month_premium
+        description: monthly premium for coverage
+        data_type: decimal(24, 4)
+      - name: premium
+        description: full premium for coverage
+        data_type: decimal(24, 4)
+      - name: month_technical_premium
+        data_type: decimal(24, 4)
+      - name: technical_premium
+        data_type: decimal(24, 4)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+  - name: quote_peril_characteristics_fields
+    description: socotra quote policys coverage characteristics fields table model
+    columns:
+      - name: field_name
+        description: socotra name for coverage
+        data_type: varchar(256)
+      - name: field_value
+        description: socotra value of field_name for coverage
+        data_type: string
+      - name: quote_peril_characteristics_locator
+        description: coverage characteristic parent locator
+        data_type: varchar(36)
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('quote_peril_characteristics')
+              pk_column_name: locator
+      - name: parent_name
+        description: parent name of field
+        data_type: varchar(256)
+      - name: datamart_created_timestamp
+        description: when row was created in datamart
+        data_type: TIMESTAMP_TZ
+      - name: datamart_updated_timestamp
+        description: when row was updated in datamart
+        data_type: TIMESTAMP_TZ
+      - name: parent_locator
+        data_type: varchar(36)
+      - name: is_group
+        data_type: boolean
+      - name: id
+        data_type: bigint
+        tests:
+          # not in socotra schema so might not need
+          - dbt_constraints.primary_key
+

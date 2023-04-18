@@ -44,6 +44,8 @@ models:
       +schema: test_socotra
     socotra:
       +schema: prod_socotra
+    develop_socotra:
+      +schema: develop_socotra
 
 vars:
   hubspot_email_event_enabled: false
