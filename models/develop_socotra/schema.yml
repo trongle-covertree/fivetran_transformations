@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: policy
+  - name: develop_policy
     description: socotra policy table model
     columns:
       - name: locator
@@ -49,7 +49,7 @@ models:
         data_type: TIMESTAMP_TZ
       - name: currency
         data_type: varchar(3)
-  - name: policyholder
+  - name: develop_policyholder
     description: socotra policyholder table model
     columns:
       - name: locator
@@ -66,7 +66,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: exposure
+  - name: develop_exposure
     description: socotra policyholder table model
     columns:
       - name: locator
@@ -93,7 +93,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: peril
+  - name: develop_peril
     description: socotra coverages table model
     columns:
       - name: locator
@@ -130,7 +130,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: policy_characteristics
+  - name: develop_policy_characteristics
     description: socotra policys characteristics table model
     columns:
       - name: locator
@@ -173,7 +173,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: policy_characteristics_fields
+  - name: develop_policy_characteristics_fields
     description: socotra policys characteristics fields table model
     columns:
       - name: field_name
@@ -207,7 +207,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: exposure_characteristics
+  - name: develop_exposure_characteristics
     description: socotra policys exposure characteristics table model
     columns:
       - name: locator
@@ -257,7 +257,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: exposure_characteristics_fields
+  - name: develop_exposure_characteristics_fields
     description: socotra policys exposure characteristics fields table model
     columns:
       - name: field_name
@@ -291,7 +291,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: peril_characteristics
+  - name: develop_peril_characteristics
     description: socotra policys coverage characteristics table model
     columns:
       - name: locator
@@ -372,7 +372,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('policy_modification')
               pk_column_name: locator
-  - name: peril_characteristics_fields
+  - name: develop_peril_characteristics_fields
     description: socotra policys coverage characteristics fields table model
     columns:
       - name: field_name
@@ -406,7 +406,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: policyholder_fields
+  - name: develop_policyholder_fields
     description: socotra policyholder fields table model
     columns:
       - name: field_name
@@ -435,7 +435,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: reinstatement
+  - name: develop_reinstatement
     description: socotra reinstatement table model
     columns:
       - name: locator
@@ -482,7 +482,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('policy')
               pk_column_name: locator
-  - name: renewal
+  - name: develop_renewal
     description: socotra renewal table model
     columns:
       - name: locator
@@ -521,7 +521,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('policy_modification')
               pk_column_name: locator
-  - name: endorsement
+  - name: develop_endorsement
     description: socotra endorsement table model
     columns:
       - name: locator
@@ -566,7 +566,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('policy_modification')
               pk_column_name: locator
-  - name: cancellation
+  - name: develop_cancellation
     description: socotra cancellation table model
     columns:
       - name: locator
@@ -616,7 +616,7 @@ models:
       - name: issued_timestamp
         description: when cancellation was issued
         data_type: TIMESTAMP_TZ
-  - name: policy_modification
+  - name: develop_policy_modification
     description: socotra policy modifications table model
     columns:
       - name: locator
@@ -649,7 +649,7 @@ models:
       - name: issued_timestamp
         description: when modification was issued
         data_type: TIMESTAMP_TZ
-  - name: grace_period
+  - name: develop_grace_period
     description: socotra policys grace period table model
     columns:
       - name: locator
@@ -692,7 +692,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: financial_transaction
+  - name: develop_financial_transaction
     description: socotra policys financial transactions table model
     columns:
       - name: invoice_locator
@@ -766,7 +766,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: invoice
+  - name: develop_invoice
     description: socotra policys invoices table model
     columns:
       - name: locator
@@ -823,7 +823,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: invoice_schedule
+  - name: develop_invoice_schedule
     description: socotra policys invoice schedule table model
     columns:
       - name: id
@@ -870,7 +870,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('invoice')
               pk_column_name: locator
-  - name: auxiliary_data
+  - name: develop_auxiliary_data
     description: custom policy data table model
     columns:
       - name: locator
@@ -888,7 +888,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: underwriting_notes
+  - name: develop_underwriting_notes
     description: socotra policys underwriting notes table model
     columns:
       - name: underwriting_result_locator
@@ -907,7 +907,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: underwriting_results
+  - name: develop_underwriting_results
     description: socotra policys underwriting results table model
     columns:
       - name: locator
@@ -962,7 +962,7 @@ models:
           - dbt_constraints.foreign_key:
               pk_table_name: ref('policy_modification')
               pk_column_name: locator
-  - name: quote_policy
+  - name: develop_quote_policy
     description: socotra quote table model
     columns:
       - name: locator
@@ -1017,7 +1017,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_exposure
+  - name: develop_quote_exposure
     description: socotra exposures for quotes table model
     columns:
       - name: locator
@@ -1051,7 +1051,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_peril
+  - name: develop_quote_peril
     description: socotra quote coverages table model
     columns:
       - name: locator
@@ -1095,7 +1095,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_policy_characteristics
+  - name: develop_quote_policy_characteristics
     description: socotra policys characteristics table model
     columns:
       - name: locator
@@ -1132,7 +1132,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_policy_characteristics_fields
+  - name: develop_quote_policy_characteristics_fields
     description: socotra quote policys characteristics fields table model
     columns:
       - name: field_name
@@ -1166,7 +1166,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: quote_exposure_characteristics
+  - name: develop_quote_exposure_characteristics
     description: socotra policys exposure characteristics table model
     columns:
       - name: locator
@@ -1210,7 +1210,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_exposure_characteristics_fields
+  - name: develop_quote_exposure_characteristics_fields
     description: socotra quote policys exposure characteristics fields table model
     columns:
       - name: field_name
@@ -1244,7 +1244,7 @@ models:
         tests:
           # not in socotra schema so might not need
           - dbt_constraints.primary_key
-  - name: quote_peril_characteristics
+  - name: develop_quote_peril_characteristics
     description: socotra policys coverage characteristics table model
     columns:
       - name: locator
@@ -1298,7 +1298,7 @@ models:
       - name: datamart_updated_timestamp
         description: when row was updated in datamart
         data_type: TIMESTAMP_TZ
-  - name: quote_peril_characteristics_fields
+  - name: develop_quote_peril_characteristics_fields
     description: socotra quote policys coverage characteristics fields table model
     columns:
       - name: field_name
