@@ -23,6 +23,7 @@ select
 	max(case when field_name = 'relationship_organization' then field_value end) as relationship_organization,
 	max(case when field_name = 'orgainzation_type' then field_value end) as orgainzation_type,
 	policyholder_locator,
+	to_timestamp_tz(ph.created_timestamp/1000) as created_timestamp,
 	to_timestamp_tz(ph.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(ph.datamart_updated_timestamp/1000) as datamart_updated_timestamp
 from  {{ socotra_db }}.policyholder_fields as phf join
@@ -32,5 +33,5 @@ from  {{ socotra_db }}.policyholder_fields as phf join
       or to_timestamp_tz(ph.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policyholder_info order by datamart_updated_timestamp desc limit 1))
     and _fivetran_deleted = false
 {% endif %}
-group by policyholder_locator, ph.datamart_created_timestamp, ph.datamart_updated_timestamp
+group by policyholder_locator, ph.created_timestamp, ph.datamart_created_timestamp, ph.datamart_updated_timestamp
 {% endmacro %}
