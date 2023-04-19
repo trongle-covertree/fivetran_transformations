@@ -31,7 +31,7 @@ from  {{ socotra_db }}.policyholder_fields as phf join
 {% if is_incremental() %}
     where (to_timestamp_tz(ph.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policyholder_info order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(ph.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policyholder_info order by datamart_updated_timestamp desc limit 1))
-    and _fivetran_deleted = false
+    and ph._fivetran_deleted = false and phf._fivetran_deleted = false
 {% endif %}
 group by policyholder_locator, ph.created_timestamp, ph.datamart_created_timestamp, ph.datamart_updated_timestamp
 {% endmacro %}
