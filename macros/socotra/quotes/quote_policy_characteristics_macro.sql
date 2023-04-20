@@ -5,9 +5,9 @@ select
     quote_policy_locator::varchar as quote_policy_locator,
     policy_locator::varchar as policy_locator,
     to_timestamp_tz(start_timestamp/1000) as start_timestamp,
-    to_date(convert_timezone('America/Los_Angeles', to_timestamp_ntz(start_timestamp/1000))) as start_date,
+    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(start_timestamp/1000))) as start_date,
     to_timestamp_tz(end_timestamp/1000) as end_timestamp,
-    to_date(convert_timezone('America/Los_Angeles', to_timestamp_ntz(end_timestamp/1000))) as end_date,
+    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(end_timestamp/1000))) as end_date,
     to_timestamp_tz(created_timestamp/1000) as created_timestamp,
     to_timestamp_tz(datamart_created_timestamp/1000) as datamart_created_timestamp,
     to_timestamp_tz(datamart_updated_timestamp/1000) as datamart_updated_timestamp
