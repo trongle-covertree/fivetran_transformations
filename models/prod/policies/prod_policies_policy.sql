@@ -37,7 +37,8 @@ where (pk like 'POLICY#%' and sk like 'POLICY') and _fivetran_deleted='FALSE' an
   '100979166', '101178036', '101132926', '101298090', '101298206', '101298618', '101298854', '101299186',
   '101255196', '101227402', '101290498', '101291026', '101291182', '101291550', '101291884', '101212396',
   '101436546', '101468294', '101468958', '101661042', '101633700', '101634302', '101729200', '101729706',
-  '101750784', '101785484', '101825810', '101825884', '101767248'))
+  '101750784', '101785484', '101825810', '101825884', '101767248', '101942576', '101942446', '101942812',
+  '101942770'))
 union
 (select deal_id, null, null, property_createdate, property_policy_effective_date, null, null, null, null, null, null, null, null, null, null, property_policy_end_date,
   null, null, null, null, null, null, property_policy_number, null, null, iff(property_policy_end_date > current_timestamp(), 'Policy-Activated', 'Policy-Cancelled'),
