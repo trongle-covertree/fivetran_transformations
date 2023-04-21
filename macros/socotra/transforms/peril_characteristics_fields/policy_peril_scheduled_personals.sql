@@ -7,6 +7,7 @@ select
 	exposure_locator,
 	pc.policy_locator::varchar as policy_locator,
 	policy_modification_locator,
+	parent_locator,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pc.datamart_updated_timestamp/1000) as datamart_updated_timestamp
 from {{ socotra_db }}.peril_characteristics_fields as pcf
@@ -19,5 +20,5 @@ where parent_name = 'scheduled_personals'
     and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_peril_scheduled_personals order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_peril_scheduled_personals order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by exposure_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator
+group by exposure_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator, parent_locator
 {% endmacro %}
