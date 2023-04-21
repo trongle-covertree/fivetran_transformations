@@ -48,6 +48,18 @@ where deal_id not in (select pk from {{ env }}.{{ prefix }}_policy_exposures_add
     {% endset %}
     {% do run_query(grid_info_merge_query) %}
 
+    {% set plan_info_merge_query %}
+    merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_exposures_plan_information as pi using (
+            select deal_id, name
+            from fivetran_covertree.{{ env }}.communities_partner_lookup right outer join fivetran_covertree.{{ env }}.{{ prefix }}_non_covertree_policies
+                on lower(trim(name)) = property_communityname) as ncp
+        on pi.pk = ncp.deal_id
+        when not matched then
+            insert (pk, park_name)
+            values (ncp.deal_id, name)
+    {% endset %}
+    {% do run_query(plan_info_merge_query) %}
+
 {% else %}
     SELECT Column1 AS ID
         FROM VALUES
