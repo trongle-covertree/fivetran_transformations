@@ -22,5 +22,5 @@ from {{ socotra_db }}.policy_characteristics_fields as pcf
     and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_level_suppl_uw order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_level_suppl_uw order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by pcf.policy_characteristics_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator, pc.end_timestamp
+group by pcf.policy_characteristics_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator, pc.start_timestamp, pc.end_timestamp
 {% endmacro %}
