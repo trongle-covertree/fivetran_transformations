@@ -5,21 +5,18 @@ select
     policy_locator::varchar as policy_locator,
     total_due,
     to_timestamp_tz(start_timestamp/1000) as start_timestamp,
-    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(start_timestamp/1000))) as start_date,
     to_timestamp_tz(end_timestamp/1000) as end_timestamp,
-    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(end_timestamp/1000))) as end_date,
     to_timestamp_tz(issue_timestamp/1000) as issued_timestamp,
-    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(issue_timestamp/1000))) as issued_date,
     to_timestamp_tz(created_timestamp/1000) as created_timestamp,
 	settlement_status,
     settlement_type,
     to_timestamp_tz(due_timestamp/1000) as due_timestamp,
-    to_date(convert_timezone('Etc/GMT', 'America/Los_Angeles', to_timestamp_ntz(due_timestamp/1000))) as due_date,
     grace_period_locator,
     status,
     to_timestamp_tz(updated_timestamp/1000) as updated_timestamp,
     to_timestamp_tz(datamart_created_timestamp/1000) as datamart_created_timestamp,
-    to_timestamp_tz(datamart_updated_timestamp/1000) as datamart_updated_timestamp
+    to_timestamp_tz(datamart_updated_timestamp/1000) as datamart_updated_timestamp,
+    display_id
 from {{ socotra_db }}.invoice
 {% if is_incremental() %}
 where ( to_timestamp_tz(created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.invoice order by created_timestamp desc limit 1)
