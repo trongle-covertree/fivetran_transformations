@@ -23,8 +23,6 @@ select
 from  {{ socotra_db }}.exposure_characteristics_fields as ecf
 	inner join {{ socotra_db }}.exposure_characteristics as ec
 		on ec.locator = ecf.exposure_characteristics_locator
-	inner join {{ socotra_db }}.peril_characteristics as pc
-		on ec.locator = pc.exposure_characteristics_locator
 	where parent_name = 'unit_details'
 {% if is_incremental() %}
     and (to_timestamp_tz(ec.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_exposure_unit_details order by datamart_created_timestamp desc limit 1)
