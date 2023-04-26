@@ -11,7 +11,7 @@ select
     id,
     to_timestamp_tz(datamart_created_timestamp/1000) as datamart_created_timestamp,
     to_timestamp_tz(datamart_updated_timestamp/1000) as datamart_updated_timestamp
-from {{ socotra_db }}.exposure_characteristics_fields
+from {{ socotra_db }}.claim_fields
 {% if is_incremental() %}
 where (
     to_timestamp_tz(datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.claim_fields order by datamart_created_timestamp desc limit 1)
