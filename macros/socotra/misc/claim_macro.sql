@@ -13,7 +13,7 @@ from {{ socotra_db }}.claim
 where (
     to_timestamp_tz(datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.claim order by datamart_created_timestamp desc limit 1)
     or to_timestamp_tz(datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.claim order by datamart_updated_timestamp desc limit 1)
-    to_timestamp_tz(created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.claim order by created_timestamp desc limit 1))
+    or to_timestamp_tz(created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.claim order by created_timestamp desc limit 1))
     and _fivetran_deleted = false
 {% endif %}
 

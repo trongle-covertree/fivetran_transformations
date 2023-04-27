@@ -14,8 +14,8 @@ from  {{ socotra_db }}.claim_fields as cf
 	where parent_name = 'documents'
 {% if is_incremental() %}
     and (to_timestamp_tz(c.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_claim_documents order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(c.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_claim_documents order by datamart_updated_timestamp desc limit 1
-	  or to_timestamp_tz(c.created_timestamp/1000) (select created_timestamp from {{ sf_schema }}.policy_claim_documents order by created_timestamp desc limit 1)))
+      or to_timestamp_tz(c.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_claim_documents order by datamart_updated_timestamp desc limit 1)
+	  or to_timestamp_tz(c.created_timestamp/1000) > (select created_timestamp from {{ sf_schema }}.policy_claim_documents order by created_timestamp desc limit 1))
 {% endif %}
 group by claim_locator, c.policy_locator, discarded, c.created_timestamp, c.datamart_created_timestamp, c.datamart_updated_timestamp
 {% endmacro %}
