@@ -91,8 +91,8 @@ FROM VALUES
     {% if 'values' in entity_json and 'organization_name' in entity_json['values'] %}'{{ entity_json['values']['organization_name'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'policyholder_id' in entity_json['values'] %}'{{ entity_json['values']['policyholder_id'][0] }}',{% else %}null,{% endif %}
     {% if 'values' in entity_json and 'relationship_organization' in entity_json['values'] %}'{{ entity_json['values']['relationship_organization'][0] }}',{% else %}null,{% endif %}
-    {% if 'values' in entity_json and 'rep_first_name' in entity_json['values'] %}'{{ entity_json['values']['rep_first_name'][0] }}',{% else %}null,{% endif %}
-    {% if 'values' in entity_json and 'rep_last_name' in entity_json['values'] %}'{{ entity_json['values']['rep_last_name'][0] }}'{% else %}null{% endif %}
+    {% if 'values' in entity_json and 'rep_first_name' in entity_json['values'] %}'{{ entity_json['values']['rep_first_name'][0] | replace("'", "\\'") }}',{% else %}null,{% endif %}
+    {% if 'values' in entity_json and 'rep_last_name' in entity_json['values'] %}'{{ entity_json['values']['rep_last_name'][0] | replace("'", "\\'") }}'{% else %}null{% endif %}
 ){% if not loop.last %},{% endif %}
     {% endif %}
 {% endfor %}
