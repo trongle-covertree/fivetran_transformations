@@ -1,3 +1,5 @@
+-- not running
+
 {{ config(materialized='table') }}
 
 select sk AS claim_locator, field_values:documents as documents, to_varchar(field_values:injured_party_info[0]) as injured_party_info,

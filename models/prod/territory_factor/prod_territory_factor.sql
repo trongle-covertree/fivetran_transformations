@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='incremental', unique_key='PK') }}
 
 select
   PK,
@@ -23,3 +23,6 @@ select
   uw_admitted
 from dynamodb.prod_territory_factor_table
 where _fivetran_deleted='FALSE'
+{% if is_incremental() %}
+  and PK not in (select PK from transformations_dynamodb.prod_territory_factor)
+{% endif %}

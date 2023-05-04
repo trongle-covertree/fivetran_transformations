@@ -38,6 +38,7 @@ models:
     #   +materialized: view
     prod:
       +schema: dynamodb
+      +incremental_strategy: delete+insert
     develop:
       +schema: dynamodb_develop
     test_socotra:

@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='incremental') }}
 
 select
   PK,
@@ -13,3 +13,6 @@ select
   POLICY_LOCATOR
 from dynamodb.prod_signed_user_details
 where _fivetran_deleted='FALSE'
+{% if is_incremental() %}
+  and date > (select date from transformations_dynamodb.prod_signed_user_details order by date desc limit 1)
+{% endif %}
