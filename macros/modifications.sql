@@ -26,7 +26,7 @@ from {{ env }}.{{ prefix }}_policies_policy
     {% endif %}
 {% endfor %}
     {# {{ log(count, info=True) }} #}
-{% if modifications|length > 0 %}
+{% if modifications|length > 0 and count > 0 %}
     {% if is_incremental() %}
         {% if pk|length == 1 %}
             {% set delete_query %}
