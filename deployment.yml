@@ -42,7 +42,7 @@ jobs:
    schedule: '*/15 * * * *'
    steps:
      - name: run socotra models
-       command: dbt run --models models/socotra
+       command: dbt run --models models/socotra/transforms models/socotra/cancellation.sql models/socotra/peril_modifications.sql
 
  - name: develop-socotra-weekdays
    schedule: 30 7 * * 1-5 # The example will run every weekday at 7:30am.
