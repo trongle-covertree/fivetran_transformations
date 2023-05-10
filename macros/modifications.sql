@@ -19,6 +19,13 @@ from {{ env }}.{{ prefix }}_policies_policy
     {% set updated_timestamps = results.columns[3].values() %}
 {% endif %}
 
+{% set count = 0 %}
+{% for i in modifications %}
+    {% if modification is not none %}
+        {% set count = count + 1%}
+    {% endif %}
+{% endfor %}
+    {# {{ log(count, info=True) }} #}
 {% if modifications|length > 0 %}
     {% if is_incremental() %}
         {% if pk|length == 1 %}
@@ -41,9 +48,9 @@ from {{ env }}.{{ prefix }}_policies_policy
             Column25 as PRODUCT_LOCATOR, to_timestamp(Column26) as UPDATED_TIMESTAMP, to_timestamp(Column27) AS POLICY_CREATED_TIMESTAMP, to_timestamp(Column28) AS POLICY_UPDATED_TIMESTAMP FROM VALUES
     {% for modification in modifications %}
         {% set outer_loop = loop %}
-        {% if modification %}
+        {% if modification is not none %}
+    {# {{ log(modification, info=True) }} #}
             {% for mod_json in fromjson(modification) %}
-    {# {{ log(mod, info=True) }} #}
     (
         '{{ pk[outer_loop.index0] + '-' + mod_json.displayId }}',
         '{{ pk[outer_loop.index0] }}',
@@ -73,7 +80,7 @@ from {{ env }}.{{ prefix }}_policies_policy
         '{{ mod_json.updatedTimestamp or null }}',
         '{{ created_timestamps[outer_loop.index0] }}',
         '{{ updated_timestamps[outer_loop.index0] }}'
-    ){% if not outer_loop.last or not loop.last %},{% endif %}
+    ){% if (not outer_loop.last or not loop.last) and count > 1 %},{% endif %}
         {% endfor %}
         {% endif %}
     {% endfor %}
