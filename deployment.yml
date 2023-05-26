@@ -32,14 +32,26 @@ jobs:
 #      - name: run develop models
 #        command: dbt run --models develop_exposure_perils
 
- - name: prod15min
-   schedule: '*/15 * * * *'
+ - name: prod15min-weekdays
+   schedule: '*/15 * * * 1-5'
    steps:
      - name: run prod models
        command: dbt run --models models/prod/policies models/prod/quotes models/prod/policyholders models/prod/leads models/prod/misc models/prod/non_covertree_policies
 
- - name: socotra15min
-   schedule: '*/15 * * * *'
+ - name: socotra15min-weekdays
+   schedule: '*/15 * * * 1-5'
+   steps:
+     - name: run socotra models
+       command: dbt run --models models/socotra/transforms models/socotra/cancellation.sql models/socotra/peril_modifications.sql
+
+ - name: prod15min-weekends
+   schedule: '0 */6 * * 6-7'
+   steps:
+     - name: run prod models
+       command: dbt run --models models/prod/policies models/prod/quotes models/prod/policyholders models/prod/leads models/prod/misc models/prod/non_covertree_policies
+
+ - name: socotra15min-weekends
+   schedule: '0 */6 * * 6-7'
    steps:
      - name: run socotra models
        command: dbt run --models models/socotra/transforms models/socotra/cancellation.sql models/socotra/peril_modifications.sql
