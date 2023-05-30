@@ -16,7 +16,6 @@ select
 	max(Case when field_name = 'fungi_bacteria_property_limit' then regexp_replace(field_value, '[$,]') End) fungi_bacteria_property_limit,
 	max(Case when field_name = 'water_damage_reduced_limit' then field_value end) water_damage_reduced_limit,
 	max(Case when field_name = 'specific_building_structure_description' then field_value End) specific_building_structure_description,
-	max(Case when field_name = 'identity_fraud_limit' then regexp_replace(field_value, '[$,]') end) identity_fraud_limit,
 	max(Case when field_name = 'scheduled_personals' then field_value End) scheduled_personals,
 	max(Case when field_name = 'earthquake_deductible' then regexp_replace(field_value, '[%]')/100 end) earthquake_deductible,
 	max(Case when field_name = 'inflation_guard' then regexp_replace(field_value, '[%]')/100 end) inflation_guard,
@@ -49,7 +48,7 @@ from {{ socotra_db }}.quote_peril_characteristics_fields as pcf
 		on pc.locator = pcf.quote_peril_characteristics_locator
 	inner join {{ socotra_db }}.quote_peril as p
 		on p.locator = pc.quote_peril_locator
-where parent_name is null
+where parent_name is null and p.name not in ('Scheduled Personal Property', 'Policy Minimum Premium Coverage', 'Identity Fraud Expense')
 {% if is_incremental() %}
     and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.quote_peril_general_characteristics order by datamart_created_timestamp desc limit 1)
       or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.quote_peril_general_characteristics order by datamart_updated_timestamp desc limit 1))
