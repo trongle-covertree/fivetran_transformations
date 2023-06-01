@@ -24,7 +24,7 @@ select
   premium_change,
   premium_change_currency,
   product_locator,
-  convert_timezone('America/New_York', to_timestamp_ntz(updated_timestamp/1000)) as updated_timestamp,
+  convert_timezone('America/New_York', to_timestamp_ntz(updated_timestamp/1000)) as updated_timestamp
 from dynamodb.prod_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'MODIFICATION#%') and _fivetran_deleted='FALSE'
 {% if is_incremental() %}
