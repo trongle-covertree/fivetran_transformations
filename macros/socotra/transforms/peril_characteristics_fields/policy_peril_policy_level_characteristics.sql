@@ -20,8 +20,8 @@ from {{ socotra_db }}.peril_characteristics_fields as pcf
 		on p.locator = pc.peril_locator
 where p.name in ('Scheduled Personal Property', 'Policy Minimum Premium Coverage', 'Identity Fraud Expense')
 {% if is_incremental() %}
-    and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_peril_scheduled_personals order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_peril_scheduled_personals order by datamart_updated_timestamp desc limit 1))
+    and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_peril_policy_level_chars order by datamart_created_timestamp desc limit 1)
+      or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_peril_policy_level_chars order by datamart_updated_timestamp desc limit 1))
 {% endif %}
 group by exposure_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator, parent_locator, pc.start_timestamp, pc.end_timestamp
 {% endmacro %}
