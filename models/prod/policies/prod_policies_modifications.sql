@@ -28,6 +28,6 @@ select
 from dynamodb.prod_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'MODIFICATION#%') and _fivetran_deleted='FALSE'
 {% if is_incremental() %}
-  and (convert_timezone('America/New_York', to_timestamp_ntz(created_timestamp/1000)) > (select created_timestamp from transformations_dynamodb.prod_policies_modification order by created_timestamp desc limit 1)
-    or convert_timezone('America/New_York', to_timestamp_ntz(updated_timestamp/1000)) > (select updated_timestamp from transformations_dynamodb.prod_policies_modification order by updated_timestamp desc limit 1))
+  and (convert_timezone('America/New_York', to_timestamp_ntz(created_timestamp/1000)) > (select created_timestamp from transformations_dynamodb.prod_policies_modifications order by created_timestamp desc limit 1)
+    or convert_timezone('America/New_York', to_timestamp_ntz(updated_timestamp/1000)) > (select updated_timestamp from transformations_dynamodb.prod_policies_modifications order by updated_timestamp desc limit 1))
 {% endif %}
