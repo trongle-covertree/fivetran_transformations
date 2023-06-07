@@ -13,7 +13,7 @@
   gross_fees,
   payment_schedule_name,
   to_timestamp_ntz(original_contract_start_timestamp/1000) as original_contract_start_timestamp,
-  to_timestamp_ntz(updated_timestamp/1000) as updated_timestamp,
+  to_timestamp_ntz(to_number(updated_timestamp)/1000) as updated_timestamp,
   product_name,
   exposures,
   invoices,
