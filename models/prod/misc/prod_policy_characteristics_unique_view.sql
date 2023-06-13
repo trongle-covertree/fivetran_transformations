@@ -13,7 +13,7 @@ FROM
         policy_start_timestamp, policy_end_timestamp, policy_locator, c.policyholder_locator, c.product_locator, start_timestamp, tax_groups, policy_created_timestamp,
         policy_updated_timestamp, upper(trim(agent_on_record)) as agent_on_record, replaced_timestamp,
         ROW_NUMBER() OVER (PARTITION BY c.pk ORDER BY c.created_timestamp desc, start_timestamp desc) num
-    FROM prod_policy_characteristics as c join prod_policies_policy as p on p.pk = c.pk
+    FROM fivetran_covertree.transformations_dynamodb.prod_policy_characteristics as c join fivetran_covertree.transformations_dynamodb.prod_policies_policy as p on p.pk = c.pk
     where (start_timestamp < current_timestamp() and end_timestamp > current_timestamp() and replaced_timestamp is null)
         or (start_timestamp = end_timestamp) or (current_timestamp() < start_timestamp and replaced_timestamp is null)
         or (p.pk not like 'POLICY#%' and p.status = 'Policy-Activated')
