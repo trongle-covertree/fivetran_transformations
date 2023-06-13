@@ -4,10 +4,12 @@ select
   pk,
   sk,
   automated_underwriting_result,
+  cancellation_name,
   config_version,
   convert_timezone('America/New_York', to_timestamp_ntz(to_number(created_timestamp)/1000)) as created_timestamp,
   display_id,
   convert_timezone('America/New_York', to_timestamp_ntz(effective_timestamp/1000)) as effective_timestamp,
+  endorsement_locator,
   exposure_modifications,
   field_groups_by_locator,
   field_values,
@@ -23,7 +25,9 @@ select
   policy_locator,
   premium_change,
   premium_change_currency,
+  pricing,
   product_locator,
+  renewal_locator,
   convert_timezone('America/New_York', to_timestamp_ntz(to_number(updated_timestamp)/1000)) as updated_timestamp
 from dynamodb.prod_socotra_policy_table
 where (pk like 'POLICY#%' and sk like 'MODIFICATION#%') and _fivetran_deleted='FALSE'
