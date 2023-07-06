@@ -31,8 +31,8 @@ where deal_id not in (select pk from {{ env }}.{{ prefix }}_policy_exposures_add
     merge into fivetran_covertree.{{ env }}.{{ prefix }}_policy_characteristics as c using fivetran_covertree.{{ env }}.{{ prefix }}_non_covertree_policies as ncp
         on c.pk = ncp.deal_id
         when not matched then
-            insert (pk, created_timestamp, gross_premium)
-            values (ncp.deal_id, ncp.property_createdate, ncp.property_amount)
+            insert (pk, created_timestamp, gross_premium, agency_id)
+            values (ncp.deal_id, ncp.property_createdate, ncp.property_amount, '000001')
     {% endset %}
     {% do run_query(char_merge_query) %}
 
