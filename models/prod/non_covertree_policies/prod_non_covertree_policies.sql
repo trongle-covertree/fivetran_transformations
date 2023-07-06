@@ -42,4 +42,4 @@ select to_varchar(d.deal_id) as deal_id, d.property_policy_number, d.property_co
     d.property_hs_is_closed, d.property_hs_is_closed_won
 from fivetran_covertree.hubspot.deal as d inner join fivetran_covertree.hubspot.deal_contact as dc on dc.deal_id = d.deal_id
     inner join fivetran_covertree.hubspot.contact as c on c.id = dc.contact_id
-where property_hs_is_closed_won = true and d.is_deleted = false and lower(d.property_carrier) not like '%covertree%' and d._fivetran_deleted = false and dc._fivetran_deleted = false and c._fivetran_deleted = false
+where property_hs_is_closed_won = true and d.is_deleted = false and lower(d.property_carrier) not like '%covertree%' and d._fivetran_deleted = false and c._fivetran_deleted = false
