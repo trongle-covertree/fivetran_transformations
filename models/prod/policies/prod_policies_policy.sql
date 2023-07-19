@@ -6,7 +6,7 @@
   sk,
   documents,
   to_timestamp_ntz(to_number(created_timestamp)/1000) as created_timestamp,
-  to_timestamp_ntz(to_number(created_timestamp_dynamo)/1000)) as created_timestamp_dynamo,
+  to_timestamp_ntz(to_number(created_timestamp_dynamo)/1000) as created_timestamp_dynamo,
   to_timestamp_ntz(to_number(issued_timestamp)/1000) as issued_timestamp,
   fees,
   characteristics,
