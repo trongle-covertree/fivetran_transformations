@@ -22,7 +22,7 @@ select
   number,
   convert_timezone('America/New_York', to_timestamp_ntz(policy_end_timestamp/1000)) as policy_end_timestamp,
   policyholder_locator,
-  iff(policy_locator is null and pk = 'POLICY#102462732', '102462732', policy_locator::varchar) as policy_locator,
+  iff(policy_locator is null, right(pk, 9)::varchar, policy_locator::varchar) as policy_locator,
   premium_change,
   premium_change_currency,
   pricing,
