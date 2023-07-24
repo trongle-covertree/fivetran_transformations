@@ -9,6 +9,7 @@ union
 from {{ env }}.{{ prefix }}_policies_policy
 {% if is_incremental() %}
     WHERE
+        pk like 'POLICY#%' and
         (created_timestamp > (select POLICY_CREATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics where policy_created_timestamp is not null order by POLICY_CREATED_TIMESTAMP desc limit 1)
             or updated_timestamp > (select POLICY_UPDATED_TIMESTAMP from {{ env }}.{{ prefix }}_policy_characteristics where policy_updated_timestamp is not null order by POLICY_UPDATED_TIMESTAMP desc limit 1))
         or (pk not in (select distinct pk from {{ env }}.{{ prefix }}_policy_characteristics) and array_size(characteristics) != 0))
