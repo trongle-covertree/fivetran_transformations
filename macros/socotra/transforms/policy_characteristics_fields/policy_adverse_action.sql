@@ -3,22 +3,23 @@
 select
 	max(case when field_name = 'reason_description' then field_value end) as reason_description,
 	max(case when field_name = 'reason_code' then field_value end) as reason_code,
-	pcf.policy_characteristics_locator,
-    pc.policy_locator::varchar as policy_locator,
-	policy_modification_locator,
-	to_timestamp_tz(pc.start_timestamp/1000) as start_timestamp,
-    to_timestamp_tz(pc.end_timestamp/1000) as end_timestamp,
-	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,
-	to_timestamp_tz(pc.datamart_updated_timestamp/1000) as datamart_updated_timestamp
-from {{ socotra_db }}.policy_characteristics_fields as pcf
-	inner join {{ socotra_db }}.policy_characteristics as pc
-    	on pc.locator = pcf.policy_characteristics_locator
-	inner join {{ socotra_db }}.peril_characteristics as p
-        on p.policy_characteristics_locator = pc.locator
+    pm.locator as policy_modification_locator,
+    pm.policy_locator,
+    poc.locator as policy_characteristics_locator,
+    convert_timezone('America/New_York', to_timestamp_tz(poc.start_timestamp/1000)) as start_timestamp,
+    convert_timezone('America/New_York', to_timestamp_tz(poc.end_timestamp/1000)) as end_timestamp,
+    convert_timezone('America/New_York', to_timestamp_tz(poc.datamart_created_timestamp/1000)) as datamart_created_timestamp,
+    convert_timezone('America/New_York', to_timestamp_tz(poc.datamart_updated_timestamp/1000)) as datamart_updated_timestamp,
+    convert_timezone('America/New_York', to_timestamp_tz(poc.replaced_timestamp/1000)) as replaced_timestamp
+from
+	{{ socotra_db }}.policy_modification as pm
+	left join {{ socotra_db }}.peril_characteristics as pc on pm.locator = pc.policy_modification_locator
+	join {{ socotra_db }}.policy_characteristics as poc on poc.locator = pc.policy_characteristics_locator
+	join {{ socotra_db }}.policy_characteristics_fields as pcf on pcf.policy_characteristics_locator = poc.locator
 	where parent_name = 'adverse_action'
 {% if is_incremental() %}
-    and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema}}.policy_adverse_action order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema}}.policy_adverse_action order by datamart_updated_timestamp desc limit 1))
+    and (to_timestamp_tz(poc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema}}.policy_adverse_action order by datamart_created_timestamp desc limit 1)
+      or to_timestamp_tz(poc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema}}.policy_adverse_action order by datamart_updated_timestamp desc limit 1))
 {% endif %}
-group by pcf.policy_characteristics_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.policy_locator, policy_modification_locator, pc.start_timestamp, pc.end_timestamp
+group by pm.locator, pm.policy_locator,  poc.locator, poc.start_timestamp, poc.end_timestamp, poc.datamart_created_timestamp, poc.datamart_updated_timestamp, poc.replaced_timestamp
 {% endmacro %}
