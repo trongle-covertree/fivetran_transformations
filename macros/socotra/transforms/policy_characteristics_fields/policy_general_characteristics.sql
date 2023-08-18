@@ -19,6 +19,7 @@ Select
     max(case when field_name = 'adverse_action' then field_value end) as adverse_action,
     max(case when field_name = 'ad_insured' then field_value end) as ad_insured,
     max(case when field_name = 'prior_claims' then field_value end) as prior_claims,
+    max(case when field_name = 'commissionable_partners' then field_value end) as commissionable_partners,
     pm.locator as policy_modification_locator,
     pm.policy_locator,
     poc.locator as policy_characteristics_locator,
