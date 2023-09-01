@@ -9,7 +9,7 @@ select
 	policy_modification_locator,
 	parent_locator,
 	to_timestamp_tz(pc.start_timestamp/1000) as start_timestamp,
-    to_timestamp_tz(pc.end_timestamp/1000) as end_timestamp,
+    convert_timezone('America/New_York', to_timestamp_tz(pc.end_timestamp/1000) as end_timestamp,
 	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,
 	to_timestamp_tz(pc.datamart_updated_timestamp/1000) as datamart_updated_timestamp
 from {{ socotra_db }}.peril_characteristics_fields as pcf

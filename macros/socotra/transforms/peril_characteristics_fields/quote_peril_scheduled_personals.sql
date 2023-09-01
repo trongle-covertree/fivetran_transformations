@@ -8,17 +8,13 @@ select
 	pc.quote_policy_locator,
 	pc.policy_locator::varchar as policy_locator,
 	parent_locator,
-	to_timestamp_tz(pc.datamart_created_timestamp/1000) as datamart_created_timestamp,
-	to_timestamp_tz(pc.datamart_updated_timestamp/1000) as datamart_updated_timestamp
+	convert_timezone('America/New_York', to_timestamp_tz(pc.datamart_created_timestamp/1000)) as datamart_created_timestamp,
+	convert_timezone('America/New_York', to_timestamp_tz(pc.datamart_updated_timestamp/1000)) as datamart_updated_timestamp
 from {{ socotra_db }}.quote_peril_characteristics_fields as pcf
 	inner join {{ socotra_db }}.quote_peril_characteristics as pc
 		on pc.locator = pcf.quote_peril_characteristics_locator
 	inner join {{ socotra_db }}.quote_peril as p
 		on p.locator = pc.quote_peril_locator
 where parent_name = 'scheduled_personals'
-{% if is_incremental() %}
-    and (to_timestamp_tz(pc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.quote_peril_scheduled_personals order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(pc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.quote_peril_scheduled_personals order by datamart_updated_timestamp desc limit 1))
-{% endif %}
 group by quote_exposure_locator, pc.datamart_created_timestamp, pc.datamart_updated_timestamp, pc.quote_policy_locator, pc.policy_locator, parent_locator
 {% endmacro %}

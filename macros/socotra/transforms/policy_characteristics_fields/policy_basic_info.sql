@@ -18,9 +18,5 @@ from
 	join {{ socotra_db }}.policy_characteristics as poc on poc.locator = pc.policy_characteristics_locator
 	join {{ socotra_db }}.policy_characteristics_fields as pcf on pcf.policy_characteristics_locator = poc.locator
 	where parent_name = 'policy_basic_info'
-{% if is_incremental() %}
-     and (to_timestamp_tz(poc.datamart_created_timestamp/1000) > (select datamart_created_timestamp from {{ sf_schema }}.policy_basic_info order by datamart_created_timestamp desc limit 1)
-      or to_timestamp_tz(poc.datamart_updated_timestamp/1000) > (select datamart_updated_timestamp from {{ sf_schema }}.policy_basic_info order by datamart_updated_timestamp desc limit 1))
-{% endif %}
 group by pm.locator, pm.policy_locator,  poc.locator, poc.start_timestamp, poc.end_timestamp, poc.datamart_created_timestamp, poc.datamart_updated_timestamp, poc.replaced_timestamp
 {% endmacro %}
