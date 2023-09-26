@@ -24,3 +24,5 @@ from transformations_prod_socotra.quote_exposure_unit_address as ua
     left join transformations_prod_socotra.quote_exposure_unit_construction as uc on qp.locator = uc.quote_policy_locator
     left join transformations_prod_socotra.policyholder_info as pi on qp.policyholder_locator = pi.policyholder_locator
 where qp.selected = true
+
+{% endmacro %}
