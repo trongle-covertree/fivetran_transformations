@@ -3,6 +3,7 @@
 select
     pr.community_manager_name,
     pr.community_name,
+    pr.partner_name,
     ua.policy_locator,
     pi.first_name,
     pi.last_name,
