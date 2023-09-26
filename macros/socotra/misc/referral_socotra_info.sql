@@ -21,7 +21,7 @@ select
     model_year,
     home_type 
 from transformations_prod_socotra.quote_exposure_unit_address as ua
-    left join (select sum(premium) as gross_premium, policy_locator from mysql_data_mart_10001.peril_characteristics group by policy_locator) as pc on ua.policy_locator = pc.policy_locator
+    left join (select sum(premium) as gross_premium, policy_locator from (select *, row_number() over (partition by policy_locator, peril_locator order by end_timestamp desc, start_timestamp desc) num from mysql_data_mart_10001.peril_characteristics) where num = 1 group by policy_locator) as pc on ua.policy_locator = pc.policy_locator
     join mysql_data_mart_10001.quote_policy as qp on ua.quote_policy_locator = qp.locator
     join transformations_dynamodb.prod_policies_referrals as pr on qp.policy_locator = pr.policy_locator
     left join transformations_prod_socotra.quote_exposure_unit_construction as uc on qp.locator = uc.quote_policy_locator
