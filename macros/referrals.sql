@@ -1,10 +1,10 @@
 {% macro run_referrals(env, prefix, partners_db) %}
 
 {% set referrals_query %}
-select pk, to_varchar(policy_locator) as policy_locator, created_at
+select pk, to_varchar(policy_locator) as policy_locator, created_at, partner_key
 {# {{ log(pk[loop.index0], info=True) }} #}
 from {{ env }}.{{ prefix }}_leads
-where pk like 'FRIENDBUY#%' and policy_locator is not null
+where pk like 'FRIENDBUY_REWARD#%' and tremendous_order_id is null
 {% if is_incremental() %}
     and policy_locator not in (select policy_locator from {{ env }}.{{ prefix }}_policies_referrals)
 {% endif %}
@@ -16,12 +16,13 @@ where pk like 'FRIENDBUY#%' and policy_locator is not null
     {% set pks = results.columns[0].values() %}
     {% set policy_locators = results.columns[1].values() %}
     {% set created_timestamps = results.columns[2].values() %}
+    {% set partner_keys = results.columns[3].values() %}
 {% endif %}
 
 {% set hubspot_manual_referrals_query %}
 select pk, referrer_communities, locator
 from {{ env }}.hubspot_referrals
-where locator not in (select policy_locator from {{ env }}.{{ prefix }}_leads where policy_locator is not null and pk like 'FRIENDBUY%') and referrer_communities != 'undefined'
+where locator not in (select policy_locator from {{ env }}.{{ prefix }}_leads where pk like 'FRIENDBUY_REWARD#%' and tremendous_order_id is null) and referrer_communities != 'undefined'
 {% if is_incremental() %}
     and locator not in (select policy_locator from {{ env }}.{{ prefix }}_policies_referrals)
 {% endif %}
@@ -110,10 +111,10 @@ SELECT Column1 AS PK, Column2 AS  POLICY_LOCATOR, Column3 AS partner_name, Colum
         {% endif %}
     {% endif %}
 
-    {% for pk in pks %}
+    {% for partner_key in partner_keys %}
         {% set outer_loop = loop %}
         {% for partner_pk in partners_pk %}
-            {% if pk == partner_pk %}
+            {% if partner_key == partner_pk %}
                 (
                     'POLICY#{{ policy_locators[outer_loop.index0] }}',
                     '{{ policy_locators[outer_loop.index0] }}',
