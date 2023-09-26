@@ -1,6 +1,8 @@
 {% macro run_referral_socotra_info_grouping() %}
 
 select
+    pr.community_manager_name,
+    pr.community_name,
     ua.policy_locator,
     pi.first_name,
     pi.last_name,
