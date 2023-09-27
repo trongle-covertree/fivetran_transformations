@@ -19,7 +19,8 @@ select
     gross_premium,
     payment_schedule_name,
     model_year,
-    home_type 
+    home_type,
+    iff(issued_timestamp is null, 'Initial-Quote', 'Policy-Activated') as status
 from transformations_prod_socotra.quote_exposure_unit_address as ua
     left join (select sum(premium) as gross_premium, policy_locator from (select *, row_number() over (partition by policy_locator, peril_locator order by end_timestamp desc, start_timestamp desc) num from mysql_data_mart_10001.peril_characteristics) where num = 1 group by policy_locator) as pc on ua.policy_locator = pc.policy_locator
     join mysql_data_mart_10001.quote_policy as qp on ua.quote_policy_locator = qp.locator
