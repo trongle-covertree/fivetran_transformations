@@ -44,6 +44,12 @@ jobs:
      - name: run socotra models
        command: dbt run --models models/socotra/transforms models/socotra/cancellation.sql models/socotra/peril_modifications.sql models/socotra/referral_socotra_info.sql
 
+ - name: dashboard15min-weekdays
+   schedule: '*/15 * * * 1-5'
+   steps:
+     - name: run dashboard models
+       command: dbt run --models models/dashboard_scripts
+
  - name: prod15min-weekends
    schedule: '0 */6 * * 6-7'
    steps:
@@ -55,6 +61,12 @@ jobs:
    steps:
      - name: run socotra models
        command: dbt run --models models/socotra/transforms models/socotra/cancellation.sql models/socotra/peril_modifications.sql models/socotra/referral_socotra_info.sql
+
+ - name: dashboard15min-weekends
+   schedule: '0 */6 * * 6-7'
+   steps:
+     - name: run dashboard models
+       command: dbt run --models models/dashboard_scripts
 
  - name: develop-socotra-weekdays
    schedule: 30 7 * * 1-5 # The example will run every weekday at 7:30am.

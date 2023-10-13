@@ -47,6 +47,8 @@ models:
       +schema: prod_socotra
     develop_socotra:
       +schema: develop_socotra
+    dashboard_scripts:
+      +schema: DYNAMODB_DEV_RAJA
 
 vars:
   hubspot_email_event_enabled: false
